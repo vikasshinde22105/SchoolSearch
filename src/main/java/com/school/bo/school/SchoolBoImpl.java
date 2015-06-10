@@ -10,7 +10,7 @@ import com.school.dao.SchoolDaoImpl;
 import com.school.model.School;
  
 @Service
-public class SchoolBoImpl  {
+public class SchoolBoImpl implements SchoolBo {
 
 	@Autowired
 	SchoolDaoImpl schoolhome;
@@ -24,6 +24,11 @@ public class SchoolBoImpl  {
 		School fetchedSchool = schoolhome.fetchById(schoolId);
         return fetchedSchool;
 	}
-	
 
+	public List<School> fetchSchoolByName(String name) {
+		System.out.println("Service"+name);
+		List<School> fetchedSchool = schoolhome.fetchByName(name);
+		return fetchedSchool;
+	}
+	
 }
