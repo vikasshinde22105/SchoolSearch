@@ -10,7 +10,7 @@ import org.apache.commons.logging.LogFactory;
 
 /**
  * Home object for domain model class School.
- * @see com.ptc.model.School
+ * @see com.school.model.ptc.model.School
  * @author Hibernate Tools
  */
 @Stateless

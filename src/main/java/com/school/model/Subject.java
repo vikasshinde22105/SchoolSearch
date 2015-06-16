@@ -1,6 +1,6 @@
 package com.school.model;
 
-// Generated 2 Jun, 2015 3:00:10 PM by Hibernate Tools 3.4.0.CR1
+// Generated Jun 16, 2015 4:57:47 PM by Hibernate Tools 4.0.0
 
 import java.util.Date;
 import java.util.HashSet;
@@ -29,18 +29,23 @@ public class Subject implements java.io.Serializable {
 	private Integer lastUpdatedBy;
 	private Set<TimeTable> timeTables = new HashSet<TimeTable>(0);
 	private Set<ClassSubjects> classSubjectses = new HashSet<ClassSubjects>(0);
+	private Set<SchoolExamSubject> schoolExamSubjects = new HashSet<SchoolExamSubject>(
+			0);
 	private Set<TeacherSubject> teacherSubjects = new HashSet<TeacherSubject>(0);
 
 	public Subject() {
 	}
 
 	public Subject(String name, Date lastUpdatedOn, Integer lastUpdatedBy,
-			Set timeTables, Set classSubjectses, Set teacherSubjects) {
+			Set<TimeTable> timeTables, Set<ClassSubjects> classSubjectses,
+			Set<SchoolExamSubject> schoolExamSubjects,
+			Set<TeacherSubject> teacherSubjects) {
 		this.name = name;
 		this.lastUpdatedOn = lastUpdatedOn;
 		this.lastUpdatedBy = lastUpdatedBy;
 		this.timeTables = timeTables;
 		this.classSubjectses = classSubjectses;
+		this.schoolExamSubjects = schoolExamSubjects;
 		this.teacherSubjects = teacherSubjects;
 	}
 
@@ -64,8 +69,8 @@ public class Subject implements java.io.Serializable {
 		this.name = name;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "last_updated_on", length = 10)
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "last_updated_on", length = 19)
 	public Date getLastUpdatedOn() {
 		return this.lastUpdatedOn;
 	}
@@ -99,6 +104,15 @@ public class Subject implements java.io.Serializable {
 
 	public void setClassSubjectses(Set<ClassSubjects> classSubjectses) {
 		this.classSubjectses = classSubjectses;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "subject")
+	public Set<SchoolExamSubject> getSchoolExamSubjects() {
+		return this.schoolExamSubjects;
+	}
+
+	public void setSchoolExamSubjects(Set<SchoolExamSubject> schoolExamSubjects) {
+		this.schoolExamSubjects = schoolExamSubjects;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "subject")

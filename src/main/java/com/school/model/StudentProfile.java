@@ -1,6 +1,6 @@
 package com.school.model;
 
-// Generated 2 Jun, 2015 3:00:10 PM by Hibernate Tools 3.4.0.CR1
+// Generated Jun 16, 2015 4:57:47 PM by Hibernate Tools 4.0.0
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -24,6 +24,7 @@ public class StudentProfile implements java.io.Serializable {
 
 	private Integer id;
 	private School school;
+	private StudentPersonalInfo studentPersonalInfo;
 	private String batch;
 	private String achievement;
 	private String image;
@@ -33,8 +34,10 @@ public class StudentProfile implements java.io.Serializable {
 	public StudentProfile() {
 	}
 
-	public StudentProfile( String batch, String achievement,
-			String image, Date lastUpdatedOn, int lastUpdatedBy) {
+	public StudentProfile(StudentPersonalInfo studentPersonalInfo,
+			String batch, String achievement, String image, Date lastUpdatedOn,
+			int lastUpdatedBy) {
+		this.studentPersonalInfo = studentPersonalInfo;
 		this.batch = batch;
 		this.achievement = achievement;
 		this.image = image;
@@ -42,10 +45,12 @@ public class StudentProfile implements java.io.Serializable {
 		this.lastUpdatedBy = lastUpdatedBy;
 	}
 
-	public StudentProfile(School school,String batch,
+	public StudentProfile(School school,
+			StudentPersonalInfo studentPersonalInfo, String batch,
 			String achievement, String image, Date lastUpdatedOn,
 			int lastUpdatedBy) {
 		this.school = school;
+		this.studentPersonalInfo = studentPersonalInfo;
 		this.batch = batch;
 		this.achievement = achievement;
 		this.image = image;
@@ -72,6 +77,16 @@ public class StudentProfile implements java.io.Serializable {
 
 	public void setSchool(School school) {
 		this.school = school;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "student_id", nullable = false)
+	public StudentPersonalInfo getStudentPersonalInfo() {
+		return this.studentPersonalInfo;
+	}
+
+	public void setStudentPersonalInfo(StudentPersonalInfo studentPersonalInfo) {
+		this.studentPersonalInfo = studentPersonalInfo;
 	}
 
 	@Column(name = "batch", nullable = false, length = 10)

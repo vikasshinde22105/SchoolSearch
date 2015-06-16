@@ -1,6 +1,6 @@
 package com.school.model;
 
-// Generated Jun 9, 2015 5:02:23 PM by Hibernate Tools 4.0.0
+// Generated Jun 16, 2015 4:57:47 PM by Hibernate Tools 4.0.0
 
 import java.util.Date;
 import java.util.HashSet;
@@ -29,13 +29,14 @@ public class ExamType implements java.io.Serializable {
 	private Byte sortOrder;
 	private Date lastUpdatedOn;
 	private Integer lastUpdatedBy;
-	private Set schoolExams = new HashSet(0);
+	private Set<SchoolExam> schoolExams = new HashSet<SchoolExam>(0);
 
 	public ExamType() {
 	}
 
 	public ExamType(String title, String description, Byte sortOrder,
-			Date lastUpdatedOn, Integer lastUpdatedBy, Set schoolExams) {
+			Date lastUpdatedOn, Integer lastUpdatedBy,
+			Set<SchoolExam> schoolExams) {
 		this.title = title;
 		this.description = description;
 		this.sortOrder = sortOrder;
@@ -102,11 +103,11 @@ public class ExamType implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "examType")
-	public Set getSchoolExams() {
+	public Set<SchoolExam> getSchoolExams() {
 		return this.schoolExams;
 	}
 
-	public void setSchoolExams(Set schoolExams) {
+	public void setSchoolExams(Set<SchoolExam> schoolExams) {
 		this.schoolExams = schoolExams;
 	}
 

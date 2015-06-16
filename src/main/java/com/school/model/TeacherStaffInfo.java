@@ -1,6 +1,6 @@
 package com.school.model;
 
-// Generated 2 Jun, 2015 3:00:10 PM by Hibernate Tools 3.4.0.CR1
+// Generated Jun 16, 2015 4:57:47 PM by Hibernate Tools 4.0.0
 
 import java.util.Date;
 import java.util.HashSet;
@@ -21,7 +21,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 /**
@@ -45,12 +44,19 @@ public class TeacherStaffInfo implements java.io.Serializable {
 	private Date drivingLicenseValidTill;
 	private Date lastUpdatedOn;
 	private int lastUpdatedBy;
-	private Set<TeacherExperience> teacherExperiences = new HashSet<TeacherExperience>(0);
+	private Set<TeacherExperience> teacherExperiences = new HashSet<TeacherExperience>(
+			0);
+	private Set<StudentAttendance> studentAttendances = new HashSet<StudentAttendance>(
+			0);
 	private Set<SchoolTeacher> schoolTeachers = new HashSet<SchoolTeacher>(0);
-	private Set<TeacherClassSkill> teacherClassSkills = new HashSet<TeacherClassSkill>(0);
-	private Set<TeacherEducationInfo> teacherEducationInfos = new HashSet<TeacherEducationInfo>(0);
-	private Set<TeacherAttendance> teacherAttendances = new HashSet<TeacherAttendance>(0);
-	private Set<TeacherTimeTable> teacherTimeTables = new HashSet<TeacherTimeTable>(0);
+	private Set<TeacherClassSkill> teacherClassSkills = new HashSet<TeacherClassSkill>(
+			0);
+	private Set<TeacherEducationInfo> teacherEducationInfos = new HashSet<TeacherEducationInfo>(
+			0);
+	private Set<TeacherAttendance> teacherAttendances = new HashSet<TeacherAttendance>(
+			0);
+	private Set<TeacherTimeTable> teacherTimeTables = new HashSet<TeacherTimeTable>(
+			0);
 	private Set<TeacherSubject> teacherSubjects = new HashSet<TeacherSubject>(0);
 	private Set<TeacherClass> teacherClasses = new HashSet<TeacherClass>(0);
 
@@ -66,10 +72,16 @@ public class TeacherStaffInfo implements java.io.Serializable {
 			String educationQualifiction, String awardDesc,
 			String extraCurricularActivity, String labName, String deptName,
 			String drivingLicenseNo, Date drivingLicenseValidTill,
-			Date lastUpdatedOn, int lastUpdatedBy, Set teacherExperiences,
-			Set schoolTeachers, Set teacherClassSkills,
-			Set teacherEducationInfos, Set teacherAttendances,
-			Set teacherTimeTables, Set teacherSubjects, Set teacherClasses) {
+			Date lastUpdatedOn, int lastUpdatedBy,
+			Set<TeacherExperience> teacherExperiences,
+			Set<StudentAttendance> studentAttendances,
+			Set<SchoolTeacher> schoolTeachers,
+			Set<TeacherClassSkill> teacherClassSkills,
+			Set<TeacherEducationInfo> teacherEducationInfos,
+			Set<TeacherAttendance> teacherAttendances,
+			Set<TeacherTimeTable> teacherTimeTables,
+			Set<TeacherSubject> teacherSubjects,
+			Set<TeacherClass> teacherClasses) {
 		this.userRegistrationInfo = userRegistrationInfo;
 		this.isStaff = isStaff;
 		this.dateOfJoining = dateOfJoining;
@@ -84,6 +96,7 @@ public class TeacherStaffInfo implements java.io.Serializable {
 		this.lastUpdatedOn = lastUpdatedOn;
 		this.lastUpdatedBy = lastUpdatedBy;
 		this.teacherExperiences = teacherExperiences;
+		this.studentAttendances = studentAttendances;
 		this.schoolTeachers = schoolTeachers;
 		this.teacherClassSkills = teacherClassSkills;
 		this.teacherEducationInfos = teacherEducationInfos;
@@ -106,7 +119,6 @@ public class TeacherStaffInfo implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
-	@JsonBackReference
 	public UserRegistrationInfo getUserRegistrationInfo() {
 		return this.userRegistrationInfo;
 	}
@@ -208,8 +220,8 @@ public class TeacherStaffInfo implements java.io.Serializable {
 		this.drivingLicenseValidTill = drivingLicenseValidTill;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "last_updated_on", length = 10)
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "last_updated_on", length = 19)
 	public Date getLastUpdatedOn() {
 		return this.lastUpdatedOn;
 	}
@@ -228,7 +240,7 @@ public class TeacherStaffInfo implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "teacherStaffInfo")
-    @JsonManagedReference
+	@JsonManagedReference
 	public Set<TeacherExperience> getTeacherExperiences() {
 		return this.teacherExperiences;
 	}
@@ -238,7 +250,17 @@ public class TeacherStaffInfo implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "teacherStaffInfo")
-    @JsonManagedReference
+	@JsonManagedReference
+	public Set<StudentAttendance> getStudentAttendances() {
+		return this.studentAttendances;
+	}
+
+	public void setStudentAttendances(Set<StudentAttendance> studentAttendances) {
+		this.studentAttendances = studentAttendances;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "teacherStaffInfo")
+	@JsonManagedReference
 	public Set<SchoolTeacher> getSchoolTeachers() {
 		return this.schoolTeachers;
 	}
@@ -248,7 +270,7 @@ public class TeacherStaffInfo implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "teacherStaffInfo")
-    @JsonManagedReference
+	@JsonManagedReference
 	public Set<TeacherClassSkill> getTeacherClassSkills() {
 		return this.teacherClassSkills;
 	}
@@ -263,7 +285,8 @@ public class TeacherStaffInfo implements java.io.Serializable {
 		return this.teacherEducationInfos;
 	}
 
-	public void setTeacherEducationInfos(Set<TeacherEducationInfo> teacherEducationInfos) {
+	public void setTeacherEducationInfos(
+			Set<TeacherEducationInfo> teacherEducationInfos) {
 		this.teacherEducationInfos = teacherEducationInfos;
 	}
 

@@ -1,6 +1,6 @@
 package com.school.model;
 
-// Generated Jun 9, 2015 5:02:23 PM by Hibernate Tools 4.0.0
+// Generated Jun 16, 2015 4:57:47 PM by Hibernate Tools 4.0.0
 
 import java.util.Date;
 import java.util.HashSet;
@@ -32,16 +32,16 @@ public class BusStop implements java.io.Serializable {
 	private Date lastUpdatedOn;
 	private Integer lastUpdatedBy;
 	private Boolean status;
-	private Set userBuses = new HashSet(0);
-	private Set busRouteStops = new HashSet(0);
+	private Set<UserBus> userBuses = new HashSet<UserBus>(0);
+	private Set<BusRouteStop> busRouteStops = new HashSet<BusRouteStop>(0);
 
 	public BusStop() {
 	}
 
 	public BusStop(String name, String pickupLatitude, String pickupLongitude,
 			String dropLatitude, String dropLongitude, Date lastUpdatedOn,
-			Integer lastUpdatedBy, Boolean status, Set userBuses,
-			Set busRouteStops) {
+			Integer lastUpdatedBy, Boolean status, Set<UserBus> userBuses,
+			Set<BusRouteStop> busRouteStops) {
 		this.name = name;
 		this.pickupLatitude = pickupLatitude;
 		this.pickupLongitude = pickupLongitude;
@@ -139,20 +139,20 @@ public class BusStop implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "busStop")
-	public Set getUserBuses() {
+	public Set<UserBus> getUserBuses() {
 		return this.userBuses;
 	}
 
-	public void setUserBuses(Set userBuses) {
+	public void setUserBuses(Set<UserBus> userBuses) {
 		this.userBuses = userBuses;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "busStop")
-	public Set getBusRouteStops() {
+	public Set<BusRouteStop> getBusRouteStops() {
 		return this.busRouteStops;
 	}
 
-	public void setBusRouteStops(Set busRouteStops) {
+	public void setBusRouteStops(Set<BusRouteStop> busRouteStops) {
 		this.busRouteStops = busRouteStops;
 	}
 

@@ -1,6 +1,6 @@
 package com.school.model;
 
-// Generated 2 Jun, 2015 3:00:10 PM by Hibernate Tools 3.4.0.CR1
+// Generated Jun 16, 2015 4:57:47 PM by Hibernate Tools 4.0.0
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -23,8 +23,8 @@ import javax.persistence.TemporalType;
 public class TeacherEducationInfo implements java.io.Serializable {
 
 	private Integer id;
+	private EducationType educationType;
 	private TeacherStaffInfo teacherStaffInfo;
-	private Short educationTypeId;
 	private Date dateOfEducation;
 	private String description;
 	private Date lastUpdatedOn;
@@ -33,11 +33,11 @@ public class TeacherEducationInfo implements java.io.Serializable {
 	public TeacherEducationInfo() {
 	}
 
-	public TeacherEducationInfo(TeacherStaffInfo teacherStaffInfo,
-			Short educationTypeId, Date dateOfEducation, String description,
-			Date lastUpdatedOn, Integer lastUpdatedBy) {
+	public TeacherEducationInfo(EducationType educationType,
+			TeacherStaffInfo teacherStaffInfo, Date dateOfEducation,
+			String description, Date lastUpdatedOn, Integer lastUpdatedBy) {
+		this.educationType = educationType;
 		this.teacherStaffInfo = teacherStaffInfo;
-		this.educationTypeId = educationTypeId;
 		this.dateOfEducation = dateOfEducation;
 		this.description = description;
 		this.lastUpdatedOn = lastUpdatedOn;
@@ -56,6 +56,16 @@ public class TeacherEducationInfo implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "education_type_id")
+	public EducationType getEducationType() {
+		return this.educationType;
+	}
+
+	public void setEducationType(EducationType educationType) {
+		this.educationType = educationType;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "teacher_staff_id")
 	public TeacherStaffInfo getTeacherStaffInfo() {
 		return this.teacherStaffInfo;
@@ -63,15 +73,6 @@ public class TeacherEducationInfo implements java.io.Serializable {
 
 	public void setTeacherStaffInfo(TeacherStaffInfo teacherStaffInfo) {
 		this.teacherStaffInfo = teacherStaffInfo;
-	}
-
-	@Column(name = "education_type_id")
-	public Short getEducationTypeId() {
-		return this.educationTypeId;
-	}
-
-	public void setEducationTypeId(Short educationTypeId) {
-		this.educationTypeId = educationTypeId;
 	}
 
 	@Temporal(TemporalType.DATE)
@@ -93,8 +94,8 @@ public class TeacherEducationInfo implements java.io.Serializable {
 		this.description = description;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "last_updated_on", length = 10)
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "last_updated_on", length = 19)
 	public Date getLastUpdatedOn() {
 		return this.lastUpdatedOn;
 	}

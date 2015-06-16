@@ -1,6 +1,6 @@
 package com.school.model;
 
-// Generated 2 Jun, 2015 3:00:10 PM by Hibernate Tools 3.4.0.CR1
+// Generated Jun 16, 2015 4:57:47 PM by Hibernate Tools 4.0.0
 
 import java.util.Date;
 import java.util.HashSet;
@@ -27,24 +27,54 @@ public class StudentPersonalInfo implements java.io.Serializable {
 
 	private Integer id;
 	private UserRegistrationInfo userRegistrationInfo;
+	private Boolean status;
+	private Date admissionDate;
 	private Date lastUpdatedOn;
 	private Integer lastUpdatedBy;
-	private Set<StudentSchoolInfo> studentSchoolInfos = new HashSet<StudentSchoolInfo>(0);
-	private Set<TeacherHomeworkRemarks> teacherHomeworkRemarkses = new HashSet<TeacherHomeworkRemarks>(0);
-	private Set<StudentPrevSchoolDetail> studentPrevSchoolDetails = new HashSet<StudentPrevSchoolDetail>(0);
+	private Set<StudentParent> studentParents = new HashSet<StudentParent>(0);
+	private Set<StudentSchoolInfo> studentSchoolInfos = new HashSet<StudentSchoolInfo>(
+			0);
+	private Set<StudentAttendance> studentAttendances = new HashSet<StudentAttendance>(
+			0);
+	private Set<StudentProfile> studentProfiles = new HashSet<StudentProfile>(0);
+	private Set<TeacherHomeworkRemarks> teacherHomeworkRemarkses = new HashSet<TeacherHomeworkRemarks>(
+			0);
+	private Set<StudentClass> studentClasses = new HashSet<StudentClass>(0);
+	private Set<StudentMarksReport> studentMarksReports = new HashSet<StudentMarksReport>(
+			0);
+	private Set<StudentPrevSchoolDetail> studentPrevSchoolDetails = new HashSet<StudentPrevSchoolDetail>(
+			0);
+	private Set<StudentSchoolFeeInfo> studentSchoolFeeInfos = new HashSet<StudentSchoolFeeInfo>(
+			0);
 
 	public StudentPersonalInfo() {
 	}
 
 	public StudentPersonalInfo(UserRegistrationInfo userRegistrationInfo,
-			Date lastUpdatedOn, Integer lastUpdatedBy, Set studentSchoolInfos,
-			Set teacherHomeworkRemarkses, Set studentPrevSchoolDetails) {
+			Boolean status, Date admissionDate, Date lastUpdatedOn,
+			Integer lastUpdatedBy, Set<StudentParent> studentParents,
+			Set<StudentSchoolInfo> studentSchoolInfos,
+			Set<StudentAttendance> studentAttendances,
+			Set<StudentProfile> studentProfiles,
+			Set<TeacherHomeworkRemarks> teacherHomeworkRemarkses,
+			Set<StudentClass> studentClasses,
+			Set<StudentMarksReport> studentMarksReports,
+			Set<StudentPrevSchoolDetail> studentPrevSchoolDetails,
+			Set<StudentSchoolFeeInfo> studentSchoolFeeInfos) {
 		this.userRegistrationInfo = userRegistrationInfo;
+		this.status = status;
+		this.admissionDate = admissionDate;
 		this.lastUpdatedOn = lastUpdatedOn;
 		this.lastUpdatedBy = lastUpdatedBy;
+		this.studentParents = studentParents;
 		this.studentSchoolInfos = studentSchoolInfos;
+		this.studentAttendances = studentAttendances;
+		this.studentProfiles = studentProfiles;
 		this.teacherHomeworkRemarkses = teacherHomeworkRemarkses;
+		this.studentClasses = studentClasses;
+		this.studentMarksReports = studentMarksReports;
 		this.studentPrevSchoolDetails = studentPrevSchoolDetails;
+		this.studentSchoolFeeInfos = studentSchoolFeeInfos;
 	}
 
 	@Id
@@ -69,8 +99,27 @@ public class StudentPersonalInfo implements java.io.Serializable {
 		this.userRegistrationInfo = userRegistrationInfo;
 	}
 
+	@Column(name = "status")
+	public Boolean getStatus() {
+		return this.status;
+	}
+
+	public void setStatus(Boolean status) {
+		this.status = status;
+	}
+
 	@Temporal(TemporalType.DATE)
-	@Column(name = "last_updated_on", length = 10)
+	@Column(name = "admission_date", length = 10)
+	public Date getAdmissionDate() {
+		return this.admissionDate;
+	}
+
+	public void setAdmissionDate(Date admissionDate) {
+		this.admissionDate = admissionDate;
+	}
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "last_updated_on", length = 19)
 	public Date getLastUpdatedOn() {
 		return this.lastUpdatedOn;
 	}
@@ -89,6 +138,15 @@ public class StudentPersonalInfo implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "studentPersonalInfo")
+	public Set<StudentParent> getStudentParents() {
+		return this.studentParents;
+	}
+
+	public void setStudentParents(Set<StudentParent> studentParents) {
+		this.studentParents = studentParents;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "studentPersonalInfo")
 	public Set<StudentSchoolInfo> getStudentSchoolInfos() {
 		return this.studentSchoolInfos;
 	}
@@ -98,12 +156,50 @@ public class StudentPersonalInfo implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "studentPersonalInfo")
+	public Set<StudentAttendance> getStudentAttendances() {
+		return this.studentAttendances;
+	}
+
+	public void setStudentAttendances(Set<StudentAttendance> studentAttendances) {
+		this.studentAttendances = studentAttendances;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "studentPersonalInfo")
+	public Set<StudentProfile> getStudentProfiles() {
+		return this.studentProfiles;
+	}
+
+	public void setStudentProfiles(Set<StudentProfile> studentProfiles) {
+		this.studentProfiles = studentProfiles;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "studentPersonalInfo")
 	public Set<TeacherHomeworkRemarks> getTeacherHomeworkRemarkses() {
 		return this.teacherHomeworkRemarkses;
 	}
 
-	public void setTeacherHomeworkRemarkses(Set<TeacherHomeworkRemarks> teacherHomeworkRemarkses) {
+	public void setTeacherHomeworkRemarkses(
+			Set<TeacherHomeworkRemarks> teacherHomeworkRemarkses) {
 		this.teacherHomeworkRemarkses = teacherHomeworkRemarkses;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "studentPersonalInfo")
+	public Set<StudentClass> getStudentClasses() {
+		return this.studentClasses;
+	}
+
+	public void setStudentClasses(Set<StudentClass> studentClasses) {
+		this.studentClasses = studentClasses;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "studentPersonalInfo")
+	public Set<StudentMarksReport> getStudentMarksReports() {
+		return this.studentMarksReports;
+	}
+
+	public void setStudentMarksReports(
+			Set<StudentMarksReport> studentMarksReports) {
+		this.studentMarksReports = studentMarksReports;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "studentPersonalInfo")
@@ -111,8 +207,19 @@ public class StudentPersonalInfo implements java.io.Serializable {
 		return this.studentPrevSchoolDetails;
 	}
 
-	public void setStudentPrevSchoolDetails(Set<StudentPrevSchoolDetail> studentPrevSchoolDetails) {
+	public void setStudentPrevSchoolDetails(
+			Set<StudentPrevSchoolDetail> studentPrevSchoolDetails) {
 		this.studentPrevSchoolDetails = studentPrevSchoolDetails;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "studentPersonalInfo")
+	public Set<StudentSchoolFeeInfo> getStudentSchoolFeeInfos() {
+		return this.studentSchoolFeeInfos;
+	}
+
+	public void setStudentSchoolFeeInfos(
+			Set<StudentSchoolFeeInfo> studentSchoolFeeInfos) {
+		this.studentSchoolFeeInfos = studentSchoolFeeInfos;
 	}
 
 }

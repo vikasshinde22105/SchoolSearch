@@ -1,10 +1,9 @@
 package com.school.model;
 
-// Generated 2 Jun, 2015 3:00:10 PM by Hibernate Tools 3.4.0.CR1
+// Generated Jun 16, 2015 4:57:47 PM by Hibernate Tools 4.0.0
 
 import java.util.Date;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -15,12 +14,14 @@ import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -29,18 +30,20 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
  */
 @Entity
 @Table(name = "school", catalog = "school_db")
-@JsonIgnoreProperties({ "timeTables","studentPrevSchoolDetails","classSubjectses"})
-public class School implements java.io.Serializable {
-
+@JsonIgnoreProperties({"schoolExams", "schoolTimelines","events","schoolFeeDetails","parentSchoolReviewRatings","schoolPaymentModes","schoolTeachers","schoolMediums","schoolEmergencyContacts","attendanceInfos",
+"schoolBankAccountDetailses","schoolBoards","schoolRatings","studentPrevSchoolDetails","studentSchoolInfos","userRatings",
+"schoolInfos","contactInfoInternals","schoolBuses","timeTables","contactInfoExternals","studentProfiles","campusInfos","parentSchoolReviewDescs","roleLeaveTrackings",
+"salesInfos","schoolCategoryOptionFeatures","classSubjectses"})
+public class School implements java.io.Serializable { 
 	private Integer id;
+	private Locality locality;
 	private String name;
 	private String plotNo;
-	private Integer localityId;
-	private String street;
+	private String streetName;
 	private String landmark;
 	private String pincode;
-	private Float longitude;
-	private Float latitude;
+	private String longitude;
+	private String latitude;
 	private String alias;
 	private String tagLine;
 	private String aboutSchool;
@@ -51,39 +54,83 @@ public class School implements java.io.Serializable {
 	private Date createdOn;
 	private Date lastUpdatedOn;
 	private Integer lastUpdatedBy;
-	
-	private Set<StudentSchoolInfo> studentSchoolInfos = new HashSet<StudentSchoolInfo>(0);
-
-	private Set<TimeTable> timeTables = new HashSet<TimeTable>(0);
-
-	private Set<StudentProfile> studentProfiles = new HashSet<StudentProfile>(0);
-
+	private Set<SchoolExam> schoolExams = new HashSet<SchoolExam>(0);
+	private Set<SchoolTimeline> schoolTimelines = new HashSet<SchoolTimeline>(0);
+	private Set<Event> events = new HashSet<Event>(0);
+	private Set<SchoolFeeDetail> schoolFeeDetails = new HashSet<SchoolFeeDetail>(
+			0);
+	private Set<ParentSchoolReviewRating> parentSchoolReviewRatings = new HashSet<ParentSchoolReviewRating>(
+			0);
+	private Set<SchoolPaymentMode> schoolPaymentModes = new HashSet<SchoolPaymentMode>(
+			0);
 	private Set<SchoolTeacher> schoolTeachers = new HashSet<SchoolTeacher>(0);
-
-	private Set<StudentPrevSchoolDetail> studentPrevSchoolDetails = new HashSet<StudentPrevSchoolDetail>(0);
-
-    private Set<ClassInfo> classInfos = new HashSet<ClassInfo>(0);
-/*    @OneToMany(mappedBy="school", fetch=FetchType.EAGER)
-    @JsonManagedReference
-    private List<ClassInfo> classInfos;
-*/
+	private Set<SchoolMedium> schoolMediums = new HashSet<SchoolMedium>(0);
+	private Set<ClassInfo> classInfos = new HashSet<ClassInfo>(0);
+	private Set<SchoolEmergencyContact> schoolEmergencyContacts = new HashSet<SchoolEmergencyContact>(
+			0);
+	private Set<AttendanceInfo> attendanceInfos = new HashSet<AttendanceInfo>(0);
+	private Set<SchoolBankAccountDetails> schoolBankAccountDetailses = new HashSet<SchoolBankAccountDetails>(
+			0);
+	private Set<SchoolBoard> schoolBoards = new HashSet<SchoolBoard>(0);
+	private Set<SchoolRating> schoolRatings = new HashSet<SchoolRating>(0);
+	private Set<StudentPrevSchoolDetail> studentPrevSchoolDetails = new HashSet<StudentPrevSchoolDetail>(
+			0);
+	private Set<StudentSchoolInfo> studentSchoolInfos = new HashSet<StudentSchoolInfo>(
+			0);
+	private Set<UserRating> userRatings = new HashSet<UserRating>(0);
+	private Set<SchoolInfo> schoolInfos = new HashSet<SchoolInfo>(0);
+	private Set<ContactInfoInternal> contactInfoInternals = new HashSet<ContactInfoInternal>(
+			0);
+	private Set<SchoolBus> schoolBuses = new HashSet<SchoolBus>(0);
+	private Set<TimeTable> timeTables = new HashSet<TimeTable>(0);
+	private Set<ContactInfoExternal> contactInfoExternals = new HashSet<ContactInfoExternal>(
+			0);
+	private Set<StudentProfile> studentProfiles = new HashSet<StudentProfile>(0);
+	private Set<CampusInfo> campusInfos = new HashSet<CampusInfo>(0);
+	private Set<ParentSchoolReviewDesc> parentSchoolReviewDescs = new HashSet<ParentSchoolReviewDesc>(
+			0);
+	private Set<RoleLeaveTracking> roleLeaveTrackings = new HashSet<RoleLeaveTracking>(
+			0);
+	private Set<SalesInfo> salesInfos = new HashSet<SalesInfo>(0);
+	private Set<SchoolCategoryOptionFeature> schoolCategoryOptionFeatures = new HashSet<SchoolCategoryOptionFeature>(
+			0);
 	private Set<ClassSubjects> classSubjectses = new HashSet<ClassSubjects>(0);
 
 	public School() {
 	}
 
-	public School(String name, String plotNo, Integer localityId,
-			String street, String landmark, String pincode, Float longitude,
-			Float latitude, String alias, String tagLine, String aboutSchool,
-			String logo, Byte establishmentType, Boolean status, Date liveDate,
-			Date createdOn, Date lastUpdatedOn, Integer lastUpdatedBy,
-			Set<StudentSchoolInfo> studentSchoolInfos, Set<TimeTable> timeTables, Set studentProfiles,
-			Set<SchoolTeacher> schoolTeachers, Set<StudentPrevSchoolDetail> studentPrevSchoolDetails, Set<ClassInfo> classInfos,
+	public School(Locality locality, String name, String plotNo,
+			String streetName, String landmark, String pincode,
+			String longitude, String latitude, String alias, String tagLine,
+			String aboutSchool, String logo, Byte establishmentType,
+			Boolean status, Date liveDate, Date createdOn, Date lastUpdatedOn,
+			Integer lastUpdatedBy, Set<SchoolExam> schoolExams,
+			Set<SchoolTimeline> schoolTimelines, Set<Event> events,
+			Set<SchoolFeeDetail> schoolFeeDetails,
+			Set<ParentSchoolReviewRating> parentSchoolReviewRatings,
+			Set<SchoolPaymentMode> schoolPaymentModes,
+			Set<SchoolTeacher> schoolTeachers, Set<SchoolMedium> schoolMediums,
+			Set<ClassInfo> classInfos,
+			Set<SchoolEmergencyContact> schoolEmergencyContacts,
+			Set<AttendanceInfo> attendanceInfos,
+			Set<SchoolBankAccountDetails> schoolBankAccountDetailses,
+			Set<SchoolBoard> schoolBoards, Set<SchoolRating> schoolRatings,
+			Set<StudentPrevSchoolDetail> studentPrevSchoolDetails,
+			Set<StudentSchoolInfo> studentSchoolInfos,
+			Set<UserRating> userRatings, Set<SchoolInfo> schoolInfos,
+			Set<ContactInfoInternal> contactInfoInternals,
+			Set<SchoolBus> schoolBuses, Set<TimeTable> timeTables,
+			Set<ContactInfoExternal> contactInfoExternals,
+			Set<StudentProfile> studentProfiles, Set<CampusInfo> campusInfos,
+			Set<ParentSchoolReviewDesc> parentSchoolReviewDescs,
+			Set<RoleLeaveTracking> roleLeaveTrackings,
+			Set<SalesInfo> salesInfos,
+			Set<SchoolCategoryOptionFeature> schoolCategoryOptionFeatures,
 			Set<ClassSubjects> classSubjectses) {
+		this.locality = locality;
 		this.name = name;
 		this.plotNo = plotNo;
-		this.localityId = localityId;
-		this.street = street;
+		this.streetName = streetName;
 		this.landmark = landmark;
 		this.pincode = pincode;
 		this.longitude = longitude;
@@ -98,12 +145,34 @@ public class School implements java.io.Serializable {
 		this.createdOn = createdOn;
 		this.lastUpdatedOn = lastUpdatedOn;
 		this.lastUpdatedBy = lastUpdatedBy;
-		this.studentSchoolInfos = studentSchoolInfos;
-		this.timeTables = timeTables;
-		this.studentProfiles = studentProfiles;
+		this.schoolExams = schoolExams;
+		this.schoolTimelines = schoolTimelines;
+		this.events = events;
+		this.schoolFeeDetails = schoolFeeDetails;
+		this.parentSchoolReviewRatings = parentSchoolReviewRatings;
+		this.schoolPaymentModes = schoolPaymentModes;
 		this.schoolTeachers = schoolTeachers;
-		this.studentPrevSchoolDetails = studentPrevSchoolDetails;
+		this.schoolMediums = schoolMediums;
 		this.classInfos = classInfos;
+		this.schoolEmergencyContacts = schoolEmergencyContacts;
+		this.attendanceInfos = attendanceInfos;
+		this.schoolBankAccountDetailses = schoolBankAccountDetailses;
+		this.schoolBoards = schoolBoards;
+		this.schoolRatings = schoolRatings;
+		this.studentPrevSchoolDetails = studentPrevSchoolDetails;
+		this.studentSchoolInfos = studentSchoolInfos;
+		this.userRatings = userRatings;
+		this.schoolInfos = schoolInfos;
+		this.contactInfoInternals = contactInfoInternals;
+		this.schoolBuses = schoolBuses;
+		this.timeTables = timeTables;
+		this.contactInfoExternals = contactInfoExternals;
+		this.studentProfiles = studentProfiles;
+		this.campusInfos = campusInfos;
+		this.parentSchoolReviewDescs = parentSchoolReviewDescs;
+		this.roleLeaveTrackings = roleLeaveTrackings;
+		this.salesInfos = salesInfos;
+		this.schoolCategoryOptionFeatures = schoolCategoryOptionFeatures;
 		this.classSubjectses = classSubjectses;
 	}
 
@@ -116,6 +185,17 @@ public class School implements java.io.Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "locality_id")
+	@JsonBackReference
+	public Locality getLocality() {
+		return this.locality;
+	}
+
+	public void setLocality(Locality locality) {
+		this.locality = locality;
 	}
 
 	@Column(name = "name", length = 200)
@@ -136,22 +216,13 @@ public class School implements java.io.Serializable {
 		this.plotNo = plotNo;
 	}
 
-	@Column(name = "locality_id")
-	public Integer getLocalityId() {
-		return this.localityId;
-	}
-
-	public void setLocalityId(Integer localityId) {
-		this.localityId = localityId;
-	}
-
 	@Column(name = "street_name", length = 500)
-	public String getStreet() {
-		return this.street;
+	public String getStreetName() {
+		return this.streetName;
 	}
 
-	public void setStreet(String street) {
-		this.street = street;
+	public void setStreetName(String streetName) {
+		this.streetName = streetName;
 	}
 
 	@Column(name = "landmark", length = 150)
@@ -172,21 +243,21 @@ public class School implements java.io.Serializable {
 		this.pincode = pincode;
 	}
 
-	@Column(name = "longitude", precision = 9, scale = 3)
-	public Float getLongitude() {
+	@Column(name = "longitude", length = 15)
+	public String getLongitude() {
 		return this.longitude;
 	}
 
-	public void setLongitude(Float longitude) {
+	public void setLongitude(String longitude) {
 		this.longitude = longitude;
 	}
 
-	@Column(name = "latitude", precision = 9, scale = 3)
-	public Float getLatitude() {
+	@Column(name = "latitude", length = 15)
+	public String getLatitude() {
 		return this.latitude;
 	}
 
-	public void setLatitude(Float latitude) {
+	public void setLatitude(String latitude) {
 		this.latitude = latitude;
 	}
 
@@ -244,8 +315,8 @@ public class School implements java.io.Serializable {
 		this.status = status;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "live_date", length = 10)
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "live_date", length = 19)
 	public Date getLiveDate() {
 		return this.liveDate;
 	}
@@ -254,8 +325,8 @@ public class School implements java.io.Serializable {
 		this.liveDate = liveDate;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "created_on", length = 10)
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "created_on", length = 19)
 	public Date getCreatedOn() {
 		return this.createdOn;
 	}
@@ -264,8 +335,8 @@ public class School implements java.io.Serializable {
 		this.createdOn = createdOn;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "last_updated_on", length = 10)
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "last_updated_on", length = 19)
 	public Date getLastUpdatedOn() {
 		return this.lastUpdatedOn;
 	}
@@ -284,34 +355,68 @@ public class School implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "school")
-	public Set<StudentSchoolInfo> getStudentSchoolInfos() {
-		return this.studentSchoolInfos;
+	@JsonManagedReference
+	public Set<SchoolExam> getSchoolExams() {
+		return this.schoolExams;
 	}
 
-	public void setStudentSchoolInfos(Set<StudentSchoolInfo> studentSchoolInfos) {
-		this.studentSchoolInfos = studentSchoolInfos;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "school")
-	public Set<TimeTable> getTimeTables() {
-		return this.timeTables;
-	}
-
-	public void setTimeTables(Set<TimeTable> timeTables) {
-		this.timeTables = timeTables;
+	public void setSchoolExams(Set<SchoolExam> schoolExams) {
+		this.schoolExams = schoolExams;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "school")
-	public Set<StudentProfile> getStudentProfiles() {
-		return this.studentProfiles;
+	@JsonManagedReference
+	public Set<SchoolTimeline> getSchoolTimelines() {
+		return this.schoolTimelines;
 	}
 
-	public void setStudentProfiles(Set<StudentProfile> studentProfiles) {
-		this.studentProfiles = studentProfiles;
+	public void setSchoolTimelines(Set<SchoolTimeline> schoolTimelines) {
+		this.schoolTimelines = schoolTimelines;
 	}
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "school")
-    @JsonManagedReference
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "school")
+	@JsonManagedReference
+	public Set<Event> getEvents() {
+		return this.events;
+	}
+
+	public void setEvents(Set<Event> events) {
+		this.events = events;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "school")
+	@JsonManagedReference
+	public Set<SchoolFeeDetail> getSchoolFeeDetails() {
+		return this.schoolFeeDetails;
+	}
+
+	public void setSchoolFeeDetails(Set<SchoolFeeDetail> schoolFeeDetails) {
+		this.schoolFeeDetails = schoolFeeDetails;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "school")
+	@JsonManagedReference
+	public Set<ParentSchoolReviewRating> getParentSchoolReviewRatings() {
+		return this.parentSchoolReviewRatings;
+	}
+
+	public void setParentSchoolReviewRatings(
+			Set<ParentSchoolReviewRating> parentSchoolReviewRatings) {
+		this.parentSchoolReviewRatings = parentSchoolReviewRatings;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "school")
+	@JsonManagedReference
+	public Set<SchoolPaymentMode> getSchoolPaymentModes() {
+		return this.schoolPaymentModes;
+	}
+
+	public void setSchoolPaymentModes(Set<SchoolPaymentMode> schoolPaymentModes) {
+		this.schoolPaymentModes = schoolPaymentModes;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "school")
+	@JsonManagedReference
 	public Set<SchoolTeacher> getSchoolTeachers() {
 		return this.schoolTeachers;
 	}
@@ -321,15 +426,17 @@ public class School implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "school")
-	public Set<StudentPrevSchoolDetail> getStudentPrevSchoolDetails() {
-		return this.studentPrevSchoolDetails;
+	@JsonManagedReference
+	public Set<SchoolMedium> getSchoolMediums() {
+		return this.schoolMediums;
 	}
 
-	public void setStudentPrevSchoolDetails(Set<StudentPrevSchoolDetail> studentPrevSchoolDetails) {
-		this.studentPrevSchoolDetails = studentPrevSchoolDetails;
+	public void setSchoolMediums(Set<SchoolMedium> schoolMediums) {
+		this.schoolMediums = schoolMediums;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "school")
+	@JsonManagedReference
 	public Set<ClassInfo> getClassInfos() {
 		return this.classInfos;
 	}
@@ -339,6 +446,204 @@ public class School implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "school")
+	@JsonManagedReference
+	public Set<SchoolEmergencyContact> getSchoolEmergencyContacts() {
+		return this.schoolEmergencyContacts;
+	}
+
+	public void setSchoolEmergencyContacts(
+			Set<SchoolEmergencyContact> schoolEmergencyContacts) {
+		this.schoolEmergencyContacts = schoolEmergencyContacts;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "school")
+	@JsonManagedReference
+	public Set<AttendanceInfo> getAttendanceInfos() {
+		return this.attendanceInfos;
+	}
+
+	public void setAttendanceInfos(Set<AttendanceInfo> attendanceInfos) {
+		this.attendanceInfos = attendanceInfos;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "school")
+	@JsonManagedReference
+	public Set<SchoolBankAccountDetails> getSchoolBankAccountDetailses() {
+		return this.schoolBankAccountDetailses;
+	}
+
+	public void setSchoolBankAccountDetailses(
+			Set<SchoolBankAccountDetails> schoolBankAccountDetailses) {
+		this.schoolBankAccountDetailses = schoolBankAccountDetailses;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "school")
+	@JsonManagedReference
+	public Set<SchoolBoard> getSchoolBoards() {
+		return this.schoolBoards;
+	}
+
+	public void setSchoolBoards(Set<SchoolBoard> schoolBoards) {
+		this.schoolBoards = schoolBoards;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "school")
+	@JsonManagedReference
+	public Set<SchoolRating> getSchoolRatings() {
+		return this.schoolRatings;
+	}
+
+	public void setSchoolRatings(Set<SchoolRating> schoolRatings) {
+		this.schoolRatings = schoolRatings;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "school")
+	@JsonManagedReference
+	public Set<StudentPrevSchoolDetail> getStudentPrevSchoolDetails() {
+		return this.studentPrevSchoolDetails;
+	}
+
+	public void setStudentPrevSchoolDetails(
+			Set<StudentPrevSchoolDetail> studentPrevSchoolDetails) {
+		this.studentPrevSchoolDetails = studentPrevSchoolDetails;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "school")
+	@JsonManagedReference
+	public Set<StudentSchoolInfo> getStudentSchoolInfos() {
+		return this.studentSchoolInfos;
+	}
+
+	public void setStudentSchoolInfos(Set<StudentSchoolInfo> studentSchoolInfos) {
+		this.studentSchoolInfos = studentSchoolInfos;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "school")
+	@JsonManagedReference
+	public Set<UserRating> getUserRatings() {
+		return this.userRatings;
+	}
+
+	public void setUserRatings(Set<UserRating> userRatings) {
+		this.userRatings = userRatings;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "school")
+	@JsonManagedReference
+	public Set<SchoolInfo> getSchoolInfos() {
+		return this.schoolInfos;
+	}
+
+	public void setSchoolInfos(Set<SchoolInfo> schoolInfos) {
+		this.schoolInfos = schoolInfos;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "school")
+	@JsonManagedReference
+	public Set<ContactInfoInternal> getContactInfoInternals() {
+		return this.contactInfoInternals;
+	}
+
+	public void setContactInfoInternals(
+			Set<ContactInfoInternal> contactInfoInternals) {
+		this.contactInfoInternals = contactInfoInternals;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "school")
+	@JsonManagedReference
+	public Set<SchoolBus> getSchoolBuses() {
+		return this.schoolBuses;
+	}
+
+	public void setSchoolBuses(Set<SchoolBus> schoolBuses) {
+		this.schoolBuses = schoolBuses;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "school")
+	@JsonManagedReference
+	public Set<TimeTable> getTimeTables() {
+		return this.timeTables;
+	}
+
+	public void setTimeTables(Set<TimeTable> timeTables) {
+		this.timeTables = timeTables;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "school")
+	@JsonManagedReference
+	public Set<ContactInfoExternal> getContactInfoExternals() {
+		return this.contactInfoExternals;
+	}
+
+	public void setContactInfoExternals(
+			Set<ContactInfoExternal> contactInfoExternals) {
+		this.contactInfoExternals = contactInfoExternals;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "school")
+	@JsonManagedReference
+	public Set<StudentProfile> getStudentProfiles() {
+		return this.studentProfiles;
+	}
+
+	public void setStudentProfiles(Set<StudentProfile> studentProfiles) {
+		this.studentProfiles = studentProfiles;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "school")
+	@JsonManagedReference
+	public Set<CampusInfo> getCampusInfos() {
+		return this.campusInfos;
+	}
+
+	public void setCampusInfos(Set<CampusInfo> campusInfos) {
+		this.campusInfos = campusInfos;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "school")
+	@JsonManagedReference
+	public Set<ParentSchoolReviewDesc> getParentSchoolReviewDescs() {
+		return this.parentSchoolReviewDescs;
+	}
+
+	public void setParentSchoolReviewDescs(
+			Set<ParentSchoolReviewDesc> parentSchoolReviewDescs) {
+		this.parentSchoolReviewDescs = parentSchoolReviewDescs;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "school")
+	@JsonManagedReference
+	public Set<RoleLeaveTracking> getRoleLeaveTrackings() {
+		return this.roleLeaveTrackings;
+	}
+
+	public void setRoleLeaveTrackings(Set<RoleLeaveTracking> roleLeaveTrackings) {
+		this.roleLeaveTrackings = roleLeaveTrackings;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "school")
+	@JsonManagedReference
+	public Set<SalesInfo> getSalesInfos() {
+		return this.salesInfos;
+	}
+
+	public void setSalesInfos(Set<SalesInfo> salesInfos) {
+		this.salesInfos = salesInfos;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "school")
+	@JsonManagedReference
+	public Set<SchoolCategoryOptionFeature> getSchoolCategoryOptionFeatures() {
+		return this.schoolCategoryOptionFeatures;
+	}
+
+	public void setSchoolCategoryOptionFeatures(
+			Set<SchoolCategoryOptionFeature> schoolCategoryOptionFeatures) {
+		this.schoolCategoryOptionFeatures = schoolCategoryOptionFeatures;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "school")
+	@JsonManagedReference
 	public Set<ClassSubjects> getClassSubjectses() {
 		return this.classSubjectses;
 	}

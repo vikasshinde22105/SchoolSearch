@@ -1,6 +1,6 @@
 package com.school.model;
 
-// Generated Jun 9, 2015 5:02:23 PM by Hibernate Tools 4.0.0
+// Generated Jun 16, 2015 4:57:47 PM by Hibernate Tools 4.0.0
 
 import java.util.HashSet;
 import java.util.Set;
@@ -27,13 +27,13 @@ public class District implements java.io.Serializable {
 	private String name;
 	private Byte status;
 	private Integer sortOrder;
-	private Set tehsils = new HashSet(0);
+	private Set<Tehsil> tehsils = new HashSet<Tehsil>(0);
 
 	public District() {
 	}
 
 	public District(State state, String name, Byte status, Integer sortOrder,
-			Set tehsils) {
+			Set<Tehsil> tehsils) {
 		this.state = state;
 		this.name = name;
 		this.status = status;
@@ -90,11 +90,11 @@ public class District implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "district")
-	public Set getTehsils() {
+	public Set<Tehsil> getTehsils() {
 		return this.tehsils;
 	}
 
-	public void setTehsils(Set tehsils) {
+	public void setTehsils(Set<Tehsil> tehsils) {
 		this.tehsils = tehsils;
 	}
 

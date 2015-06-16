@@ -1,6 +1,6 @@
 package com.school.model;
 
-// Generated Jun 9, 2015 5:02:23 PM by Hibernate Tools 4.0.0
+// Generated Jun 16, 2015 4:57:47 PM by Hibernate Tools 4.0.0
 
 import java.util.Date;
 import java.util.HashSet;
@@ -32,18 +32,20 @@ public class BusInfo implements java.io.Serializable {
 	private String description;
 	private Date lastUpdatedOn;
 	private Integer lastUpdatedBy;
-	private Set schoolBuses = new HashSet(0);
-	private Set busDrivers = new HashSet(0);
-	private Set busRoutes = new HashSet(0);
-	private Set busDelayDetailses = new HashSet(0);
+	private Set<SchoolBus> schoolBuses = new HashSet<SchoolBus>(0);
+	private Set<BusDriver> busDrivers = new HashSet<BusDriver>(0);
+	private Set<BusRoute> busRoutes = new HashSet<BusRoute>(0);
+	private Set<BusDelayDetails> busDelayDetailses = new HashSet<BusDelayDetails>(
+			0);
 
 	public BusInfo() {
 	}
 
 	public BusInfo(String title, String busNumber, String vehicleNo,
 			String busDriverName, String contactNo, String description,
-			Date lastUpdatedOn, Integer lastUpdatedBy, Set schoolBuses,
-			Set busDrivers, Set busRoutes, Set busDelayDetailses) {
+			Date lastUpdatedOn, Integer lastUpdatedBy,
+			Set<SchoolBus> schoolBuses, Set<BusDriver> busDrivers,
+			Set<BusRoute> busRoutes, Set<BusDelayDetails> busDelayDetailses) {
 		this.title = title;
 		this.busNumber = busNumber;
 		this.vehicleNo = vehicleNo;
@@ -143,38 +145,38 @@ public class BusInfo implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "busInfo")
-	public Set getSchoolBuses() {
+	public Set<SchoolBus> getSchoolBuses() {
 		return this.schoolBuses;
 	}
 
-	public void setSchoolBuses(Set schoolBuses) {
+	public void setSchoolBuses(Set<SchoolBus> schoolBuses) {
 		this.schoolBuses = schoolBuses;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "busInfo")
-	public Set getBusDrivers() {
+	public Set<BusDriver> getBusDrivers() {
 		return this.busDrivers;
 	}
 
-	public void setBusDrivers(Set busDrivers) {
+	public void setBusDrivers(Set<BusDriver> busDrivers) {
 		this.busDrivers = busDrivers;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "busInfo")
-	public Set getBusRoutes() {
+	public Set<BusRoute> getBusRoutes() {
 		return this.busRoutes;
 	}
 
-	public void setBusRoutes(Set busRoutes) {
+	public void setBusRoutes(Set<BusRoute> busRoutes) {
 		this.busRoutes = busRoutes;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "busInfo")
-	public Set getBusDelayDetailses() {
+	public Set<BusDelayDetails> getBusDelayDetailses() {
 		return this.busDelayDetailses;
 	}
 
-	public void setBusDelayDetailses(Set busDelayDetailses) {
+	public void setBusDelayDetailses(Set<BusDelayDetails> busDelayDetailses) {
 		this.busDelayDetailses = busDelayDetailses;
 	}
 

@@ -1,12 +1,18 @@
 package com.school.model;
 
-// Generated 2 Jun, 2015 2:50:11 PM by Hibernate Tools 3.4.0.CR1
+// Generated Jun 16, 2015 4:57:47 PM by Hibernate Tools 4.0.0
 
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -17,20 +23,22 @@ import javax.persistence.Table;
 public class Tehsil implements java.io.Serializable {
 
 	private Integer id;
-	private Integer districtId;
+	private District district;
 	private String name;
 	private Integer sortOrder;
 	private Boolean status;
+	private Set<City> cities = new HashSet<City>(0);
 
 	public Tehsil() {
 	}
 
-	public Tehsil(Integer districtId, String name, Integer sortOrder,
-			Boolean status) {
-		this.districtId = districtId;
+	public Tehsil(District district, String name, Integer sortOrder,
+			Boolean status, Set<City> cities) {
+		this.district = district;
 		this.name = name;
 		this.sortOrder = sortOrder;
 		this.status = status;
+		this.cities = cities;
 	}
 
 	@Id
@@ -44,13 +52,14 @@ public class Tehsil implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@Column(name = "district_id")
-	public Integer getDistrictId() {
-		return this.districtId;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "district_id")
+	public District getDistrict() {
+		return this.district;
 	}
 
-	public void setDistrictId(Integer districtId) {
-		this.districtId = districtId;
+	public void setDistrict(District district) {
+		this.district = district;
 	}
 
 	@Column(name = "name", length = 200)
@@ -78,6 +87,15 @@ public class Tehsil implements java.io.Serializable {
 
 	public void setStatus(Boolean status) {
 		this.status = status;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tehsil")
+	public Set<City> getCities() {
+		return this.cities;
+	}
+
+	public void setCities(Set<City> cities) {
+		this.cities = cities;
 	}
 
 }

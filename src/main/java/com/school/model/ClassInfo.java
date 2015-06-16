@@ -1,6 +1,6 @@
 package com.school.model;
 
-// Generated 2 Jun, 2015 3:00:10 PM by Hibernate Tools 3.4.0.CR1
+// Generated Jun 16, 2015 4:57:47 PM by Hibernate Tools 4.0.0
 
 import java.util.Date;
 import java.util.HashSet;
@@ -23,7 +23,6 @@ import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 /**
@@ -32,13 +31,12 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Entity
 @Table(name = "class_info", catalog = "school_db", uniqueConstraints = @UniqueConstraint(columnNames = {
 		"school_id", "standard_id", "ta_id" }))
-@JsonIgnoreProperties({ "timeTables"})
 public class ClassInfo implements java.io.Serializable {
 
 	private Integer id;
 	private TeachingApproachType teachingApproachType;
+	private StandardType standardType;
 	private School school;
-	private Short standardId;
 	private String eligibilityCriteria;
 	private Date admissionDeadline;
 	private String admissionProcess;
@@ -52,26 +50,41 @@ public class ClassInfo implements java.io.Serializable {
 	private Integer lastUpdatedBy;
 	private Date lastUpdatedOn;
 	private Set<TimeTable> timeTables = new HashSet<TimeTable>(0);
-	
+	private Set<AttendanceInfo> attendanceInfos = new HashSet<AttendanceInfo>(0);
+	private Set<ClassAccessories> classAccessorieses = new HashSet<ClassAccessories>(
+			0);
 	private Set<ClassSection> classSections = new HashSet<ClassSection>(0);
+	private Set<SchoolFeeDetail> schoolFeeDetails = new HashSet<SchoolFeeDetail>(
+			0);
 	private Set<ClassSubjects> classSubjectses = new HashSet<ClassSubjects>(0);
+	private Set<StudentClass> studentClasses = new HashSet<StudentClass>(0);
+	private Set<Event> events = new HashSet<Event>(0);
+	private Set<SchoolExam> schoolExams = new HashSet<SchoolExam>(0);
 	private Set<TeacherClass> teacherClasses = new HashSet<TeacherClass>(0);
-	private Set<StudentPrevSchoolDetail> studentPrevSchoolDetails = new HashSet<StudentPrevSchoolDetail>(0);
+	private Set<StudentPrevSchoolDetail> studentPrevSchoolDetails = new HashSet<StudentPrevSchoolDetail>(
+			0);
 
 	public ClassInfo() {
 	}
 
-	public ClassInfo(TeachingApproachType teachingApproachType, School school,
-			Short standardId, String eligibilityCriteria,
-			Date admissionDeadline, String admissionProcess,
-			Date admissionFrom, Date admissionTo, String howToApply,
-			String feesPaymentTerm, Short totalSeat, Short seatVacant,
-			String specialization, Integer lastUpdatedBy, Date lastUpdatedOn,
-			Set timeTables, Set classSections, Set classSubjectses,
-			Set teacherClasses, Set studentPrevSchoolDetails) {
+	public ClassInfo(TeachingApproachType teachingApproachType,
+			StandardType standardType, School school,
+			String eligibilityCriteria, Date admissionDeadline,
+			String admissionProcess, Date admissionFrom, Date admissionTo,
+			String howToApply, String feesPaymentTerm, Short totalSeat,
+			Short seatVacant, String specialization, Integer lastUpdatedBy,
+			Date lastUpdatedOn, Set<TimeTable> timeTables,
+			Set<AttendanceInfo> attendanceInfos,
+			Set<ClassAccessories> classAccessorieses,
+			Set<ClassSection> classSections,
+			Set<SchoolFeeDetail> schoolFeeDetails,
+			Set<ClassSubjects> classSubjectses,
+			Set<StudentClass> studentClasses, Set<Event> events,
+			Set<SchoolExam> schoolExams, Set<TeacherClass> teacherClasses,
+			Set<StudentPrevSchoolDetail> studentPrevSchoolDetails) {
 		this.teachingApproachType = teachingApproachType;
+		this.standardType = standardType;
 		this.school = school;
-		this.standardId = standardId;
 		this.eligibilityCriteria = eligibilityCriteria;
 		this.admissionDeadline = admissionDeadline;
 		this.admissionProcess = admissionProcess;
@@ -85,8 +98,14 @@ public class ClassInfo implements java.io.Serializable {
 		this.lastUpdatedBy = lastUpdatedBy;
 		this.lastUpdatedOn = lastUpdatedOn;
 		this.timeTables = timeTables;
+		this.attendanceInfos = attendanceInfos;
+		this.classAccessorieses = classAccessorieses;
 		this.classSections = classSections;
+		this.schoolFeeDetails = schoolFeeDetails;
 		this.classSubjectses = classSubjectses;
+		this.studentClasses = studentClasses;
+		this.events = events;
+		this.schoolExams = schoolExams;
 		this.teacherClasses = teacherClasses;
 		this.studentPrevSchoolDetails = studentPrevSchoolDetails;
 	}
@@ -115,6 +134,17 @@ public class ClassInfo implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "standard_id")
+	@JsonBackReference
+	public StandardType getStandardType() {
+		return this.standardType;
+	}
+
+	public void setStandardType(StandardType standardType) {
+		this.standardType = standardType;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "school_id")
 	@JsonBackReference
 	public School getSchool() {
@@ -123,15 +153,6 @@ public class ClassInfo implements java.io.Serializable {
 
 	public void setSchool(School school) {
 		this.school = school;
-	}
-
-	@Column(name = "standard_id")
-	public Short getStandardId() {
-		return this.standardId;
-	}
-
-	public void setStandardId(Short standardId) {
-		this.standardId = standardId;
 	}
 
 	@Column(name = "eligibility_criteria")
@@ -256,7 +277,27 @@ public class ClassInfo implements java.io.Serializable {
 		this.timeTables = timeTables;
 	}
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "classInfo")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "classInfo")
+	@JsonManagedReference
+	public Set<AttendanceInfo> getAttendanceInfos() {
+		return this.attendanceInfos;
+	}
+
+	public void setAttendanceInfos(Set<AttendanceInfo> attendanceInfos) {
+		this.attendanceInfos = attendanceInfos;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "classInfo")
+	@JsonManagedReference
+	public Set<ClassAccessories> getClassAccessorieses() {
+		return this.classAccessorieses;
+	}
+
+	public void setClassAccessorieses(Set<ClassAccessories> classAccessorieses) {
+		this.classAccessorieses = classAccessorieses;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "classInfo")
 	@JsonManagedReference
 	public Set<ClassSection> getClassSections() {
 		return this.classSections;
@@ -268,12 +309,52 @@ public class ClassInfo implements java.io.Serializable {
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "classInfo")
 	@JsonManagedReference
+	public Set<SchoolFeeDetail> getSchoolFeeDetails() {
+		return this.schoolFeeDetails;
+	}
+
+	public void setSchoolFeeDetails(Set<SchoolFeeDetail> schoolFeeDetails) {
+		this.schoolFeeDetails = schoolFeeDetails;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "classInfo")
+	@JsonManagedReference
 	public Set<ClassSubjects> getClassSubjectses() {
 		return this.classSubjectses;
 	}
 
 	public void setClassSubjectses(Set<ClassSubjects> classSubjectses) {
 		this.classSubjectses = classSubjectses;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "classInfo")
+	@JsonManagedReference
+	public Set<StudentClass> getStudentClasses() {
+		return this.studentClasses;
+	}
+
+	public void setStudentClasses(Set<StudentClass> studentClasses) {
+		this.studentClasses = studentClasses;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "classInfo")
+	@JsonManagedReference
+	public Set<Event> getEvents() {
+		return this.events;
+	}
+
+	public void setEvents(Set<Event> events) {
+		this.events = events;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "classInfo")
+	@JsonManagedReference
+	public Set<SchoolExam> getSchoolExams() {
+		return this.schoolExams;
+	}
+
+	public void setSchoolExams(Set<SchoolExam> schoolExams) {
+		this.schoolExams = schoolExams;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "classInfo")
@@ -292,7 +373,8 @@ public class ClassInfo implements java.io.Serializable {
 		return this.studentPrevSchoolDetails;
 	}
 
-	public void setStudentPrevSchoolDetails(Set<StudentPrevSchoolDetail> studentPrevSchoolDetails) {
+	public void setStudentPrevSchoolDetails(
+			Set<StudentPrevSchoolDetail> studentPrevSchoolDetails) {
 		this.studentPrevSchoolDetails = studentPrevSchoolDetails;
 	}
 

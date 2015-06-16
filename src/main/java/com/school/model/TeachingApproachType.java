@@ -1,6 +1,6 @@
 package com.school.model;
 
-// Generated 2 Jun, 2015 3:00:10 PM by Hibernate Tools 3.4.0.CR1
+// Generated Jun 16, 2015 4:57:47 PM by Hibernate Tools 4.0.0
 
 import java.util.Date;
 import java.util.HashSet;
@@ -38,7 +38,7 @@ public class TeachingApproachType implements java.io.Serializable {
 	}
 
 	public TeachingApproachType(String name, Date lastUpdatedOn,
-			Integer lastUpdatedBy, Set classInfos) {
+			Integer lastUpdatedBy, Set<ClassInfo> classInfos) {
 		this.name = name;
 		this.lastUpdatedOn = lastUpdatedOn;
 		this.lastUpdatedBy = lastUpdatedBy;
@@ -65,8 +65,8 @@ public class TeachingApproachType implements java.io.Serializable {
 		this.name = name;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "last_updated_on", length = 10)
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "last_updated_on", length = 19)
 	public Date getLastUpdatedOn() {
 		return this.lastUpdatedOn;
 	}

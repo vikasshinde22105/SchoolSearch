@@ -1,6 +1,6 @@
 package com.school.model;
 
-// Generated 2 Jun, 2015 2:50:11 PM by Hibernate Tools 3.4.0.CR1
+// Generated Jun 16, 2015 4:57:47 PM by Hibernate Tools 4.0.0
 
 import java.util.Date;
 import java.util.HashSet;
@@ -11,6 +11,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -24,21 +26,21 @@ import javax.persistence.TemporalType;
 public class SecondaryRole implements java.io.Serializable {
 
 	private Short id;
-	private Short primaryRoleId;
+	private Role role;
 	private String description;
 	private String title;
 	private Byte status;
 	private Date lastUpdatedOn;
 	private Integer lastUpdatedBy;
-	private Set userRoles = new HashSet(0);
+	private Set<UserRole> userRoles = new HashSet<UserRole>(0);
 
 	public SecondaryRole() {
 	}
 
-	public SecondaryRole(Short primaryRoleId, String description, String title,
+	public SecondaryRole(Role role, String description, String title,
 			Byte status, Date lastUpdatedOn, Integer lastUpdatedBy,
-			Set userRoles) {
-		this.primaryRoleId = primaryRoleId;
+			Set<UserRole> userRoles) {
+		this.role = role;
 		this.description = description;
 		this.title = title;
 		this.status = status;
@@ -58,13 +60,14 @@ public class SecondaryRole implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@Column(name = "primary_role_id")
-	public Short getPrimaryRoleId() {
-		return this.primaryRoleId;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "primary_role_id")
+	public Role getRole() {
+		return this.role;
 	}
 
-	public void setPrimaryRoleId(Short primaryRoleId) {
-		this.primaryRoleId = primaryRoleId;
+	public void setRole(Role role) {
+		this.role = role;
 	}
 
 	@Column(name = "description", length = 16777215)
@@ -94,8 +97,8 @@ public class SecondaryRole implements java.io.Serializable {
 		this.status = status;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "last_updated_on", length = 10)
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "last_updated_on", length = 19)
 	public Date getLastUpdatedOn() {
 		return this.lastUpdatedOn;
 	}
@@ -114,11 +117,11 @@ public class SecondaryRole implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "secondaryRole")
-	public Set getUserRoles() {
+	public Set<UserRole> getUserRoles() {
 		return this.userRoles;
 	}
 
-	public void setUserRoles(Set userRoles) {
+	public void setUserRoles(Set<UserRole> userRoles) {
 		this.userRoles = userRoles;
 	}
 

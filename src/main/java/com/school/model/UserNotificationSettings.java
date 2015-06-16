@@ -1,6 +1,6 @@
 package com.school.model;
 
-// Generated 2 Jun, 2015 2:50:11 PM by Hibernate Tools 3.4.0.CR1
+// Generated Jun 16, 2015 4:57:47 PM by Hibernate Tools 4.0.0
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -24,7 +24,7 @@ public class UserNotificationSettings implements java.io.Serializable {
 
 	private Integer id;
 	private UserRegistrationInfo userRegistrationInfo;
-	private Short notificationTypeId;
+	private NotificationType notificationType;
 	private Boolean status;
 	private Date lastUpdatedOn;
 	private Integer lastUpdatedBy;
@@ -33,10 +33,10 @@ public class UserNotificationSettings implements java.io.Serializable {
 	}
 
 	public UserNotificationSettings(UserRegistrationInfo userRegistrationInfo,
-			Short notificationTypeId, Boolean status, Date lastUpdatedOn,
-			Integer lastUpdatedBy) {
+			NotificationType notificationType, Boolean status,
+			Date lastUpdatedOn, Integer lastUpdatedBy) {
 		this.userRegistrationInfo = userRegistrationInfo;
-		this.notificationTypeId = notificationTypeId;
+		this.notificationType = notificationType;
 		this.status = status;
 		this.lastUpdatedOn = lastUpdatedOn;
 		this.lastUpdatedBy = lastUpdatedBy;
@@ -64,13 +64,14 @@ public class UserNotificationSettings implements java.io.Serializable {
 		this.userRegistrationInfo = userRegistrationInfo;
 	}
 
-	@Column(name = "notification_type_id")
-	public Short getNotificationTypeId() {
-		return this.notificationTypeId;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "notification_type_id")
+	public NotificationType getNotificationType() {
+		return this.notificationType;
 	}
 
-	public void setNotificationTypeId(Short notificationTypeId) {
-		this.notificationTypeId = notificationTypeId;
+	public void setNotificationType(NotificationType notificationType) {
+		this.notificationType = notificationType;
 	}
 
 	@Column(name = "status")
@@ -82,8 +83,8 @@ public class UserNotificationSettings implements java.io.Serializable {
 		this.status = status;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "last_updated_on", length = 10)
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "last_updated_on", length = 19)
 	public Date getLastUpdatedOn() {
 		return this.lastUpdatedOn;
 	}

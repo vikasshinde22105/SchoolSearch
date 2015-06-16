@@ -1,6 +1,6 @@
 package com.school.model;
 
-// Generated Jun 9, 2015 5:02:23 PM by Hibernate Tools 4.0.0
+// Generated Jun 16, 2015 4:57:47 PM by Hibernate Tools 4.0.0
 
 import java.util.Date;
 import java.util.HashSet;
@@ -28,14 +28,16 @@ public class Role implements java.io.Serializable {
 	private Byte status;
 	private Date lastUpdatedOn;
 	private Integer lastUpdatedBy;
-	private Set roleLeaveTrackings = new HashSet(0);
-	private Set secondaryRoles = new HashSet(0);
+	private Set<RoleLeaveTracking> roleLeaveTrackings = new HashSet<RoleLeaveTracking>(
+			0);
+	private Set<SecondaryRole> secondaryRoles = new HashSet<SecondaryRole>(0);
 
 	public Role() {
 	}
 
 	public Role(String role, Byte status, Date lastUpdatedOn,
-			Integer lastUpdatedBy, Set roleLeaveTrackings, Set secondaryRoles) {
+			Integer lastUpdatedBy, Set<RoleLeaveTracking> roleLeaveTrackings,
+			Set<SecondaryRole> secondaryRoles) {
 		this.role = role;
 		this.status = status;
 		this.lastUpdatedOn = lastUpdatedOn;
@@ -93,20 +95,20 @@ public class Role implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "role")
-	public Set getRoleLeaveTrackings() {
+	public Set<RoleLeaveTracking> getRoleLeaveTrackings() {
 		return this.roleLeaveTrackings;
 	}
 
-	public void setRoleLeaveTrackings(Set roleLeaveTrackings) {
+	public void setRoleLeaveTrackings(Set<RoleLeaveTracking> roleLeaveTrackings) {
 		this.roleLeaveTrackings = roleLeaveTrackings;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "role")
-	public Set getSecondaryRoles() {
+	public Set<SecondaryRole> getSecondaryRoles() {
 		return this.secondaryRoles;
 	}
 
-	public void setSecondaryRoles(Set secondaryRoles) {
+	public void setSecondaryRoles(Set<SecondaryRole> secondaryRoles) {
 		this.secondaryRoles = secondaryRoles;
 	}
 

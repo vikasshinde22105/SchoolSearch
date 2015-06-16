@@ -1,6 +1,6 @@
 package com.school.model;
 
-// Generated 2 Jun, 2015 2:50:11 PM by Hibernate Tools 3.4.0.CR1
+// Generated Jun 16, 2015 4:57:47 PM by Hibernate Tools 4.0.0
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -22,6 +22,7 @@ public class StudentSchoolFeeInfo implements java.io.Serializable {
 	private StudentSchoolFeeInfoId id;
 	private SchoolFeeDetail schoolFeeDetail;
 	private StudentPersonalInfo studentPersonalInfo;
+	private ParentInfo parentInfo;
 
 	public StudentSchoolFeeInfo() {
 	}
@@ -32,10 +33,11 @@ public class StudentSchoolFeeInfo implements java.io.Serializable {
 
 	public StudentSchoolFeeInfo(StudentSchoolFeeInfoId id,
 			SchoolFeeDetail schoolFeeDetail,
-			StudentPersonalInfo studentPersonalInfo) {
+			StudentPersonalInfo studentPersonalInfo, ParentInfo parentInfo) {
 		this.id = id;
 		this.schoolFeeDetail = schoolFeeDetail;
 		this.studentPersonalInfo = studentPersonalInfo;
+		this.parentInfo = parentInfo;
 	}
 
 	@EmbeddedId
@@ -49,7 +51,7 @@ public class StudentSchoolFeeInfo implements java.io.Serializable {
 			@AttributeOverride(name = "parentId", column = @Column(name = "parent_id")),
 			@AttributeOverride(name = "description", column = @Column(name = "description")),
 			@AttributeOverride(name = "isDeleted", column = @Column(name = "is_deleted")),
-			@AttributeOverride(name = "lastUpdatedOn", column = @Column(name = "last_updated_on", length = 10)),
+			@AttributeOverride(name = "lastUpdatedOn", column = @Column(name = "last_updated_on", length = 19)),
 			@AttributeOverride(name = "lastUpdatedBy", column = @Column(name = "last_updated_by")) })
 	public StudentSchoolFeeInfoId getId() {
 		return this.id;
@@ -77,6 +79,16 @@ public class StudentSchoolFeeInfo implements java.io.Serializable {
 
 	public void setStudentPersonalInfo(StudentPersonalInfo studentPersonalInfo) {
 		this.studentPersonalInfo = studentPersonalInfo;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "parent_id", insertable = false, updatable = false)
+	public ParentInfo getParentInfo() {
+		return this.parentInfo;
+	}
+
+	public void setParentInfo(ParentInfo parentInfo) {
+		this.parentInfo = parentInfo;
 	}
 
 }

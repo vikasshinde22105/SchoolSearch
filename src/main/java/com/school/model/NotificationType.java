@@ -1,6 +1,6 @@
 package com.school.model;
 
-// Generated Jun 9, 2015 5:02:23 PM by Hibernate Tools 4.0.0
+// Generated Jun 16, 2015 4:57:47 PM by Hibernate Tools 4.0.0
 
 import java.util.Date;
 import java.util.HashSet;
@@ -28,15 +28,16 @@ public class NotificationType implements java.io.Serializable {
 	private Byte status;
 	private Date lastUpdatedOn;
 	private Integer lastUpdatedBy;
-	private Set notifications = new HashSet(0);
-	private Set userNotificationSettingses = new HashSet(0);
+	private Set<Notification> notifications = new HashSet<Notification>(0);
+	private Set<UserNotificationSettings> userNotificationSettingses = new HashSet<UserNotificationSettings>(
+			0);
 
 	public NotificationType() {
 	}
 
 	public NotificationType(String name, Byte status, Date lastUpdatedOn,
-			Integer lastUpdatedBy, Set notifications,
-			Set userNotificationSettingses) {
+			Integer lastUpdatedBy, Set<Notification> notifications,
+			Set<UserNotificationSettings> userNotificationSettingses) {
 		this.name = name;
 		this.status = status;
 		this.lastUpdatedOn = lastUpdatedOn;
@@ -94,20 +95,21 @@ public class NotificationType implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "notificationType")
-	public Set getNotifications() {
+	public Set<Notification> getNotifications() {
 		return this.notifications;
 	}
 
-	public void setNotifications(Set notifications) {
+	public void setNotifications(Set<Notification> notifications) {
 		this.notifications = notifications;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "notificationType")
-	public Set getUserNotificationSettingses() {
+	public Set<UserNotificationSettings> getUserNotificationSettingses() {
 		return this.userNotificationSettingses;
 	}
 
-	public void setUserNotificationSettingses(Set userNotificationSettingses) {
+	public void setUserNotificationSettingses(
+			Set<UserNotificationSettings> userNotificationSettingses) {
 		this.userNotificationSettingses = userNotificationSettingses;
 	}
 

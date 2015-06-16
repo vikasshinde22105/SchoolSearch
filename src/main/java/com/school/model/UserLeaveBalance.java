@@ -1,6 +1,6 @@
 package com.school.model;
 
-// Generated 2 Jun, 2015 2:50:11 PM by Hibernate Tools 3.4.0.CR1
+// Generated Jun 16, 2015 4:57:47 PM by Hibernate Tools 4.0.0
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -24,7 +24,7 @@ public class UserLeaveBalance implements java.io.Serializable {
 
 	private Integer id;
 	private UserRegistrationInfo userRegistrationInfo;
-	private Integer roleLeaveTrackingId;
+	private RoleLeaveTracking roleLeaveTracking;
 	private Float noOfDays;
 	private String description;
 	private Date lastUpdatedOn;
@@ -34,10 +34,10 @@ public class UserLeaveBalance implements java.io.Serializable {
 	}
 
 	public UserLeaveBalance(UserRegistrationInfo userRegistrationInfo,
-			Integer roleLeaveTrackingId, Float noOfDays, String description,
-			Date lastUpdatedOn, Integer lastUpdatedBy) {
+			RoleLeaveTracking roleLeaveTracking, Float noOfDays,
+			String description, Date lastUpdatedOn, Integer lastUpdatedBy) {
 		this.userRegistrationInfo = userRegistrationInfo;
-		this.roleLeaveTrackingId = roleLeaveTrackingId;
+		this.roleLeaveTracking = roleLeaveTracking;
 		this.noOfDays = noOfDays;
 		this.description = description;
 		this.lastUpdatedOn = lastUpdatedOn;
@@ -66,13 +66,14 @@ public class UserLeaveBalance implements java.io.Serializable {
 		this.userRegistrationInfo = userRegistrationInfo;
 	}
 
-	@Column(name = "role_leave_tracking_id")
-	public Integer getRoleLeaveTrackingId() {
-		return this.roleLeaveTrackingId;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "role_leave_tracking_id")
+	public RoleLeaveTracking getRoleLeaveTracking() {
+		return this.roleLeaveTracking;
 	}
 
-	public void setRoleLeaveTrackingId(Integer roleLeaveTrackingId) {
-		this.roleLeaveTrackingId = roleLeaveTrackingId;
+	public void setRoleLeaveTracking(RoleLeaveTracking roleLeaveTracking) {
+		this.roleLeaveTracking = roleLeaveTracking;
 	}
 
 	@Column(name = "no_of_days", precision = 9, scale = 3)
@@ -93,8 +94,8 @@ public class UserLeaveBalance implements java.io.Serializable {
 		this.description = description;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "last_updated_on", length = 10)
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "last_updated_on", length = 19)
 	public Date getLastUpdatedOn() {
 		return this.lastUpdatedOn;
 	}

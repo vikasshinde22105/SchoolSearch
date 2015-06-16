@@ -1,6 +1,6 @@
 package com.school.model;
 
-// Generated 2 Jun, 2015 3:00:10 PM by Hibernate Tools 3.4.0.CR1
+// Generated Jun 16, 2015 4:57:47 PM by Hibernate Tools 4.0.0
 
 import java.util.Date;
 import java.util.HashSet;
@@ -43,8 +43,11 @@ public class TimeTable implements java.io.Serializable {
 	private Boolean status;
 	private Date lastUpdatedOn;
 	private Integer lastUpdatedBy;
-	private Set<TeacherHomework> teacherHomeworks = new HashSet<TeacherHomework>(0);
-	private Set<TeacherTimeTable> teacherTimeTables = new HashSet<TeacherTimeTable>(0);
+	private Set<AttendanceInfo> attendanceInfos = new HashSet<AttendanceInfo>(0);
+	private Set<TeacherHomework> teacherHomeworks = new HashSet<TeacherHomework>(
+			0);
+	private Set<TeacherTimeTable> teacherTimeTables = new HashSet<TeacherTimeTable>(
+			0);
 
 	public TimeTable() {
 	}
@@ -52,8 +55,10 @@ public class TimeTable implements java.io.Serializable {
 	public TimeTable(Subject subject, School school, ClassInfo classInfo,
 			ClassSection classSection, Date startTime, Date endTime,
 			String periodName, Date createdOn, Boolean status,
-			Date lastUpdatedOn, Integer lastUpdatedBy, Set teacherHomeworks,
-			Set teacherTimeTables) {
+			Date lastUpdatedOn, Integer lastUpdatedBy,
+			Set<AttendanceInfo> attendanceInfos,
+			Set<TeacherHomework> teacherHomeworks,
+			Set<TeacherTimeTable> teacherTimeTables) {
 		this.subject = subject;
 		this.school = school;
 		this.classInfo = classInfo;
@@ -65,6 +70,7 @@ public class TimeTable implements java.io.Serializable {
 		this.status = status;
 		this.lastUpdatedOn = lastUpdatedOn;
 		this.lastUpdatedBy = lastUpdatedBy;
+		this.attendanceInfos = attendanceInfos;
 		this.teacherHomeworks = teacherHomeworks;
 		this.teacherTimeTables = teacherTimeTables;
 	}
@@ -80,7 +86,7 @@ public class TimeTable implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "subject_id")
 	@JsonBackReference
 	public Subject getSubject() {
@@ -91,7 +97,7 @@ public class TimeTable implements java.io.Serializable {
 		this.subject = subject;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "school_id")
 	@JsonBackReference
 	public School getSchool() {
@@ -102,7 +108,7 @@ public class TimeTable implements java.io.Serializable {
 		this.school = school;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "class_id")
 	@JsonBackReference
 	public ClassInfo getClassInfo() {
@@ -113,7 +119,7 @@ public class TimeTable implements java.io.Serializable {
 		this.classInfo = classInfo;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "section_id")
 	@JsonBackReference
 	public ClassSection getClassSection() {
@@ -153,8 +159,8 @@ public class TimeTable implements java.io.Serializable {
 		this.periodName = periodName;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "created_on", length = 10)
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "created_on", length = 19)
 	public Date getCreatedOn() {
 		return this.createdOn;
 	}
@@ -172,8 +178,8 @@ public class TimeTable implements java.io.Serializable {
 		this.status = status;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "last_updated_on", length = 10)
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "last_updated_on", length = 19)
 	public Date getLastUpdatedOn() {
 		return this.lastUpdatedOn;
 	}
@@ -191,7 +197,17 @@ public class TimeTable implements java.io.Serializable {
 		this.lastUpdatedBy = lastUpdatedBy;
 	}
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "timeTable")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "timeTable")
+	@JsonManagedReference
+	public Set<AttendanceInfo> getAttendanceInfos() {
+		return this.attendanceInfos;
+	}
+
+	public void setAttendanceInfos(Set<AttendanceInfo> attendanceInfos) {
+		this.attendanceInfos = attendanceInfos;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "timeTable")
 	@JsonManagedReference
 	public Set<TeacherHomework> getTeacherHomeworks() {
 		return this.teacherHomeworks;
@@ -201,7 +217,7 @@ public class TimeTable implements java.io.Serializable {
 		this.teacherHomeworks = teacherHomeworks;
 	}
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "timeTable")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "timeTable")
 	@JsonManagedReference
 	public Set<TeacherTimeTable> getTeacherTimeTables() {
 		return this.teacherTimeTables;

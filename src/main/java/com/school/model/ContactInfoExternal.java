@@ -1,6 +1,6 @@
 package com.school.model;
 
-// Generated Jun 9, 2015 5:02:23 PM by Hibernate Tools 4.0.0
+// Generated Jun 16, 2015 4:57:47 PM by Hibernate Tools 4.0.0
 
 import java.util.Date;
 import java.util.HashSet;
@@ -32,14 +32,15 @@ public class ContactInfoExternal implements java.io.Serializable {
 	private Date lastUpdatedOn;
 	private Integer lastUpdatedBy;
 	private String mobileNo;
-	private Set classAccessorieses = new HashSet(0);
+	private Set<ClassAccessories> classAccessorieses = new HashSet<ClassAccessories>(
+			0);
 
 	public ContactInfoExternal() {
 	}
 
 	public ContactInfoExternal(School school, String name, String email,
 			Date lastUpdatedOn, Integer lastUpdatedBy, String mobileNo,
-			Set classAccessorieses) {
+			Set<ClassAccessories> classAccessorieses) {
 		this.school = school;
 		this.name = name;
 		this.email = email;
@@ -117,11 +118,11 @@ public class ContactInfoExternal implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "contactInfoExternal")
-	public Set getClassAccessorieses() {
+	public Set<ClassAccessories> getClassAccessorieses() {
 		return this.classAccessorieses;
 	}
 
-	public void setClassAccessorieses(Set classAccessorieses) {
+	public void setClassAccessorieses(Set<ClassAccessories> classAccessorieses) {
 		this.classAccessorieses = classAccessorieses;
 	}
 

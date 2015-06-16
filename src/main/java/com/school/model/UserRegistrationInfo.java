@@ -1,6 +1,6 @@
 package com.school.model;
 
-// Generated 2 Jun, 2015 3:00:10 PM by Hibernate Tools 3.4.0.CR1
+// Generated Jun 16, 2015 4:57:47 PM by Hibernate Tools 4.0.0
 
 import java.util.Date;
 import java.util.HashSet;
@@ -47,11 +47,30 @@ public class UserRegistrationInfo implements java.io.Serializable {
 	private Integer lastUpdatedBy;
 	private Date lastUpdatedOn;
 	private Set<Task> tasksForAssignedBy = new HashSet<Task>(0);
+	private Set<UserLeaveBalance> userLeaveBalances = new HashSet<UserLeaveBalance>(
+			0);
 	private Set<Task> tasksForToUserId = new HashSet<Task>(0);
+	private Set<UserLeave> userLeaves = new HashSet<UserLeave>(0);
+	private Set<UserBus> userBuses = new HashSet<UserBus>(0);
+	private Set<Notification> notificationsForFromUserId = new HashSet<Notification>(
+			0);
+	private Set<Notification> notificationsForToUserId = new HashSet<Notification>(
+			0);
+	private Set<UserNotificationSettings> userNotificationSettingses = new HashSet<UserNotificationSettings>(
+			0);
+	private Set<Event> events = new HashSet<Event>(0);
+	private Set<Message> messagesForFromUserId = new HashSet<Message>(0);
+	private Set<Message> messagesForToUserId = new HashSet<Message>(0);
+	private Set<BusDriver> busDrivers = new HashSet<BusDriver>(0);
+	private Set<UserMessageSettings> userMessageSettingses = new HashSet<UserMessageSettings>(
+			0);
 	private Set<ParentInfo> parentInfos = new HashSet<ParentInfo>(0);
+	private Set<UserRating> userRatings = new HashSet<UserRating>(0);
 	private Set<UserRole> userRoles = new HashSet<UserRole>(0);
-	private Set<StudentPersonalInfo> studentPersonalInfos = new HashSet<StudentPersonalInfo>(0);
-	private Set<TeacherStaffInfo> teacherStaffInfos = new HashSet<TeacherStaffInfo>(0);
+	private Set<StudentPersonalInfo> studentPersonalInfos = new HashSet<StudentPersonalInfo>(
+			0);
+	private Set<TeacherStaffInfo> teacherStaffInfos = new HashSet<TeacherStaffInfo>(
+			0);
 
 	public UserRegistrationInfo() {
 	}
@@ -61,9 +80,20 @@ public class UserRegistrationInfo implements java.io.Serializable {
 			String memberOtp, Boolean gender, Date dateOfBirth, String image,
 			String bloodGroup, String tempAddr, String permAddr,
 			String landlineNo, Date lastLoggedOn, Integer lastUpdatedBy,
-			Date lastUpdatedOn, Set tasksForAssignedBy, Set tasksForToUserId,
-			Set parentInfos, Set userRoles, Set studentPersonalInfos,
-			Set teacherStaffInfos) {
+			Date lastUpdatedOn, Set<Task> tasksForAssignedBy,
+			Set<UserLeaveBalance> userLeaveBalances,
+			Set<Task> tasksForToUserId, Set<UserLeave> userLeaves,
+			Set<UserBus> userBuses,
+			Set<Notification> notificationsForFromUserId,
+			Set<Notification> notificationsForToUserId,
+			Set<UserNotificationSettings> userNotificationSettingses,
+			Set<Event> events, Set<Message> messagesForFromUserId,
+			Set<Message> messagesForToUserId, Set<BusDriver> busDrivers,
+			Set<UserMessageSettings> userMessageSettingses,
+			Set<ParentInfo> parentInfos, Set<UserRating> userRatings,
+			Set<UserRole> userRoles,
+			Set<StudentPersonalInfo> studentPersonalInfos,
+			Set<TeacherStaffInfo> teacherStaffInfos) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.mobile = mobile;
@@ -82,8 +112,20 @@ public class UserRegistrationInfo implements java.io.Serializable {
 		this.lastUpdatedBy = lastUpdatedBy;
 		this.lastUpdatedOn = lastUpdatedOn;
 		this.tasksForAssignedBy = tasksForAssignedBy;
+		this.userLeaveBalances = userLeaveBalances;
 		this.tasksForToUserId = tasksForToUserId;
+		this.userLeaves = userLeaves;
+		this.userBuses = userBuses;
+		this.notificationsForFromUserId = notificationsForFromUserId;
+		this.notificationsForToUserId = notificationsForToUserId;
+		this.userNotificationSettingses = userNotificationSettingses;
+		this.events = events;
+		this.messagesForFromUserId = messagesForFromUserId;
+		this.messagesForToUserId = messagesForToUserId;
+		this.busDrivers = busDrivers;
+		this.userMessageSettingses = userMessageSettingses;
 		this.parentInfos = parentInfos;
+		this.userRatings = userRatings;
 		this.userRoles = userRoles;
 		this.studentPersonalInfos = studentPersonalInfos;
 		this.teacherStaffInfos = teacherStaffInfos;
@@ -246,8 +288,8 @@ public class UserRegistrationInfo implements java.io.Serializable {
 		this.lastUpdatedBy = lastUpdatedBy;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "last_updated_on", length = 10)
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "last_updated_on", length = 19)
 	public Date getLastUpdatedOn() {
 		return this.lastUpdatedOn;
 	}
@@ -266,6 +308,16 @@ public class UserRegistrationInfo implements java.io.Serializable {
 		this.tasksForAssignedBy = tasksForAssignedBy;
 	}
 
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userRegistrationInfo")
+	@JsonManagedReference
+	public Set<UserLeaveBalance> getUserLeaveBalances() {
+		return this.userLeaveBalances;
+	}
+
+	public void setUserLeaveBalances(Set<UserLeaveBalance> userLeaveBalances) {
+		this.userLeaveBalances = userLeaveBalances;
+	}
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userRegistrationInfoByToUserId")
 	@JsonManagedReference
 	public Set<Task> getTasksForToUserId() {
@@ -278,12 +330,126 @@ public class UserRegistrationInfo implements java.io.Serializable {
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userRegistrationInfo")
 	@JsonManagedReference
+	public Set<UserLeave> getUserLeaves() {
+		return this.userLeaves;
+	}
+
+	public void setUserLeaves(Set<UserLeave> userLeaves) {
+		this.userLeaves = userLeaves;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userRegistrationInfo")
+	@JsonManagedReference
+	public Set<UserBus> getUserBuses() {
+		return this.userBuses;
+	}
+
+	public void setUserBuses(Set<UserBus> userBuses) {
+		this.userBuses = userBuses;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userRegistrationInfoByFromUserId")
+	@JsonManagedReference
+	public Set<Notification> getNotificationsForFromUserId() {
+		return this.notificationsForFromUserId;
+	}
+
+	public void setNotificationsForFromUserId(
+			Set<Notification> notificationsForFromUserId) {
+		this.notificationsForFromUserId = notificationsForFromUserId;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userRegistrationInfoByToUserId")
+	@JsonManagedReference
+	public Set<Notification> getNotificationsForToUserId() {
+		return this.notificationsForToUserId;
+	}
+
+	public void setNotificationsForToUserId(
+			Set<Notification> notificationsForToUserId) {
+		this.notificationsForToUserId = notificationsForToUserId;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userRegistrationInfo")
+	@JsonManagedReference
+	public Set<UserNotificationSettings> getUserNotificationSettingses() {
+		return this.userNotificationSettingses;
+	}
+
+	public void setUserNotificationSettingses(
+			Set<UserNotificationSettings> userNotificationSettingses) {
+		this.userNotificationSettingses = userNotificationSettingses;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userRegistrationInfo")
+	@JsonManagedReference
+	public Set<Event> getEvents() {
+		return this.events;
+	}
+
+	public void setEvents(Set<Event> events) {
+		this.events = events;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userRegistrationInfoByFromUserId")
+	@JsonManagedReference
+	public Set<Message> getMessagesForFromUserId() {
+		return this.messagesForFromUserId;
+	}
+
+	public void setMessagesForFromUserId(Set<Message> messagesForFromUserId) {
+		this.messagesForFromUserId = messagesForFromUserId;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userRegistrationInfoByToUserId")
+	@JsonManagedReference
+	public Set<Message> getMessagesForToUserId() {
+		return this.messagesForToUserId;
+	}
+
+	public void setMessagesForToUserId(Set<Message> messagesForToUserId) {
+		this.messagesForToUserId = messagesForToUserId;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userRegistrationInfo")
+	@JsonManagedReference
+	public Set<BusDriver> getBusDrivers() {
+		return this.busDrivers;
+	}
+
+	public void setBusDrivers(Set<BusDriver> busDrivers) {
+		this.busDrivers = busDrivers;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userRegistrationInfo")
+	@JsonManagedReference
+	public Set<UserMessageSettings> getUserMessageSettingses() {
+		return this.userMessageSettingses;
+	}
+
+	public void setUserMessageSettingses(
+			Set<UserMessageSettings> userMessageSettingses) {
+		this.userMessageSettingses = userMessageSettingses;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userRegistrationInfo")
+	@JsonManagedReference
 	public Set<ParentInfo> getParentInfos() {
 		return this.parentInfos;
 	}
 
 	public void setParentInfos(Set<ParentInfo> parentInfos) {
 		this.parentInfos = parentInfos;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userRegistrationInfo")
+	@JsonManagedReference
+	public Set<UserRating> getUserRatings() {
+		return this.userRatings;
+	}
+
+	public void setUserRatings(Set<UserRating> userRatings) {
+		this.userRatings = userRatings;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userRegistrationInfo")
@@ -302,7 +468,8 @@ public class UserRegistrationInfo implements java.io.Serializable {
 		return this.studentPersonalInfos;
 	}
 
-	public void setStudentPersonalInfos(Set<StudentPersonalInfo> studentPersonalInfos) {
+	public void setStudentPersonalInfos(
+			Set<StudentPersonalInfo> studentPersonalInfos) {
 		this.studentPersonalInfos = studentPersonalInfos;
 	}
 

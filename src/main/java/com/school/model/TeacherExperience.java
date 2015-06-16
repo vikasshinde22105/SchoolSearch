@@ -1,6 +1,6 @@
 package com.school.model;
 
-// Generated 2 Jun, 2015 3:00:10 PM by Hibernate Tools 3.4.0.CR1
+// Generated Jun 16, 2015 4:57:47 PM by Hibernate Tools 4.0.0
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -23,10 +23,10 @@ import javax.persistence.TemporalType;
 public class TeacherExperience implements java.io.Serializable {
 
 	private Integer id;
+	private Locality locality;
 	private TeacherStaffInfo teacherStaffInfo;
 	private Byte empType;
 	private String organisationName;
-	private Integer localityId;
 	private String location;
 	private String designation;
 	private Date workedFromDate;
@@ -41,15 +41,16 @@ public class TeacherExperience implements java.io.Serializable {
 	public TeacherExperience() {
 	}
 
-	public TeacherExperience(TeacherStaffInfo teacherStaffInfo, Byte empType,
-			String organisationName, Integer localityId, String location,
-			String designation, Date workedFromDate, Date workedToDate,
-			String experience, Byte isSubjectDesc, Byte isCurrentJob,
-			String interestAreaDesc, Date lastUpdatedOn, Integer lastUpdatedBy) {
+	public TeacherExperience(Locality locality,
+			TeacherStaffInfo teacherStaffInfo, Byte empType,
+			String organisationName, String location, String designation,
+			Date workedFromDate, Date workedToDate, String experience,
+			Byte isSubjectDesc, Byte isCurrentJob, String interestAreaDesc,
+			Date lastUpdatedOn, Integer lastUpdatedBy) {
+		this.locality = locality;
 		this.teacherStaffInfo = teacherStaffInfo;
 		this.empType = empType;
 		this.organisationName = organisationName;
-		this.localityId = localityId;
 		this.location = location;
 		this.designation = designation;
 		this.workedFromDate = workedFromDate;
@@ -71,6 +72,16 @@ public class TeacherExperience implements java.io.Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "locality_id")
+	public Locality getLocality() {
+		return this.locality;
+	}
+
+	public void setLocality(Locality locality) {
+		this.locality = locality;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -99,15 +110,6 @@ public class TeacherExperience implements java.io.Serializable {
 
 	public void setOrganisationName(String organisationName) {
 		this.organisationName = organisationName;
-	}
-
-	@Column(name = "locality_id")
-	public Integer getLocalityId() {
-		return this.localityId;
-	}
-
-	public void setLocalityId(Integer localityId) {
-		this.localityId = localityId;
 	}
 
 	@Column(name = "location", length = 250)
@@ -184,8 +186,8 @@ public class TeacherExperience implements java.io.Serializable {
 		this.interestAreaDesc = interestAreaDesc;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "last_updated_on", length = 10)
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "last_updated_on", length = 19)
 	public Date getLastUpdatedOn() {
 		return this.lastUpdatedOn;
 	}

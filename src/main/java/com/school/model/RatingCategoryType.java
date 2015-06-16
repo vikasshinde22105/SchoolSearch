@@ -1,6 +1,6 @@
 package com.school.model;
 
-// Generated Jun 9, 2015 5:02:23 PM by Hibernate Tools 4.0.0
+// Generated Jun 16, 2015 4:57:47 PM by Hibernate Tools 4.0.0
 
 import java.util.Date;
 import java.util.HashSet;
@@ -28,13 +28,14 @@ public class RatingCategoryType implements java.io.Serializable {
 	private Float weightage;
 	private Date lastUpdatedOn;
 	private Integer lastUpdatedBy;
-	private Set userRatings = new HashSet(0);
+	private Set<UserRating> userRatings = new HashSet<UserRating>(0);
 
 	public RatingCategoryType() {
 	}
 
 	public RatingCategoryType(String categoryName, Float weightage,
-			Date lastUpdatedOn, Integer lastUpdatedBy, Set userRatings) {
+			Date lastUpdatedOn, Integer lastUpdatedBy,
+			Set<UserRating> userRatings) {
 		this.categoryName = categoryName;
 		this.weightage = weightage;
 		this.lastUpdatedOn = lastUpdatedOn;
@@ -91,11 +92,11 @@ public class RatingCategoryType implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "ratingCategoryType")
-	public Set getUserRatings() {
+	public Set<UserRating> getUserRatings() {
 		return this.userRatings;
 	}
 
-	public void setUserRatings(Set userRatings) {
+	public void setUserRatings(Set<UserRating> userRatings) {
 		this.userRatings = userRatings;
 	}
 

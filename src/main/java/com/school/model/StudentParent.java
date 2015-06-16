@@ -1,6 +1,6 @@
 package com.school.model;
 
-// Generated 2 Jun, 2015 2:50:11 PM by Hibernate Tools 3.4.0.CR1
+// Generated Jun 16, 2015 4:57:47 PM by Hibernate Tools 4.0.0
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,7 +21,7 @@ public class StudentParent implements java.io.Serializable {
 
 	private Integer id;
 	private StudentPersonalInfo studentPersonalInfo;
-	private Integer parentId;
+	private ParentInfo parentInfo;
 	private Boolean isStatus;
 	private Byte isType;
 
@@ -29,9 +29,9 @@ public class StudentParent implements java.io.Serializable {
 	}
 
 	public StudentParent(StudentPersonalInfo studentPersonalInfo,
-			Integer parentId, Boolean isStatus, Byte isType) {
+			ParentInfo parentInfo, Boolean isStatus, Byte isType) {
 		this.studentPersonalInfo = studentPersonalInfo;
-		this.parentId = parentId;
+		this.parentInfo = parentInfo;
 		this.isStatus = isStatus;
 		this.isType = isType;
 	}
@@ -57,13 +57,14 @@ public class StudentParent implements java.io.Serializable {
 		this.studentPersonalInfo = studentPersonalInfo;
 	}
 
-	@Column(name = "parent_id")
-	public Integer getParentId() {
-		return this.parentId;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "parent_id")
+	public ParentInfo getParentInfo() {
+		return this.parentInfo;
 	}
 
-	public void setParentId(Integer parentId) {
-		this.parentId = parentId;
+	public void setParentInfo(ParentInfo parentInfo) {
+		this.parentInfo = parentInfo;
 	}
 
 	@Column(name = "is_status")

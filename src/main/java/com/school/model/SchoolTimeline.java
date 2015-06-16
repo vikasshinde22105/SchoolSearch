@@ -1,6 +1,6 @@
 package com.school.model;
 
-// Generated 2 Jun, 2015 2:50:11 PM by Hibernate Tools 3.4.0.CR1
+// Generated Jun 16, 2015 4:57:47 PM by Hibernate Tools 4.0.0
 
 import java.util.Date;
 import java.util.HashSet;
@@ -33,14 +33,16 @@ public class SchoolTimeline implements java.io.Serializable {
 	private String classesUpto;
 	private Integer lastUpdatedBy;
 	private Date lastUpdatedOn;
-	private Set schoolTimelineMilestones = new HashSet(0);
+	private Set<SchoolTimelineMilestone> schoolTimelineMilestones = new HashSet<SchoolTimelineMilestone>(
+			0);
 
 	public SchoolTimeline() {
 	}
 
 	public SchoolTimeline(School school, Short year, String title,
 			String image, String classesUpto, Integer lastUpdatedBy,
-			Date lastUpdatedOn, Set schoolTimelineMilestones) {
+			Date lastUpdatedOn,
+			Set<SchoolTimelineMilestone> schoolTimelineMilestones) {
 		this.school = school;
 		this.year = year;
 		this.title = title;
@@ -117,8 +119,8 @@ public class SchoolTimeline implements java.io.Serializable {
 		this.lastUpdatedBy = lastUpdatedBy;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "last_updated_on", length = 10)
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "last_updated_on", length = 19)
 	public Date getLastUpdatedOn() {
 		return this.lastUpdatedOn;
 	}
@@ -128,11 +130,12 @@ public class SchoolTimeline implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "schoolTimeline")
-	public Set getSchoolTimelineMilestones() {
+	public Set<SchoolTimelineMilestone> getSchoolTimelineMilestones() {
 		return this.schoolTimelineMilestones;
 	}
 
-	public void setSchoolTimelineMilestones(Set schoolTimelineMilestones) {
+	public void setSchoolTimelineMilestones(
+			Set<SchoolTimelineMilestone> schoolTimelineMilestones) {
 		this.schoolTimelineMilestones = schoolTimelineMilestones;
 	}
 

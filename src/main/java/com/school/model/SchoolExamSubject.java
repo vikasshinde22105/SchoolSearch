@@ -1,6 +1,6 @@
 package com.school.model;
 
-// Generated 2 Jun, 2015 2:50:11 PM by Hibernate Tools 3.4.0.CR1
+// Generated Jun 16, 2015 4:57:47 PM by Hibernate Tools 4.0.0
 
 import java.util.Date;
 import java.util.HashSet;
@@ -34,14 +34,16 @@ public class SchoolExamSubject implements java.io.Serializable {
 	private Byte isDeleted;
 	private Date lastUpdatedOn;
 	private Integer lastUpdatedBy;
-	private Set studentMarksReports = new HashSet(0);
+	private Set<StudentMarksReport> studentMarksReports = new HashSet<StudentMarksReport>(
+			0);
 
 	public SchoolExamSubject() {
 	}
 
 	public SchoolExamSubject(SchoolExam schoolExam, Subject subject,
 			Float maxMarks, Date conductedOn, Byte status, Byte isDeleted,
-			Date lastUpdatedOn, Integer lastUpdatedBy, Set studentMarksReports) {
+			Date lastUpdatedOn, Integer lastUpdatedBy,
+			Set<StudentMarksReport> studentMarksReports) {
 		this.schoolExam = schoolExam;
 		this.subject = subject;
 		this.maxMarks = maxMarks;
@@ -121,8 +123,8 @@ public class SchoolExamSubject implements java.io.Serializable {
 		this.isDeleted = isDeleted;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "last_updated_on", length = 10)
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "last_updated_on", length = 19)
 	public Date getLastUpdatedOn() {
 		return this.lastUpdatedOn;
 	}
@@ -141,11 +143,12 @@ public class SchoolExamSubject implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "schoolExamSubject")
-	public Set getStudentMarksReports() {
+	public Set<StudentMarksReport> getStudentMarksReports() {
 		return this.studentMarksReports;
 	}
 
-	public void setStudentMarksReports(Set studentMarksReports) {
+	public void setStudentMarksReports(
+			Set<StudentMarksReport> studentMarksReports) {
 		this.studentMarksReports = studentMarksReports;
 	}
 

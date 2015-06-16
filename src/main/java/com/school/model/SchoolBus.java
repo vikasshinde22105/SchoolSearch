@@ -1,6 +1,6 @@
 package com.school.model;
 
-// Generated 2 Jun, 2015 2:50:11 PM by Hibernate Tools 3.4.0.CR1
+// Generated Jun 16, 2015 4:57:47 PM by Hibernate Tools 4.0.0
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -23,8 +23,8 @@ import javax.persistence.TemporalType;
 public class SchoolBus implements java.io.Serializable {
 
 	private Integer id;
+	private BusInfo busInfo;
 	private School school;
-	private Integer busId;
 	private Byte status;
 	private String contractType;
 	private Date lastUpdatedOn;
@@ -33,10 +33,10 @@ public class SchoolBus implements java.io.Serializable {
 	public SchoolBus() {
 	}
 
-	public SchoolBus(School school, Integer busId, Byte status,
+	public SchoolBus(BusInfo busInfo, School school, Byte status,
 			String contractType, Date lastUpdatedOn, Integer lastUpdatedBy) {
+		this.busInfo = busInfo;
 		this.school = school;
-		this.busId = busId;
 		this.status = status;
 		this.contractType = contractType;
 		this.lastUpdatedOn = lastUpdatedOn;
@@ -55,6 +55,16 @@ public class SchoolBus implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "bus_id")
+	public BusInfo getBusInfo() {
+		return this.busInfo;
+	}
+
+	public void setBusInfo(BusInfo busInfo) {
+		this.busInfo = busInfo;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "school_id")
 	public School getSchool() {
 		return this.school;
@@ -62,15 +72,6 @@ public class SchoolBus implements java.io.Serializable {
 
 	public void setSchool(School school) {
 		this.school = school;
-	}
-
-	@Column(name = "bus_id")
-	public Integer getBusId() {
-		return this.busId;
-	}
-
-	public void setBusId(Integer busId) {
-		this.busId = busId;
 	}
 
 	@Column(name = "status")
@@ -91,8 +92,8 @@ public class SchoolBus implements java.io.Serializable {
 		this.contractType = contractType;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "last_updated_on", length = 10)
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "last_updated_on", length = 19)
 	public Date getLastUpdatedOn() {
 		return this.lastUpdatedOn;
 	}

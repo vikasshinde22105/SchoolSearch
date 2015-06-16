@@ -1,6 +1,6 @@
 package com.school.model;
 
-// Generated Jun 9, 2015 5:02:23 PM by Hibernate Tools 4.0.0
+// Generated Jun 16, 2015 4:57:47 PM by Hibernate Tools 4.0.0
 
 import java.util.Date;
 import java.util.HashSet;
@@ -29,13 +29,13 @@ public class SalesExecutive implements java.io.Serializable {
 	private String email;
 	private Date lastUpdatedOn;
 	private Integer lastUpdatedBy;
-	private Set salesInfos = new HashSet(0);
+	private Set<SalesInfo> salesInfos = new HashSet<SalesInfo>(0);
 
 	public SalesExecutive() {
 	}
 
 	public SalesExecutive(String name, String contactNumber, String email,
-			Date lastUpdatedOn, Integer lastUpdatedBy, Set salesInfos) {
+			Date lastUpdatedOn, Integer lastUpdatedBy, Set<SalesInfo> salesInfos) {
 		this.name = name;
 		this.contactNumber = contactNumber;
 		this.email = email;
@@ -102,11 +102,11 @@ public class SalesExecutive implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "salesExecutive")
-	public Set getSalesInfos() {
+	public Set<SalesInfo> getSalesInfos() {
 		return this.salesInfos;
 	}
 
-	public void setSalesInfos(Set salesInfos) {
+	public void setSalesInfos(Set<SalesInfo> salesInfos) {
 		this.salesInfos = salesInfos;
 	}
 
