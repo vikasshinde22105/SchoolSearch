@@ -18,6 +18,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -31,8 +34,10 @@ public class UserRegistrationInfo implements java.io.Serializable {
 	private Integer id;
 	private String firstName;
 	private String lastName;
+	@Size(min = 10, max = 10)
 	private String mobile;
 	private String password;
+	@Email(message="Email is not valid.")
 	private String email;
 	private Byte status;
 	private String memberOtp;
