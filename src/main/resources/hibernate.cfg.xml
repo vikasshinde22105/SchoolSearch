@@ -9,8 +9,8 @@
         <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/school_db</property>
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-               <mapping class="com.school.model.School" />
-               <mapping class="com.school.model.ClassInfo" />
+   <mapping class="com.school.model.School" />
+   <mapping class="com.school.model.ClassInfo" />
    <mapping class="com.school.model.TeachingApproachType" />
    <mapping class="com.school.model.ClassSubjects" />
    <mapping class="com.school.model.Subject" />
@@ -23,7 +23,7 @@
    <mapping class="com.school.model.TeacherHomework" />
    <mapping class="com.school.model.TimeTable" />
    <mapping class="com.school.model.ClassSection" />
-
+   <mapping class="com.school.model.StandardType" />
    <mapping class="com.school.model.TeacherHomeworkRemarks" />
    <mapping class="com.school.model.StudentPrevSchoolDetail" />
    <mapping class="com.school.model.StudentSchoolInfo" />
@@ -32,10 +32,10 @@
    <mapping class="com.school.model.TeacherClass" />
    <mapping class="com.school.model.TeacherClassSkill" />
    <mapping class="com.school.model.TeacherEducationInfo" />
-      <mapping class="com.school.model.TeacherEducationInfo" />
+   <mapping class="com.school.model.TeacherEducationInfo" />
    <mapping class="com.school.model.TeacherExperience" />
    <mapping class="com.school.model.TeacherTimeTable" />
-         <mapping class="com.school.model.ParentInfo" />
+   <mapping class="com.school.model.ParentInfo" />
    <mapping class="com.school.model.Task" />
    <mapping class="com.school.model.UserRole" />
                
