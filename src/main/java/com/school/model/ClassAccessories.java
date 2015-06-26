@@ -1,6 +1,6 @@
 package com.school.model;
 
-// Generated Jun 9, 2015 5:02:23 PM by Hibernate Tools 4.0.0
+// Generated Jun 26, 2015 2:39:37 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -25,7 +25,7 @@ public class ClassAccessories implements java.io.Serializable {
 	private Integer id;
 	private Accessories accessories;
 	private ClassInfo classInfo;
-	private ContactInfoExternal contactInfoExternal;
+	private ClassSection classSection;
 	private Date lastUpdatedOn;
 	private Integer lastUpdatedBy;
 
@@ -33,11 +33,10 @@ public class ClassAccessories implements java.io.Serializable {
 	}
 
 	public ClassAccessories(Accessories accessories, ClassInfo classInfo,
-			ContactInfoExternal contactInfoExternal, Date lastUpdatedOn,
-			Integer lastUpdatedBy) {
+			ClassSection classSection, Date lastUpdatedOn, Integer lastUpdatedBy) {
 		this.accessories = accessories;
 		this.classInfo = classInfo;
-		this.contactInfoExternal = contactInfoExternal;
+		this.classSection = classSection;
 		this.lastUpdatedOn = lastUpdatedOn;
 		this.lastUpdatedBy = lastUpdatedBy;
 	}
@@ -75,12 +74,12 @@ public class ClassAccessories implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "section_id")
-	public ContactInfoExternal getContactInfoExternal() {
-		return this.contactInfoExternal;
+	public ClassSection getClassSection() {
+		return this.classSection;
 	}
 
-	public void setContactInfoExternal(ContactInfoExternal contactInfoExternal) {
-		this.contactInfoExternal = contactInfoExternal;
+	public void setClassSection(ClassSection classSection) {
+		this.classSection = classSection;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)

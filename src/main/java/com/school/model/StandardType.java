@@ -1,13 +1,17 @@
 package com.school.model;
 
-// Generated 2 Jun, 2015 2:50:11 PM by Hibernate Tools 3.4.0.CR1
+// Generated Jun 26, 2015 2:39:37 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -23,14 +27,17 @@ public class StandardType implements java.io.Serializable {
 	private String name;
 	private Date lastUpdatedOn;
 	private Integer lastUpdatedBy;
+	private Set<ClassInfo> classInfos = new HashSet<ClassInfo>(0);
 
 	public StandardType() {
 	}
 
-	public StandardType(String name, Date lastUpdatedOn, Integer lastUpdatedBy) {
+	public StandardType(String name, Date lastUpdatedOn, Integer lastUpdatedBy,
+			Set<ClassInfo> classInfos) {
 		this.name = name;
 		this.lastUpdatedOn = lastUpdatedOn;
 		this.lastUpdatedBy = lastUpdatedBy;
+		this.classInfos = classInfos;
 	}
 
 	@Id
@@ -70,6 +77,15 @@ public class StandardType implements java.io.Serializable {
 
 	public void setLastUpdatedBy(Integer lastUpdatedBy) {
 		this.lastUpdatedBy = lastUpdatedBy;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "standardType")
+	public Set<ClassInfo> getClassInfos() {
+		return this.classInfos;
+	}
+
+	public void setClassInfos(Set<ClassInfo> classInfos) {
+		this.classInfos = classInfos;
 	}
 
 }

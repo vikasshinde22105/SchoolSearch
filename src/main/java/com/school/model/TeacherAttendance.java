@@ -1,6 +1,6 @@
 package com.school.model;
 
-// Generated 2 Jun, 2015 3:00:10 PM by Hibernate Tools 3.4.0.CR1
+// Generated Jun 26, 2015 2:39:37 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -23,8 +23,8 @@ import javax.persistence.TemporalType;
 public class TeacherAttendance implements java.io.Serializable {
 
 	private Integer id;
+	private AttendanceInfo attendanceInfo;
 	private TeacherStaffInfo teacherStaffInfo;
-	private Integer attendanceId;
 	private Boolean isPresent;
 	private String description;
 	private Date lastUpdatedOn;
@@ -33,11 +33,11 @@ public class TeacherAttendance implements java.io.Serializable {
 	public TeacherAttendance() {
 	}
 
-	public TeacherAttendance(TeacherStaffInfo teacherStaffInfo,
-			Integer attendanceId, Boolean isPresent, String description,
-			Date lastUpdatedOn, Integer lastUpdatedBy) {
+	public TeacherAttendance(AttendanceInfo attendanceInfo,
+			TeacherStaffInfo teacherStaffInfo, Boolean isPresent,
+			String description, Date lastUpdatedOn, Integer lastUpdatedBy) {
+		this.attendanceInfo = attendanceInfo;
 		this.teacherStaffInfo = teacherStaffInfo;
-		this.attendanceId = attendanceId;
 		this.isPresent = isPresent;
 		this.description = description;
 		this.lastUpdatedOn = lastUpdatedOn;
@@ -56,6 +56,16 @@ public class TeacherAttendance implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "attendance_id")
+	public AttendanceInfo getAttendanceInfo() {
+		return this.attendanceInfo;
+	}
+
+	public void setAttendanceInfo(AttendanceInfo attendanceInfo) {
+		this.attendanceInfo = attendanceInfo;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "teacher_staff_id")
 	public TeacherStaffInfo getTeacherStaffInfo() {
 		return this.teacherStaffInfo;
@@ -63,15 +73,6 @@ public class TeacherAttendance implements java.io.Serializable {
 
 	public void setTeacherStaffInfo(TeacherStaffInfo teacherStaffInfo) {
 		this.teacherStaffInfo = teacherStaffInfo;
-	}
-
-	@Column(name = "attendance_id")
-	public Integer getAttendanceId() {
-		return this.attendanceId;
-	}
-
-	public void setAttendanceId(Integer attendanceId) {
-		this.attendanceId = attendanceId;
 	}
 
 	@Column(name = "is_present")
@@ -92,8 +93,8 @@ public class TeacherAttendance implements java.io.Serializable {
 		this.description = description;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "last_updated_on", length = 10)
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "last_updated_on", length = 19)
 	public Date getLastUpdatedOn() {
 		return this.lastUpdatedOn;
 	}

@@ -1,6 +1,6 @@
 package com.school.model;
 
-// Generated 2 Jun, 2015 2:50:11 PM by Hibernate Tools 3.4.0.CR1
+// Generated Jun 26, 2015 2:39:37 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -24,19 +24,20 @@ public class UserRating implements java.io.Serializable {
 
 	private Integer id;
 	private UserRegistrationInfo userRegistrationInfo;
+	private RatingCategoryType ratingCategoryType;
 	private School school;
-	private Short ratingCategoryTypeId;
 	private Float rating;
 	private Date addedDate;
 
 	public UserRating() {
 	}
 
-	public UserRating(UserRegistrationInfo userRegistrationInfo, School school,
-			Short ratingCategoryTypeId, Float rating, Date addedDate) {
+	public UserRating(UserRegistrationInfo userRegistrationInfo,
+			RatingCategoryType ratingCategoryType, School school, Float rating,
+			Date addedDate) {
 		this.userRegistrationInfo = userRegistrationInfo;
+		this.ratingCategoryType = ratingCategoryType;
 		this.school = school;
-		this.ratingCategoryTypeId = ratingCategoryTypeId;
 		this.rating = rating;
 		this.addedDate = addedDate;
 	}
@@ -64,6 +65,16 @@ public class UserRating implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "rating_category_type_id")
+	public RatingCategoryType getRatingCategoryType() {
+		return this.ratingCategoryType;
+	}
+
+	public void setRatingCategoryType(RatingCategoryType ratingCategoryType) {
+		this.ratingCategoryType = ratingCategoryType;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "school_id")
 	public School getSchool() {
 		return this.school;
@@ -71,15 +82,6 @@ public class UserRating implements java.io.Serializable {
 
 	public void setSchool(School school) {
 		this.school = school;
-	}
-
-	@Column(name = "rating_category_type_id")
-	public Short getRatingCategoryTypeId() {
-		return this.ratingCategoryTypeId;
-	}
-
-	public void setRatingCategoryTypeId(Short ratingCategoryTypeId) {
-		this.ratingCategoryTypeId = ratingCategoryTypeId;
 	}
 
 	@Column(name = "rating", precision = 9, scale = 3)

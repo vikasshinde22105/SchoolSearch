@@ -1,6 +1,6 @@
 package com.school.model;
 
-// Generated Jun 9, 2015 5:02:23 PM by Hibernate Tools 4.0.0
+// Generated Jun 26, 2015 2:39:37 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,14 +22,15 @@ public class Country implements java.io.Serializable {
 
 	private Integer id;
 	private String name;
-	private Boolean status;
+	private Byte status;
 	private Integer sortOrder;
-	private Set states = new HashSet(0);
+	private Set<State> states = new HashSet<State>(0);
 
 	public Country() {
 	}
 
-	public Country(String name, Boolean status, Integer sortOrder, Set states) {
+	public Country(String name, Byte status, Integer sortOrder,
+			Set<State> states) {
 		this.name = name;
 		this.status = status;
 		this.sortOrder = sortOrder;
@@ -57,11 +58,11 @@ public class Country implements java.io.Serializable {
 	}
 
 	@Column(name = "status")
-	public Boolean getStatus() {
+	public Byte getStatus() {
 		return this.status;
 	}
 
-	public void setStatus(Boolean status) {
+	public void setStatus(Byte status) {
 		this.status = status;
 	}
 
@@ -75,11 +76,11 @@ public class Country implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "country")
-	public Set getStates() {
+	public Set<State> getStates() {
 		return this.states;
 	}
 
-	public void setStates(Set states) {
+	public void setStates(Set<State> states) {
 		this.states = states;
 	}
 

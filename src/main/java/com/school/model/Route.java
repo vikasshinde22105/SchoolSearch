@@ -1,6 +1,6 @@
 package com.school.model;
 
-// Generated Jun 9, 2015 5:02:23 PM by Hibernate Tools 4.0.0
+// Generated Jun 26, 2015 2:39:37 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -28,16 +28,16 @@ public class Route implements java.io.Serializable {
 	private Byte status;
 	private Date lastUpdatedOn;
 	private Integer lastUpdatedBy;
-	private Set userBuses = new HashSet(0);
-	private Set busRouteStops = new HashSet(0);
-	private Set busRoutes = new HashSet(0);
+	private Set<UserBus> userBuses = new HashSet<UserBus>(0);
+	private Set<BusRouteStop> busRouteStops = new HashSet<BusRouteStop>(0);
+	private Set<BusRoute> busRoutes = new HashSet<BusRoute>(0);
 
 	public Route() {
 	}
 
 	public Route(String name, Byte status, Date lastUpdatedOn,
-			Integer lastUpdatedBy, Set userBuses, Set busRouteStops,
-			Set busRoutes) {
+			Integer lastUpdatedBy, Set<UserBus> userBuses,
+			Set<BusRouteStop> busRouteStops, Set<BusRoute> busRoutes) {
 		this.name = name;
 		this.status = status;
 		this.lastUpdatedOn = lastUpdatedOn;
@@ -96,29 +96,29 @@ public class Route implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "route")
-	public Set getUserBuses() {
+	public Set<UserBus> getUserBuses() {
 		return this.userBuses;
 	}
 
-	public void setUserBuses(Set userBuses) {
+	public void setUserBuses(Set<UserBus> userBuses) {
 		this.userBuses = userBuses;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "route")
-	public Set getBusRouteStops() {
+	public Set<BusRouteStop> getBusRouteStops() {
 		return this.busRouteStops;
 	}
 
-	public void setBusRouteStops(Set busRouteStops) {
+	public void setBusRouteStops(Set<BusRouteStop> busRouteStops) {
 		this.busRouteStops = busRouteStops;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "route")
-	public Set getBusRoutes() {
+	public Set<BusRoute> getBusRoutes() {
 		return this.busRoutes;
 	}
 
-	public void setBusRoutes(Set busRoutes) {
+	public void setBusRoutes(Set<BusRoute> busRoutes) {
 		this.busRoutes = busRoutes;
 	}
 

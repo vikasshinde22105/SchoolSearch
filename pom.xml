@@ -38,7 +38,7 @@
         <hibernate.entitymanager.version>4.1.9.Final</hibernate.entitymanager.version>
         <hibernate.jpa.version>1.0.1.Final</hibernate.jpa.version>
         <hibernate.validator.annotation.processor.version>4.2.0.Final</hibernate.validator.annotation.processor.version>
-        <jackson.version>2.1.4</jackson.version>
+        <jackson.version>2.5.4</jackson.version>
         <javax.validation.api.version>1.0.0.GA</javax.validation.api.version>
         <jaxrs.api.version>2.3.2.Final</jaxrs.api.version>
         <junit.version>4.11</junit.version>

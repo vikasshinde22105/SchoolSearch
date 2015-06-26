@@ -1,6 +1,6 @@
 package com.school.model;
 
-// Generated 2 Jun, 2015 2:50:11 PM by Hibernate Tools 3.4.0.CR1
+// Generated Jun 26, 2015 2:39:37 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -27,9 +27,9 @@ public class SchoolExam implements java.io.Serializable {
 
 	private Integer id;
 	private School school;
-	private Integer classId;
-	private Integer sectionId;
-	private Short examTypeId;
+	private ClassInfo classInfo;
+	private ExamType examType;
+	private ClassSection classSection;
 	private String title;
 	private Date fromDate;
 	private Date toDate;
@@ -37,19 +37,20 @@ public class SchoolExam implements java.io.Serializable {
 	private Byte isDeleted;
 	private Date lastUpdatedOn;
 	private Integer lastUpdatedBy;
-	private Set schoolExamSubjects = new HashSet(0);
+	private Set<SchoolExamSubject> schoolExamSubjects = new HashSet<SchoolExamSubject>(
+			0);
 
 	public SchoolExam() {
 	}
 
-	public SchoolExam(School school, Integer classId, Integer sectionId,
-			Short examTypeId, String title, Date fromDate, Date toDate,
-			Float totalMarks, Byte isDeleted, Date lastUpdatedOn,
-			Integer lastUpdatedBy, Set schoolExamSubjects) {
+	public SchoolExam(School school, ClassInfo classInfo, ExamType examType,
+			ClassSection classSection, String title, Date fromDate,
+			Date toDate, Float totalMarks, Byte isDeleted, Date lastUpdatedOn,
+			Integer lastUpdatedBy, Set<SchoolExamSubject> schoolExamSubjects) {
 		this.school = school;
-		this.classId = classId;
-		this.sectionId = sectionId;
-		this.examTypeId = examTypeId;
+		this.classInfo = classInfo;
+		this.examType = examType;
+		this.classSection = classSection;
 		this.title = title;
 		this.fromDate = fromDate;
 		this.toDate = toDate;
@@ -81,31 +82,34 @@ public class SchoolExam implements java.io.Serializable {
 		this.school = school;
 	}
 
-	@Column(name = "class_id")
-	public Integer getClassId() {
-		return this.classId;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "class_id")
+	public ClassInfo getClassInfo() {
+		return this.classInfo;
 	}
 
-	public void setClassId(Integer classId) {
-		this.classId = classId;
+	public void setClassInfo(ClassInfo classInfo) {
+		this.classInfo = classInfo;
 	}
 
-	@Column(name = "section_id")
-	public Integer getSectionId() {
-		return this.sectionId;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "exam_type_id")
+	public ExamType getExamType() {
+		return this.examType;
 	}
 
-	public void setSectionId(Integer sectionId) {
-		this.sectionId = sectionId;
+	public void setExamType(ExamType examType) {
+		this.examType = examType;
 	}
 
-	@Column(name = "exam_type_id")
-	public Short getExamTypeId() {
-		return this.examTypeId;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "section_id")
+	public ClassSection getClassSection() {
+		return this.classSection;
 	}
 
-	public void setExamTypeId(Short examTypeId) {
-		this.examTypeId = examTypeId;
+	public void setClassSection(ClassSection classSection) {
+		this.classSection = classSection;
 	}
 
 	@Column(name = "title", length = 50)
@@ -155,8 +159,8 @@ public class SchoolExam implements java.io.Serializable {
 		this.isDeleted = isDeleted;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "last_updated_on", length = 10)
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "last_updated_on", length = 19)
 	public Date getLastUpdatedOn() {
 		return this.lastUpdatedOn;
 	}
@@ -175,11 +179,11 @@ public class SchoolExam implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "schoolExam")
-	public Set getSchoolExamSubjects() {
+	public Set<SchoolExamSubject> getSchoolExamSubjects() {
 		return this.schoolExamSubjects;
 	}
 
-	public void setSchoolExamSubjects(Set schoolExamSubjects) {
+	public void setSchoolExamSubjects(Set<SchoolExamSubject> schoolExamSubjects) {
 		this.schoolExamSubjects = schoolExamSubjects;
 	}
 

@@ -1,6 +1,6 @@
 package com.school.model;
 
-// Generated Jun 9, 2015 5:02:23 PM by Hibernate Tools 4.0.0
+// Generated Jun 26, 2015 2:39:37 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -28,14 +28,16 @@ public class City implements java.io.Serializable {
 	private Integer isCity;
 	private Integer sortOrder;
 	private Byte status;
-	private Set localities = new HashSet(0);
-	private Set schoolBankAccountDetailses = new HashSet(0);
+	private Set<Locality> localities = new HashSet<Locality>(0);
+	private Set<SchoolBankAccountDetails> schoolBankAccountDetailses = new HashSet<SchoolBankAccountDetails>(
+			0);
 
 	public City() {
 	}
 
 	public City(Tehsil tehsil, String name, Integer isCity, Integer sortOrder,
-			Byte status, Set localities, Set schoolBankAccountDetailses) {
+			Byte status, Set<Locality> localities,
+			Set<SchoolBankAccountDetails> schoolBankAccountDetailses) {
 		this.tehsil = tehsil;
 		this.name = name;
 		this.isCity = isCity;
@@ -103,20 +105,21 @@ public class City implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "city")
-	public Set getLocalities() {
+	public Set<Locality> getLocalities() {
 		return this.localities;
 	}
 
-	public void setLocalities(Set localities) {
+	public void setLocalities(Set<Locality> localities) {
 		this.localities = localities;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "city")
-	public Set getSchoolBankAccountDetailses() {
+	public Set<SchoolBankAccountDetails> getSchoolBankAccountDetailses() {
 		return this.schoolBankAccountDetailses;
 	}
 
-	public void setSchoolBankAccountDetailses(Set schoolBankAccountDetailses) {
+	public void setSchoolBankAccountDetailses(
+			Set<SchoolBankAccountDetails> schoolBankAccountDetailses) {
 		this.schoolBankAccountDetailses = schoolBankAccountDetailses;
 	}
 

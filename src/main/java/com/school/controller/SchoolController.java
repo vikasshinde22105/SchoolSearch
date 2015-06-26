@@ -1,19 +1,18 @@
 package com.school.controller;
 
 import java.util.List;
-
-import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.Response;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.school.bo.school.SchoolBoImpl;
-import com.school.dao.SchoolDaoImpl;
+import com.school.custom.pojo.SchoolListingRequest;
 import com.school.errorhandling.WebServiceException;
 import com.school.model.School;
 
@@ -47,5 +46,19 @@ public class SchoolController// extends ExceptionHandlerController
 		System.out.println("Search"+name);
 		List<School> fetchedSchool = schoolhome.fetchSchoolByName(name);
 		return fetchedSchool;
+	}
+	
+	@RequestMapping(value = "/searchList", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
+	@ResponseBody
+	public Map<String, List> fetchSchoolListByLattitudeByLongitude( @RequestBody SchoolListingRequest schoolListRequest ) {
+		Map<String, List> fetchedSchool = schoolhome.fetchSchoolListByLattitudeByLongitude(schoolListRequest);
+		return fetchedSchool;
+	}
+	
+	@RequestMapping(value = "/filters" , method = RequestMethod.GET, produces = "application/json" )
+	@ResponseBody
+	public Map<String, List> fetchSchoolListingFilters() {
+		Map<String, List> schoolSearchFilters = schoolhome.fetchSchoolListingFilters();
+		return schoolSearchFilters;	
 	}
 }

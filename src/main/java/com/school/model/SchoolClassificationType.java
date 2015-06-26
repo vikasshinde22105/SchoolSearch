@@ -1,6 +1,6 @@
 package com.school.model;
 
-// Generated 2 Jun, 2015 2:50:11 PM by Hibernate Tools 3.4.0.CR1
+// Generated Jun 26, 2015 2:39:37 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -27,13 +27,13 @@ public class SchoolClassificationType implements java.io.Serializable {
 	private String name;
 	private Date lastUpdatedOn;
 	private Integer lastUpdatedBy;
-	private Set schoolInfos = new HashSet(0);
+	private Set<SchoolInfo> schoolInfos = new HashSet<SchoolInfo>(0);
 
 	public SchoolClassificationType() {
 	}
 
 	public SchoolClassificationType(String name, Date lastUpdatedOn,
-			Integer lastUpdatedBy, Set schoolInfos) {
+			Integer lastUpdatedBy, Set<SchoolInfo> schoolInfos) {
 		this.name = name;
 		this.lastUpdatedOn = lastUpdatedOn;
 		this.lastUpdatedBy = lastUpdatedBy;
@@ -60,8 +60,8 @@ public class SchoolClassificationType implements java.io.Serializable {
 		this.name = name;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "last_updated_on", length = 10)
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "last_updated_on", length = 19)
 	public Date getLastUpdatedOn() {
 		return this.lastUpdatedOn;
 	}
@@ -80,11 +80,11 @@ public class SchoolClassificationType implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "schoolClassificationType")
-	public Set getSchoolInfos() {
+	public Set<SchoolInfo> getSchoolInfos() {
 		return this.schoolInfos;
 	}
 
-	public void setSchoolInfos(Set schoolInfos) {
+	public void setSchoolInfos(Set<SchoolInfo> schoolInfos) {
 		this.schoolInfos = schoolInfos;
 	}
 

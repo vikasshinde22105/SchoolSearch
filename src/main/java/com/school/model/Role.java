@@ -1,6 +1,6 @@
 package com.school.model;
 
-// Generated Jun 9, 2015 5:02:23 PM by Hibernate Tools 4.0.0
+// Generated Jun 26, 2015 2:39:37 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -24,19 +24,21 @@ import javax.persistence.TemporalType;
 public class Role implements java.io.Serializable {
 
 	private Short id;
-	private String role;
+	private String name;
 	private Byte status;
 	private Date lastUpdatedOn;
 	private Integer lastUpdatedBy;
-	private Set roleLeaveTrackings = new HashSet(0);
-	private Set secondaryRoles = new HashSet(0);
+	private Set<RoleLeaveTracking> roleLeaveTrackings = new HashSet<RoleLeaveTracking>(
+			0);
+	private Set<SecondaryRole> secondaryRoles = new HashSet<SecondaryRole>(0);
 
 	public Role() {
 	}
 
-	public Role(String role, Byte status, Date lastUpdatedOn,
-			Integer lastUpdatedBy, Set roleLeaveTrackings, Set secondaryRoles) {
-		this.role = role;
+	public Role(String name, Byte status, Date lastUpdatedOn,
+			Integer lastUpdatedBy, Set<RoleLeaveTracking> roleLeaveTrackings,
+			Set<SecondaryRole> secondaryRoles) {
+		this.name = name;
 		this.status = status;
 		this.lastUpdatedOn = lastUpdatedOn;
 		this.lastUpdatedBy = lastUpdatedBy;
@@ -55,13 +57,13 @@ public class Role implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@Column(name = "role", length = 200)
-	public String getRole() {
-		return this.role;
+	@Column(name = "name", length = 200)
+	public String getName() {
+		return this.name;
 	}
 
-	public void setRole(String role) {
-		this.role = role;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	@Column(name = "status")
@@ -93,20 +95,20 @@ public class Role implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "role")
-	public Set getRoleLeaveTrackings() {
+	public Set<RoleLeaveTracking> getRoleLeaveTrackings() {
 		return this.roleLeaveTrackings;
 	}
 
-	public void setRoleLeaveTrackings(Set roleLeaveTrackings) {
+	public void setRoleLeaveTrackings(Set<RoleLeaveTracking> roleLeaveTrackings) {
 		this.roleLeaveTrackings = roleLeaveTrackings;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "role")
-	public Set getSecondaryRoles() {
+	public Set<SecondaryRole> getSecondaryRoles() {
 		return this.secondaryRoles;
 	}
 
-	public void setSecondaryRoles(Set secondaryRoles) {
+	public void setSecondaryRoles(Set<SecondaryRole> secondaryRoles) {
 		this.secondaryRoles = secondaryRoles;
 	}
 

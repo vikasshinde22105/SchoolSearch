@@ -1,6 +1,6 @@
 package com.school.model;
 
-// Generated Jun 9, 2015 5:02:23 PM by Hibernate Tools 4.0.0
+// Generated Jun 26, 2015 2:39:37 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -28,7 +28,7 @@ public class BoardType implements java.io.Serializable {
 	private Integer lastUpdatedBy;
 	private Date lastUpdatedOn;
 	private Integer createdBy;
-	private Set schoolBoards = new HashSet(0);
+	private Set<SchoolBoard> schoolBoards = new HashSet<SchoolBoard>(0);
 
 	public BoardType() {
 	}
@@ -38,7 +38,7 @@ public class BoardType implements java.io.Serializable {
 	}
 
 	public BoardType(String boardName, Integer lastUpdatedBy,
-			Date lastUpdatedOn, Integer createdBy, Set schoolBoards) {
+			Date lastUpdatedOn, Integer createdBy, Set<SchoolBoard> schoolBoards) {
 		this.boardName = boardName;
 		this.lastUpdatedBy = lastUpdatedBy;
 		this.lastUpdatedOn = lastUpdatedOn;
@@ -95,11 +95,11 @@ public class BoardType implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "boardType")
-	public Set getSchoolBoards() {
+	public Set<SchoolBoard> getSchoolBoards() {
 		return this.schoolBoards;
 	}
 
-	public void setSchoolBoards(Set schoolBoards) {
+	public void setSchoolBoards(Set<SchoolBoard> schoolBoards) {
 		this.schoolBoards = schoolBoards;
 	}
 

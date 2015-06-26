@@ -1,6 +1,6 @@
 package com.school.model;
 
-// Generated Jun 9, 2015 5:02:23 PM by Hibernate Tools 4.0.0
+// Generated Jun 26, 2015 2:39:37 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -28,13 +28,13 @@ public class MediumType implements java.io.Serializable {
 	private String description;
 	private Date lastUpdatedOn;
 	private Integer lastUpdatedBy;
-	private Set schoolMediums = new HashSet(0);
+	private Set<SchoolMedium> schoolMediums = new HashSet<SchoolMedium>(0);
 
 	public MediumType() {
 	}
 
 	public MediumType(String title, String description, Date lastUpdatedOn,
-			Integer lastUpdatedBy, Set schoolMediums) {
+			Integer lastUpdatedBy, Set<SchoolMedium> schoolMediums) {
 		this.title = title;
 		this.description = description;
 		this.lastUpdatedOn = lastUpdatedOn;
@@ -91,11 +91,11 @@ public class MediumType implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "mediumType")
-	public Set getSchoolMediums() {
+	public Set<SchoolMedium> getSchoolMediums() {
 		return this.schoolMediums;
 	}
 
-	public void setSchoolMediums(Set schoolMediums) {
+	public void setSchoolMediums(Set<SchoolMedium> schoolMediums) {
 		this.schoolMediums = schoolMediums;
 	}
 

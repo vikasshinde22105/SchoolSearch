@@ -1,6 +1,6 @@
 package com.school.model;
 
-// Generated Jun 9, 2015 5:02:23 PM by Hibernate Tools 4.0.0
+// Generated Jun 26, 2015 2:39:37 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -30,14 +30,15 @@ public class PaymentMode implements java.io.Serializable {
 	private Byte isOnline;
 	private Date lastUpdatedOn;
 	private Integer lastUpdatedBy;
-	private Set schoolPaymentModes = new HashSet(0);
+	private Set<SchoolPaymentMode> schoolPaymentModes = new HashSet<SchoolPaymentMode>(
+			0);
 
 	public PaymentMode() {
 	}
 
 	public PaymentMode(String title, String description, Byte isDeleted,
 			Byte isOnline, Date lastUpdatedOn, Integer lastUpdatedBy,
-			Set schoolPaymentModes) {
+			Set<SchoolPaymentMode> schoolPaymentModes) {
 		this.title = title;
 		this.description = description;
 		this.isDeleted = isDeleted;
@@ -114,11 +115,11 @@ public class PaymentMode implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "paymentMode")
-	public Set getSchoolPaymentModes() {
+	public Set<SchoolPaymentMode> getSchoolPaymentModes() {
 		return this.schoolPaymentModes;
 	}
 
-	public void setSchoolPaymentModes(Set schoolPaymentModes) {
+	public void setSchoolPaymentModes(Set<SchoolPaymentMode> schoolPaymentModes) {
 		this.schoolPaymentModes = schoolPaymentModes;
 	}
 
