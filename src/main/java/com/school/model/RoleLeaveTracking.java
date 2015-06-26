@@ -1,6 +1,6 @@
 package com.school.model;
 
-// Generated Jun 9, 2015 5:02:23 PM by Hibernate Tools 4.0.0
+// Generated Jun 26, 2015 2:39:37 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -32,14 +32,15 @@ public class RoleLeaveTracking implements java.io.Serializable {
 	private Short leaveTypeId;
 	private Float noOfDays;
 	private Integer lastUpdatedBy;
-	private Set userLeaveBalances = new HashSet(0);
+	private Set<UserLeaveBalance> userLeaveBalances = new HashSet<UserLeaveBalance>(
+			0);
 
 	public RoleLeaveTracking() {
 	}
 
 	public RoleLeaveTracking(Role role, School school, Date lastUpdatedOn,
 			Short leaveTypeId, Float noOfDays, Integer lastUpdatedBy,
-			Set userLeaveBalances) {
+			Set<UserLeaveBalance> userLeaveBalances) {
 		this.role = role;
 		this.school = school;
 		this.lastUpdatedOn = lastUpdatedOn;
@@ -118,11 +119,11 @@ public class RoleLeaveTracking implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "roleLeaveTracking")
-	public Set getUserLeaveBalances() {
+	public Set<UserLeaveBalance> getUserLeaveBalances() {
 		return this.userLeaveBalances;
 	}
 
-	public void setUserLeaveBalances(Set userLeaveBalances) {
+	public void setUserLeaveBalances(Set<UserLeaveBalance> userLeaveBalances) {
 		this.userLeaveBalances = userLeaveBalances;
 	}
 

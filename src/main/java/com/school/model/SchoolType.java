@@ -1,13 +1,17 @@
 package com.school.model;
 
-// Generated 2 Jun, 2015 3:00:10 PM by Hibernate Tools 3.4.0.CR1
+// Generated Jun 26, 2015 2:39:37 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -23,14 +27,17 @@ public class SchoolType implements java.io.Serializable {
 	private String name;
 	private Date lastUpdatedOn;
 	private Integer lastUpdatedBy;
+	private Set<SchoolInfo> schoolInfos = new HashSet<SchoolInfo>(0);
 
 	public SchoolType() {
 	}
 
-	public SchoolType(String name, Date lastUpdatedOn, Integer lastUpdatedBy) {
+	public SchoolType(String name, Date lastUpdatedOn, Integer lastUpdatedBy,
+			Set<SchoolInfo> schoolInfos) {
 		this.name = name;
 		this.lastUpdatedOn = lastUpdatedOn;
 		this.lastUpdatedBy = lastUpdatedBy;
+		this.schoolInfos = schoolInfos;
 	}
 
 	@Id
@@ -53,8 +60,8 @@ public class SchoolType implements java.io.Serializable {
 		this.name = name;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "last_updated_on", length = 10)
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "last_updated_on", length = 19)
 	public Date getLastUpdatedOn() {
 		return this.lastUpdatedOn;
 	}
@@ -70,6 +77,15 @@ public class SchoolType implements java.io.Serializable {
 
 	public void setLastUpdatedBy(Integer lastUpdatedBy) {
 		this.lastUpdatedBy = lastUpdatedBy;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "schoolType")
+	public Set<SchoolInfo> getSchoolInfos() {
+		return this.schoolInfos;
+	}
+
+	public void setSchoolInfos(Set<SchoolInfo> schoolInfos) {
+		this.schoolInfos = schoolInfos;
 	}
 
 }

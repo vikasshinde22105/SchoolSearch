@@ -1,6 +1,6 @@
 package com.school.model;
 
-// Generated Jun 9, 2015 5:02:23 PM by Hibernate Tools 4.0.0
+// Generated Jun 26, 2015 2:39:37 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -30,14 +30,15 @@ public class EducationType implements java.io.Serializable {
 	private Integer lastUpdatedBy;
 	private String shortTitle;
 	private Byte sortOrder;
-	private Set teacherEducationInfos = new HashSet(0);
+	private Set<TeacherEducationInfo> teacherEducationInfos = new HashSet<TeacherEducationInfo>(
+			0);
 
 	public EducationType() {
 	}
 
 	public EducationType(String title, String description, Date lastUpdatedOn,
 			Integer lastUpdatedBy, String shortTitle, Byte sortOrder,
-			Set teacherEducationInfos) {
+			Set<TeacherEducationInfo> teacherEducationInfos) {
 		this.title = title;
 		this.description = description;
 		this.lastUpdatedOn = lastUpdatedOn;
@@ -67,7 +68,7 @@ public class EducationType implements java.io.Serializable {
 		this.title = title;
 	}
 
-	@Column(name = "description", length = 400)
+	@Column(name = "description", length = 65535)
 	public String getDescription() {
 		return this.description;
 	}
@@ -114,11 +115,12 @@ public class EducationType implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "educationType")
-	public Set getTeacherEducationInfos() {
+	public Set<TeacherEducationInfo> getTeacherEducationInfos() {
 		return this.teacherEducationInfos;
 	}
 
-	public void setTeacherEducationInfos(Set teacherEducationInfos) {
+	public void setTeacherEducationInfos(
+			Set<TeacherEducationInfo> teacherEducationInfos) {
 		this.teacherEducationInfos = teacherEducationInfos;
 	}
 

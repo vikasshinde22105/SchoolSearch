@@ -1,6 +1,6 @@
 package com.school.model;
 
-// Generated 2 Jun, 2015 2:50:11 PM by Hibernate Tools 3.4.0.CR1
+// Generated Jun 26, 2015 2:39:37 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -23,9 +23,9 @@ import javax.persistence.TemporalType;
 public class StudentAttendance implements java.io.Serializable {
 
 	private Integer id;
+	private AttendanceInfo attendanceInfo;
 	private StudentPersonalInfo studentPersonalInfo;
 	private TeacherStaffInfo teacherStaffInfo;
-	private Integer attendanceId;
 	private Boolean isPresent;
 	private Date attendanceDate;
 	private String rollNo;
@@ -34,13 +34,13 @@ public class StudentAttendance implements java.io.Serializable {
 	public StudentAttendance() {
 	}
 
-	public StudentAttendance(StudentPersonalInfo studentPersonalInfo,
-			TeacherStaffInfo teacherStaffInfo, Integer attendanceId,
-			Boolean isPresent, Date attendanceDate, String rollNo,
-			String description) {
+	public StudentAttendance(AttendanceInfo attendanceInfo,
+			StudentPersonalInfo studentPersonalInfo,
+			TeacherStaffInfo teacherStaffInfo, Boolean isPresent,
+			Date attendanceDate, String rollNo, String description) {
+		this.attendanceInfo = attendanceInfo;
 		this.studentPersonalInfo = studentPersonalInfo;
 		this.teacherStaffInfo = teacherStaffInfo;
-		this.attendanceId = attendanceId;
 		this.isPresent = isPresent;
 		this.attendanceDate = attendanceDate;
 		this.rollNo = rollNo;
@@ -56,6 +56,16 @@ public class StudentAttendance implements java.io.Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "attendance_id")
+	public AttendanceInfo getAttendanceInfo() {
+		return this.attendanceInfo;
+	}
+
+	public void setAttendanceInfo(AttendanceInfo attendanceInfo) {
+		this.attendanceInfo = attendanceInfo;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -76,15 +86,6 @@ public class StudentAttendance implements java.io.Serializable {
 
 	public void setTeacherStaffInfo(TeacherStaffInfo teacherStaffInfo) {
 		this.teacherStaffInfo = teacherStaffInfo;
-	}
-
-	@Column(name = "attendance_id")
-	public Integer getAttendanceId() {
-		return this.attendanceId;
-	}
-
-	public void setAttendanceId(Integer attendanceId) {
-		this.attendanceId = attendanceId;
 	}
 
 	@Column(name = "is_present")

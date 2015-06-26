@@ -1,6 +1,6 @@
 package com.school.model;
 
-// Generated Jun 9, 2015 5:02:23 PM by Hibernate Tools 4.0.0
+// Generated Jun 26, 2015 2:39:37 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -23,9 +23,9 @@ import javax.persistence.TemporalType;
 public class SalesInfo implements java.io.Serializable {
 
 	private Integer id;
-	private DataCollector dataCollector;
-	private SalesExecutive salesExecutive;
 	private School school;
+	private Integer salesExecutiveId;
+	private Integer dataCollectorId;
 	private String infoProviderDesignation;
 	private String infoProviderName;
 	private String infoProviderContactNo;
@@ -36,14 +36,13 @@ public class SalesInfo implements java.io.Serializable {
 	public SalesInfo() {
 	}
 
-	public SalesInfo(DataCollector dataCollector,
-			SalesExecutive salesExecutive, School school,
-			String infoProviderDesignation, String infoProviderName,
-			String infoProviderContactNo, String infoProviderEmail,
-			Date lastUpdatedOn, Integer lastUpdatedBy) {
-		this.dataCollector = dataCollector;
-		this.salesExecutive = salesExecutive;
+	public SalesInfo(School school, Integer salesExecutiveId,
+			Integer dataCollectorId, String infoProviderDesignation,
+			String infoProviderName, String infoProviderContactNo,
+			String infoProviderEmail, Date lastUpdatedOn, Integer lastUpdatedBy) {
 		this.school = school;
+		this.salesExecutiveId = salesExecutiveId;
+		this.dataCollectorId = dataCollectorId;
 		this.infoProviderDesignation = infoProviderDesignation;
 		this.infoProviderName = infoProviderName;
 		this.infoProviderContactNo = infoProviderContactNo;
@@ -64,26 +63,6 @@ public class SalesInfo implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "data_collector_id")
-	public DataCollector getDataCollector() {
-		return this.dataCollector;
-	}
-
-	public void setDataCollector(DataCollector dataCollector) {
-		this.dataCollector = dataCollector;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "sales_executive_id")
-	public SalesExecutive getSalesExecutive() {
-		return this.salesExecutive;
-	}
-
-	public void setSalesExecutive(SalesExecutive salesExecutive) {
-		this.salesExecutive = salesExecutive;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "school_id")
 	public School getSchool() {
 		return this.school;
@@ -91,6 +70,24 @@ public class SalesInfo implements java.io.Serializable {
 
 	public void setSchool(School school) {
 		this.school = school;
+	}
+
+	@Column(name = "sales_executive_id")
+	public Integer getSalesExecutiveId() {
+		return this.salesExecutiveId;
+	}
+
+	public void setSalesExecutiveId(Integer salesExecutiveId) {
+		this.salesExecutiveId = salesExecutiveId;
+	}
+
+	@Column(name = "data_collector_id")
+	public Integer getDataCollectorId() {
+		return this.dataCollectorId;
+	}
+
+	public void setDataCollectorId(Integer dataCollectorId) {
+		this.dataCollectorId = dataCollectorId;
 	}
 
 	@Column(name = "info_provider_designation", length = 200)

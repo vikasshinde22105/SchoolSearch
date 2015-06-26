@@ -1,6 +1,6 @@
 package com.school.model;
 
-// Generated 2 Jun, 2015 2:50:11 PM by Hibernate Tools 3.4.0.CR1
+// Generated Jun 26, 2015 2:39:37 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -29,13 +29,14 @@ public class SchoolCategoryType implements java.io.Serializable {
 	private Double maxPoints;
 	private Date lastUpdatedOn;
 	private Integer lastUpdatedBy;
-	private Set schoolInfos = new HashSet(0);
+	private Set<SchoolInfo> schoolInfos = new HashSet<SchoolInfo>(0);
 
 	public SchoolCategoryType() {
 	}
 
 	public SchoolCategoryType(String name, Byte status, Double maxPoints,
-			Date lastUpdatedOn, Integer lastUpdatedBy, Set schoolInfos) {
+			Date lastUpdatedOn, Integer lastUpdatedBy,
+			Set<SchoolInfo> schoolInfos) {
 		this.name = name;
 		this.status = status;
 		this.maxPoints = maxPoints;
@@ -82,8 +83,8 @@ public class SchoolCategoryType implements java.io.Serializable {
 		this.maxPoints = maxPoints;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "last_updated_on", length = 10)
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "last_updated_on", length = 19)
 	public Date getLastUpdatedOn() {
 		return this.lastUpdatedOn;
 	}
@@ -102,11 +103,11 @@ public class SchoolCategoryType implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "schoolCategoryType")
-	public Set getSchoolInfos() {
+	public Set<SchoolInfo> getSchoolInfos() {
 		return this.schoolInfos;
 	}
 
-	public void setSchoolInfos(Set schoolInfos) {
+	public void setSchoolInfos(Set<SchoolInfo> schoolInfos) {
 		this.schoolInfos = schoolInfos;
 	}
 

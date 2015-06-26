@@ -1,6 +1,6 @@
 package com.school.model;
 
-// Generated 2 Jun, 2015 2:50:11 PM by Hibernate Tools 3.4.0.CR1
+// Generated Jun 26, 2015 2:39:37 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -26,38 +26,40 @@ import javax.persistence.TemporalType;
 public class SchoolFeeDetail implements java.io.Serializable {
 
 	private Integer id;
+	private BillingCycleType billingCycleType;
 	private School school;
-	private Integer classId;
-	private Integer sectionId;
-	private Short feeTypeId;
+	private ClassInfo classInfo;
+	private ClassSection classSection;
+	private FeeType feeType;
 	private Date feeTermStartDate;
 	private Date feeTermEndDate;
 	private Float amount;
 	private Date payByDate;
-	private Short billingCycleId;
 	private String description;
 	private Boolean isDeleted;
 	private Date lastUpdatedOn;
 	private Integer lastUpdatedBy;
-	private Set studentSchoolFeeInfos = new HashSet(0);
+	private Set<StudentSchoolFeeInfo> studentSchoolFeeInfos = new HashSet<StudentSchoolFeeInfo>(
+			0);
 
 	public SchoolFeeDetail() {
 	}
 
-	public SchoolFeeDetail(School school, Integer classId, Integer sectionId,
-			Short feeTypeId, Date feeTermStartDate, Date feeTermEndDate,
-			Float amount, Date payByDate, Short billingCycleId,
-			String description, Boolean isDeleted, Date lastUpdatedOn,
-			Integer lastUpdatedBy, Set studentSchoolFeeInfos) {
+	public SchoolFeeDetail(BillingCycleType billingCycleType, School school,
+			ClassInfo classInfo, ClassSection classSection, FeeType feeType,
+			Date feeTermStartDate, Date feeTermEndDate, Float amount,
+			Date payByDate, String description, Boolean isDeleted,
+			Date lastUpdatedOn, Integer lastUpdatedBy,
+			Set<StudentSchoolFeeInfo> studentSchoolFeeInfos) {
+		this.billingCycleType = billingCycleType;
 		this.school = school;
-		this.classId = classId;
-		this.sectionId = sectionId;
-		this.feeTypeId = feeTypeId;
+		this.classInfo = classInfo;
+		this.classSection = classSection;
+		this.feeType = feeType;
 		this.feeTermStartDate = feeTermStartDate;
 		this.feeTermEndDate = feeTermEndDate;
 		this.amount = amount;
 		this.payByDate = payByDate;
-		this.billingCycleId = billingCycleId;
 		this.description = description;
 		this.isDeleted = isDeleted;
 		this.lastUpdatedOn = lastUpdatedOn;
@@ -77,6 +79,16 @@ public class SchoolFeeDetail implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "billing_cycle_id")
+	public BillingCycleType getBillingCycleType() {
+		return this.billingCycleType;
+	}
+
+	public void setBillingCycleType(BillingCycleType billingCycleType) {
+		this.billingCycleType = billingCycleType;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "school_id")
 	public School getSchool() {
 		return this.school;
@@ -86,31 +98,34 @@ public class SchoolFeeDetail implements java.io.Serializable {
 		this.school = school;
 	}
 
-	@Column(name = "class_id")
-	public Integer getClassId() {
-		return this.classId;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "class_id")
+	public ClassInfo getClassInfo() {
+		return this.classInfo;
 	}
 
-	public void setClassId(Integer classId) {
-		this.classId = classId;
+	public void setClassInfo(ClassInfo classInfo) {
+		this.classInfo = classInfo;
 	}
 
-	@Column(name = "section_id")
-	public Integer getSectionId() {
-		return this.sectionId;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "section_id")
+	public ClassSection getClassSection() {
+		return this.classSection;
 	}
 
-	public void setSectionId(Integer sectionId) {
-		this.sectionId = sectionId;
+	public void setClassSection(ClassSection classSection) {
+		this.classSection = classSection;
 	}
 
-	@Column(name = "fee_type_id")
-	public Short getFeeTypeId() {
-		return this.feeTypeId;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "fee_type_id")
+	public FeeType getFeeType() {
+		return this.feeType;
 	}
 
-	public void setFeeTypeId(Short feeTypeId) {
-		this.feeTypeId = feeTypeId;
+	public void setFeeType(FeeType feeType) {
+		this.feeType = feeType;
 	}
 
 	@Temporal(TemporalType.DATE)
@@ -152,15 +167,6 @@ public class SchoolFeeDetail implements java.io.Serializable {
 		this.payByDate = payByDate;
 	}
 
-	@Column(name = "billing_cycle_id")
-	public Short getBillingCycleId() {
-		return this.billingCycleId;
-	}
-
-	public void setBillingCycleId(Short billingCycleId) {
-		this.billingCycleId = billingCycleId;
-	}
-
 	@Column(name = "description", length = 300)
 	public String getDescription() {
 		return this.description;
@@ -179,8 +185,8 @@ public class SchoolFeeDetail implements java.io.Serializable {
 		this.isDeleted = isDeleted;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "last_updated_on", length = 10)
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "last_updated_on", length = 19)
 	public Date getLastUpdatedOn() {
 		return this.lastUpdatedOn;
 	}
@@ -199,11 +205,12 @@ public class SchoolFeeDetail implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "schoolFeeDetail")
-	public Set getStudentSchoolFeeInfos() {
+	public Set<StudentSchoolFeeInfo> getStudentSchoolFeeInfos() {
 		return this.studentSchoolFeeInfos;
 	}
 
-	public void setStudentSchoolFeeInfos(Set studentSchoolFeeInfos) {
+	public void setStudentSchoolFeeInfos(
+			Set<StudentSchoolFeeInfo> studentSchoolFeeInfos) {
 		this.studentSchoolFeeInfos = studentSchoolFeeInfos;
 	}
 

@@ -1,6 +1,6 @@
 package com.school.model;
 
-// Generated Jun 9, 2015 5:02:23 PM by Hibernate Tools 4.0.0
+// Generated Jun 26, 2015 2:39:37 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -27,13 +27,14 @@ public class Accessories implements java.io.Serializable {
 	private String name;
 	private Date lastUpdatedOn;
 	private Integer lastUpdatedBy;
-	private Set classAccessorieses = new HashSet(0);
+	private Set<ClassAccessories> classAccessorieses = new HashSet<ClassAccessories>(
+			0);
 
 	public Accessories() {
 	}
 
 	public Accessories(String name, Date lastUpdatedOn, Integer lastUpdatedBy,
-			Set classAccessorieses) {
+			Set<ClassAccessories> classAccessorieses) {
 		this.name = name;
 		this.lastUpdatedOn = lastUpdatedOn;
 		this.lastUpdatedBy = lastUpdatedBy;
@@ -80,11 +81,11 @@ public class Accessories implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "accessories")
-	public Set getClassAccessorieses() {
+	public Set<ClassAccessories> getClassAccessorieses() {
 		return this.classAccessorieses;
 	}
 
-	public void setClassAccessorieses(Set classAccessorieses) {
+	public void setClassAccessorieses(Set<ClassAccessories> classAccessorieses) {
 		this.classAccessorieses = classAccessorieses;
 	}
 

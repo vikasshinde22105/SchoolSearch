@@ -1,6 +1,6 @@
 package com.school.model;
 
-// Generated Jun 9, 2015 5:02:23 PM by Hibernate Tools 4.0.0
+// Generated Jun 26, 2015 2:39:37 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -32,15 +32,16 @@ public class Locality implements java.io.Serializable {
 	private Byte sortOrder;
 	private Date lastUpdatedOn;
 	private Integer lastUpdatedBy;
-	private Set teacherExperiences = new HashSet(0);
-	private Set schools = new HashSet(0);
+	private Set<TeacherExperience> teacherExperiences = new HashSet<TeacherExperience>(
+			0);
+	private Set<School> schools = new HashSet<School>(0);
 
 	public Locality() {
 	}
 
 	public Locality(City city, String name, Boolean status, Byte sortOrder,
-			Date lastUpdatedOn, Integer lastUpdatedBy, Set teacherExperiences,
-			Set schools) {
+			Date lastUpdatedOn, Integer lastUpdatedBy,
+			Set<TeacherExperience> teacherExperiences, Set<School> schools) {
 		this.city = city;
 		this.name = name;
 		this.status = status;
@@ -119,20 +120,20 @@ public class Locality implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "locality")
-	public Set getTeacherExperiences() {
+	public Set<TeacherExperience> getTeacherExperiences() {
 		return this.teacherExperiences;
 	}
 
-	public void setTeacherExperiences(Set teacherExperiences) {
+	public void setTeacherExperiences(Set<TeacherExperience> teacherExperiences) {
 		this.teacherExperiences = teacherExperiences;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "locality")
-	public Set getSchools() {
+	public Set<School> getSchools() {
 		return this.schools;
 	}
 
-	public void setSchools(Set schools) {
+	public void setSchools(Set<School> schools) {
 		this.schools = schools;
 	}
 

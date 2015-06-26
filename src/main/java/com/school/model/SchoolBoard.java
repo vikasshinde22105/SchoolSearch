@@ -1,9 +1,7 @@
 package com.school.model;
 
-// Generated 2 Jun, 2015 2:50:11 PM by Hibernate Tools 3.4.0.CR1
+// Generated Jun 26, 2015 2:39:37 PM by Hibernate Tools 3.4.0.CR1
 
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,7 +10,6 @@ import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -23,23 +20,15 @@ import javax.persistence.Table;
 public class SchoolBoard implements java.io.Serializable {
 
 	private Integer id;
-	private SchoolBoard schoolBoard;
-	private short boardTypeId;
-	private Set schoolBoards = new HashSet(0);
+	private BoardType boardType;
+	private School school;
 
 	public SchoolBoard() {
 	}
 
-	public SchoolBoard(SchoolBoard schoolBoard, short boardTypeId) {
-		this.schoolBoard = schoolBoard;
-		this.boardTypeId = boardTypeId;
-	}
-
-	public SchoolBoard(SchoolBoard schoolBoard, short boardTypeId,
-			Set schoolBoards) {
-		this.schoolBoard = schoolBoard;
-		this.boardTypeId = boardTypeId;
-		this.schoolBoards = schoolBoards;
+	public SchoolBoard(BoardType boardType, School school) {
+		this.boardType = boardType;
+		this.school = school;
 	}
 
 	@Id
@@ -54,31 +43,23 @@ public class SchoolBoard implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "board_type_id", nullable = false)
+	public BoardType getBoardType() {
+		return this.boardType;
+	}
+
+	public void setBoardType(BoardType boardType) {
+		this.boardType = boardType;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "school_id", nullable = false)
-	public SchoolBoard getSchoolBoard() {
-		return this.schoolBoard;
+	public School getSchool() {
+		return this.school;
 	}
 
-	public void setSchoolBoard(SchoolBoard schoolBoard) {
-		this.schoolBoard = schoolBoard;
-	}
-
-	@Column(name = "board_type_id", nullable = false)
-	public short getBoardTypeId() {
-		return this.boardTypeId;
-	}
-
-	public void setBoardTypeId(short boardTypeId) {
-		this.boardTypeId = boardTypeId;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "schoolBoard")
-	public Set getSchoolBoards() {
-		return this.schoolBoards;
-	}
-
-	public void setSchoolBoards(Set schoolBoards) {
-		this.schoolBoards = schoolBoards;
+	public void setSchool(School school) {
+		this.school = school;
 	}
 
 }

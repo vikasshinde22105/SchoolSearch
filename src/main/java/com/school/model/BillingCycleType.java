@@ -1,6 +1,6 @@
 package com.school.model;
 
-// Generated Jun 9, 2015 5:02:23 PM by Hibernate Tools 4.0.0
+// Generated Jun 26, 2015 2:39:37 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -29,13 +29,15 @@ public class BillingCycleType implements java.io.Serializable {
 	private Byte isDeleted;
 	private Date lastUpdatedOn;
 	private Integer lastUpdatedBy;
-	private Set schoolFeeDetails = new HashSet(0);
+	private Set<SchoolFeeDetail> schoolFeeDetails = new HashSet<SchoolFeeDetail>(
+			0);
 
 	public BillingCycleType() {
 	}
 
 	public BillingCycleType(String title, String description, Byte isDeleted,
-			Date lastUpdatedOn, Integer lastUpdatedBy, Set schoolFeeDetails) {
+			Date lastUpdatedOn, Integer lastUpdatedBy,
+			Set<SchoolFeeDetail> schoolFeeDetails) {
 		this.title = title;
 		this.description = description;
 		this.isDeleted = isDeleted;
@@ -102,11 +104,11 @@ public class BillingCycleType implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "billingCycleType")
-	public Set getSchoolFeeDetails() {
+	public Set<SchoolFeeDetail> getSchoolFeeDetails() {
 		return this.schoolFeeDetails;
 	}
 
-	public void setSchoolFeeDetails(Set schoolFeeDetails) {
+	public void setSchoolFeeDetails(Set<SchoolFeeDetail> schoolFeeDetails) {
 		this.schoolFeeDetails = schoolFeeDetails;
 	}
 

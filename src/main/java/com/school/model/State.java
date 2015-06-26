@@ -1,12 +1,18 @@
 package com.school.model;
 
-// Generated 2 Jun, 2015 2:50:11 PM by Hibernate Tools 3.4.0.CR1
+// Generated Jun 26, 2015 2:39:37 PM by Hibernate Tools 3.4.0.CR1
 
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -17,19 +23,22 @@ import javax.persistence.Table;
 public class State implements java.io.Serializable {
 
 	private Integer id;
-	private Integer countryId;
-	private Integer name;
+	private Country country;
+	private String name;
 	private Byte status;
 	private Integer sortOrder;
+	private Set<District> districts = new HashSet<District>(0);
 
 	public State() {
 	}
 
-	public State(Integer countryId, Integer name, Byte status, Integer sortOrder) {
-		this.countryId = countryId;
+	public State(Country country, String name, Byte status, Integer sortOrder,
+			Set<District> districts) {
+		this.country = country;
 		this.name = name;
 		this.status = status;
 		this.sortOrder = sortOrder;
+		this.districts = districts;
 	}
 
 	@Id
@@ -43,21 +52,22 @@ public class State implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@Column(name = "country_id")
-	public Integer getCountryId() {
-		return this.countryId;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "country_id")
+	public Country getCountry() {
+		return this.country;
 	}
 
-	public void setCountryId(Integer countryId) {
-		this.countryId = countryId;
+	public void setCountry(Country country) {
+		this.country = country;
 	}
 
-	@Column(name = "name")
-	public Integer getName() {
+	@Column(name = "name", length = 128)
+	public String getName() {
 		return this.name;
 	}
 
-	public void setName(Integer name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 
@@ -77,6 +87,15 @@ public class State implements java.io.Serializable {
 
 	public void setSortOrder(Integer sortOrder) {
 		this.sortOrder = sortOrder;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "state")
+	public Set<District> getDistricts() {
+		return this.districts;
+	}
+
+	public void setDistricts(Set<District> districts) {
+		this.districts = districts;
 	}
 
 }

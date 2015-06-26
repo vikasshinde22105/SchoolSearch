@@ -1,6 +1,6 @@
 package com.school.model;
 
-// Generated 2 Jun, 2015 2:50:11 PM by Hibernate Tools 3.4.0.CR1
+// Generated Jun 26, 2015 2:39:37 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -23,18 +23,18 @@ import javax.persistence.TemporalType;
 public class SchoolMedium implements java.io.Serializable {
 
 	private Integer id;
+	private MediumType mediumType;
 	private School school;
-	private Short mediumId;
 	private Date lastUpdatedOn;
 	private Integer lastUpdatedBy;
 
 	public SchoolMedium() {
 	}
 
-	public SchoolMedium(School school, Short mediumId, Date lastUpdatedOn,
-			Integer lastUpdatedBy) {
+	public SchoolMedium(MediumType mediumType, School school,
+			Date lastUpdatedOn, Integer lastUpdatedBy) {
+		this.mediumType = mediumType;
 		this.school = school;
-		this.mediumId = mediumId;
 		this.lastUpdatedOn = lastUpdatedOn;
 		this.lastUpdatedBy = lastUpdatedBy;
 	}
@@ -51,6 +51,16 @@ public class SchoolMedium implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "medium_id")
+	public MediumType getMediumType() {
+		return this.mediumType;
+	}
+
+	public void setMediumType(MediumType mediumType) {
+		this.mediumType = mediumType;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "school_id")
 	public School getSchool() {
 		return this.school;
@@ -60,17 +70,8 @@ public class SchoolMedium implements java.io.Serializable {
 		this.school = school;
 	}
 
-	@Column(name = "medium_id")
-	public Short getMediumId() {
-		return this.mediumId;
-	}
-
-	public void setMediumId(Short mediumId) {
-		this.mediumId = mediumId;
-	}
-
-	@Temporal(TemporalType.DATE)
-	@Column(name = "last_updated_on", length = 10)
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "last_updated_on", length = 19)
 	public Date getLastUpdatedOn() {
 		return this.lastUpdatedOn;
 	}
