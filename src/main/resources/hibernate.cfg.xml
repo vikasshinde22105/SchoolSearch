@@ -37,7 +37,7 @@
         <mapping class="com.school.model.BusDriver" />
         <mapping class="com.school.model.EducationType" />
         <mapping class="com.school.model.ReviewRatingCategory" />
-        <mapping class="com.school.model.ContactInfoExternal" />
+        <mapping class="com.school.model.ContactInfo" />
         <mapping class="com.school.model.SchoolInfo" />
         <mapping class="com.school.model.StudentMarksReport" />
         <mapping class="com.school.model.Notification" />
@@ -95,7 +95,6 @@
         <mapping class="com.school.model.TeacherEducationInfo" />
         <mapping class="com.school.model.StudentParent" />
         <mapping class="com.school.model.SchoolMedium" />
-        <mapping class="com.school.model.ContactInfoInternal" />
         <mapping class="com.school.model.StudentPersonalInfo" />
         <mapping class="com.school.model.SchoolCategoryOptionFeature" />
         <mapping class="com.school.model.ParentInfo" />
