@@ -12,6 +12,9 @@
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="hibernate.search.autoregister_listeners">false</property>
         <property name="hibernate.validator.apply_to_ddl">false</property>
+		<property name="hibernate.search.default.directory_provider">filesystem</property>
+        <property name="hibernate.search.default.indexBase">/test/lucene/indexes</property>
+        
         <mapping class="com.school.model.SchoolCategoryType" />
         <mapping class="com.school.model.SchoolEducationAchievement" />
         <mapping class="com.school.model.StudentClass" />

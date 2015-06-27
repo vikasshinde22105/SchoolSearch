@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.school.bo.school.SchoolBoImpl;
 import com.school.custom.pojo.SchoolListingRequest;
 import com.school.errorhandling.WebServiceException;
+import com.school.model.ContactInfoInternal;
 import com.school.model.School;
+import com.school.model.SchoolBasic;
 
 @Controller
 @RequestMapping("/school")
@@ -25,11 +27,12 @@ public class SchoolController// extends ExceptionHandlerController
 	
 	@RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
-     public List<School> fetchAll() {
+     public List<SchoolBasic> fetchAll() {
 	        System.out.println("SchoolDao: fetchAll");
-	        List<School> fetchedSchool = schoolhome.fetchAllSchool();
+	        List<SchoolBasic> fetchedSchool = schoolhome.fetchAllSchool();
 	        return fetchedSchool;
 	    }
+	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
     public School fetchById(@PathVariable int id) throws WebServiceException {
@@ -42,12 +45,17 @@ public class SchoolController// extends ExceptionHandlerController
 	
 	@RequestMapping(value = "/search/{name}" , method = RequestMethod.GET , produces = "application/json")
 	@ResponseBody
-	public List<School> fetchByName(@PathVariable String name) {
-		System.out.println("Search"+name);
+	public List<School> fetchByName(@PathVariable String name) throws InterruptedException {
 		List<School> fetchedSchool = schoolhome.fetchSchoolByName(name);
 		return fetchedSchool;
 	}
 	
+	@RequestMapping(value = "/basic/{schoolId}", method = RequestMethod.GET, produces = "application/json")
+    @ResponseBody
+     public List<SchoolBasic> fetchBasicInfo(@PathVariable int schoolId) {
+	        return schoolhome.fetchSchoolBasicInfo(schoolId);
+	    }
+
 	@RequestMapping(value = "/searchList", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
 	@ResponseBody
 	public Map<String, List> fetchSchoolListByLattitudeByLongitude( @RequestBody SchoolListingRequest schoolListRequest ) {
