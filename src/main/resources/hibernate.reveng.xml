@@ -3,7 +3,10 @@
 
 <hibernate-reverse-engineering>
   <table-filter match-catalog="school_db" match-name="accessories"/>
-  <table-filter match-catalog="school_db" match-name="adminuser"/>
+  <table-filter match-catalog="school_db" match-name="activity_category"/>
+  <table-filter match-catalog="school_db" match-name="activity_category_item"/>
+  <table-filter match-catalog="school_db" match-name="admin_user"/>
+  <table-filter match-catalog="school_db" match-name="admin_user_role"/>
   <table-filter match-catalog="school_db" match-name="area_unit"/>
   <table-filter match-catalog="school_db" match-name="attendance_info"/>
   <table-filter match-catalog="school_db" match-name="billing_cycle_type"/>
@@ -15,22 +18,25 @@
   <table-filter match-catalog="school_db" match-name="bus_route_stop"/>
   <table-filter match-catalog="school_db" match-name="bus_stop"/>
   <table-filter match-catalog="school_db" match-name="campus_info"/>
+  <table-filter match-catalog="school_db" match-name="category"/>
+  <table-filter match-catalog="school_db" match-name="category_option"/>
+  <table-filter match-catalog="school_db" match-name="category_option_feature"/>
   <table-filter match-catalog="school_db" match-name="certificate_type"/>
   <table-filter match-catalog="school_db" match-name="city"/>
   <table-filter match-catalog="school_db" match-name="class_accessories"/>
   <table-filter match-catalog="school_db" match-name="class_info"/>
   <table-filter match-catalog="school_db" match-name="class_section"/>
   <table-filter match-catalog="school_db" match-name="class_subjects"/>
-  <table-filter match-catalog="school_db" match-name="contact_info_external"/>
-  <table-filter match-catalog="school_db" match-name="contact_info_internal"/>
+  <table-filter match-catalog="school_db" match-name="contact_info"/>
   <table-filter match-catalog="school_db" match-name="country"/>
-  <table-filter match-catalog="school_db" match-name="data_collector"/>
   <table-filter match-catalog="school_db" match-name="district"/>
   <table-filter match-catalog="school_db" match-name="education_type"/>
   <table-filter match-catalog="school_db" match-name="event"/>
   <table-filter match-catalog="school_db" match-name="exam_type"/>
   <table-filter match-catalog="school_db" match-name="faculty_type"/>
   <table-filter match-catalog="school_db" match-name="fee_type"/>
+  <table-filter match-catalog="school_db" match-name="infrastructure_category"/>
+  <table-filter match-catalog="school_db" match-name="infrastructure_category_item"/>
   <table-filter match-catalog="school_db" match-name="leave_type"/>
   <table-filter match-catalog="school_db" match-name="locality"/>
   <table-filter match-catalog="school_db" match-name="medium_type"/>
@@ -42,18 +48,20 @@
   <table-filter match-catalog="school_db" match-name="parent_school_review_desc"/>
   <table-filter match-catalog="school_db" match-name="parent_school_review_rating"/>
   <table-filter match-catalog="school_db" match-name="payment_mode"/>
+  <table-filter match-catalog="school_db" match-name="prev_student_profile"/>
   <table-filter match-catalog="school_db" match-name="rating_category_type"/>
   <table-filter match-catalog="school_db" match-name="review_rating_category"/>
   <table-filter match-catalog="school_db" match-name="role"/>
   <table-filter match-catalog="school_db" match-name="role_leave_tracking"/>
   <table-filter match-catalog="school_db" match-name="route"/>
-  <table-filter match-catalog="school_db" match-name="sales_executive"/>
+  <table-filter match-catalog="school_db" match-name="safety_category"/>
+  <table-filter match-catalog="school_db" match-name="safety_category_item"/>
   <table-filter match-catalog="school_db" match-name="sales_info"/>
   <table-filter match-catalog="school_db" match-name="school"/>
+  <table-filter match-catalog="school_db" match-name="school_activity_cat_item"/>
   <table-filter match-catalog="school_db" match-name="school_bank_account_details"/>
   <table-filter match-catalog="school_db" match-name="school_board"/>
   <table-filter match-catalog="school_db" match-name="school_bus"/>
-  <table-filter match-catalog="school_db" match-name="school_category_option_feature"/>
   <table-filter match-catalog="school_db" match-name="school_category_type"/>
   <table-filter match-catalog="school_db" match-name="school_classification_type"/>
   <table-filter match-catalog="school_db" match-name="school_education_achievement"/>
@@ -61,17 +69,22 @@
   <table-filter match-catalog="school_db" match-name="school_exam"/>
   <table-filter match-catalog="school_db" match-name="school_exam_subject"/>
   <table-filter match-catalog="school_db" match-name="school_fee_detail"/>
+  <table-filter match-catalog="school_db" match-name="school_highlight"/>
   <table-filter match-catalog="school_db" match-name="school_info"/>
+  <table-filter match-catalog="school_db" match-name="school_infrastructure_cat_item"/>
   <table-filter match-catalog="school_db" match-name="school_medium"/>
   <table-filter match-catalog="school_db" match-name="school_payment_mode"/>
   <table-filter match-catalog="school_db" match-name="school_rating"/>
+  <table-filter match-catalog="school_db" match-name="school_safety_cat_item"/>
   <table-filter match-catalog="school_db" match-name="school_teacher"/>
   <table-filter match-catalog="school_db" match-name="school_timeline"/>
   <table-filter match-catalog="school_db" match-name="school_timeline_milestone"/>
   <table-filter match-catalog="school_db" match-name="school_type"/>
   <table-filter match-catalog="school_db" match-name="secondary_role"/>
+  <table-filter match-catalog="school_db" match-name="section_type"/>
   <table-filter match-catalog="school_db" match-name="standard_type"/>
   <table-filter match-catalog="school_db" match-name="state"/>
+  <table-filter match-catalog="school_db" match-name="stream_type"/>
   <table-filter match-catalog="school_db" match-name="student_attendance"/>
   <table-filter match-catalog="school_db" match-name="student_class"/>
   <table-filter match-catalog="school_db" match-name="student_marks_report"/>
