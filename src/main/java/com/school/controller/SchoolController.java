@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.school.bo.school.SchoolBoImpl;
 import com.school.custom.pojo.SchoolListingRequest;
 import com.school.errorhandling.WebServiceException;
-import com.school.model.ContactInfoInternal;
 import com.school.model.School;
 
 @Controller

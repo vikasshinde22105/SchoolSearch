@@ -65,7 +65,6 @@
         <mapping class="com.school.model.Country" />
         <mapping class="com.school.model.TeacherSubjectSkill" />
         <mapping class="com.school.model.TeacherHomeworkRemarks" />
-        <mapping class="com.school.model.SalesExecutive" />
         <mapping class="com.school.model.SchoolFeeDetail" />
         <mapping class="com.school.model.UserMessageSettings" />
         <mapping class="com.school.model.RoleLeaveTracking" />
@@ -75,7 +74,6 @@
         <mapping class="com.school.model.ParentSchoolReviewRating" />
         <mapping class="com.school.model.Locality" />
         <mapping class="com.school.model.Route" />
-        <mapping class="com.school.model.DataCollector" />
         <mapping class="com.school.model.StudentProfile" />
         <mapping class="com.school.model.TeacherExperience" />
         <mapping class="com.school.model.SchoolBoard" />
