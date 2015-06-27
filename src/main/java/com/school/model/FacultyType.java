@@ -1,6 +1,6 @@
 package com.school.model;
 
-// Generated Jun 9, 2015 5:02:23 PM by Hibernate Tools 4.0.0
+// Generated Jun 26, 2015 2:39:37 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -27,13 +27,13 @@ public class FacultyType implements java.io.Serializable {
 	private String name;
 	private Date lastUpdatedOn;
 	private Integer lastUpdatedBy;
-	private Set schoolTeachers = new HashSet(0);
+	private Set<SchoolTeacher> schoolTeachers = new HashSet<SchoolTeacher>(0);
 
 	public FacultyType() {
 	}
 
 	public FacultyType(String name, Date lastUpdatedOn, Integer lastUpdatedBy,
-			Set schoolTeachers) {
+			Set<SchoolTeacher> schoolTeachers) {
 		this.name = name;
 		this.lastUpdatedOn = lastUpdatedOn;
 		this.lastUpdatedBy = lastUpdatedBy;
@@ -80,11 +80,11 @@ public class FacultyType implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "facultyType")
-	public Set getSchoolTeachers() {
+	public Set<SchoolTeacher> getSchoolTeachers() {
 		return this.schoolTeachers;
 	}
 
-	public void setSchoolTeachers(Set schoolTeachers) {
+	public void setSchoolTeachers(Set<SchoolTeacher> schoolTeachers) {
 		this.schoolTeachers = schoolTeachers;
 	}
 

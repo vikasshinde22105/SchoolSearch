@@ -1,6 +1,6 @@
 package com.school.model;
 
-// Generated 2 Jun, 2015 2:50:11 PM by Hibernate Tools 3.4.0.CR1
+// Generated Jun 26, 2015 2:39:37 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -32,7 +32,7 @@ public class SchoolInfo implements java.io.Serializable {
 	private String tieUpDesc;
 	private String approvalDesc;
 	private Date lastUpdatedOn;
-	private Date lastUpdatedBy;
+	private Integer lastUpdatedBy;
 
 	public SchoolInfo() {
 	}
@@ -41,7 +41,7 @@ public class SchoolInfo implements java.io.Serializable {
 			SchoolCategoryType schoolCategoryType,
 			SchoolClassificationType schoolClassificationType, School school,
 			String schoolWebsite, String awardDesc, String tieUpDesc,
-			String approvalDesc, Date lastUpdatedOn, Date lastUpdatedBy) {
+			String approvalDesc, Date lastUpdatedOn, Integer lastUpdatedBy) {
 		this.schoolType = schoolType;
 		this.schoolCategoryType = schoolCategoryType;
 		this.schoolClassificationType = schoolClassificationType;
@@ -142,8 +142,8 @@ public class SchoolInfo implements java.io.Serializable {
 		this.approvalDesc = approvalDesc;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "last_updated_on", length = 10)
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "last_updated_on", length = 19)
 	public Date getLastUpdatedOn() {
 		return this.lastUpdatedOn;
 	}
@@ -152,13 +152,12 @@ public class SchoolInfo implements java.io.Serializable {
 		this.lastUpdatedOn = lastUpdatedOn;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "last_updated_by", length = 10)
-	public Date getLastUpdatedBy() {
+	@Column(name = "last_updated_by")
+	public Integer getLastUpdatedBy() {
 		return this.lastUpdatedBy;
 	}
 
-	public void setLastUpdatedBy(Date lastUpdatedBy) {
+	public void setLastUpdatedBy(Integer lastUpdatedBy) {
 		this.lastUpdatedBy = lastUpdatedBy;
 	}
 

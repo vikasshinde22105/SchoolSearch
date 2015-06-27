@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-configuration PUBLIC
-		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
-		"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+                                         "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
@@ -9,37 +8,111 @@
         <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/school_db</property>
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-   <mapping class="com.school.model.School" />
-   <mapping class="com.school.model.ClassInfo" />
-   <mapping class="com.school.model.TeachingApproachType" />
-   <mapping class="com.school.model.ClassSubjects" />
-   <mapping class="com.school.model.Subject" />
-   <mapping class="com.school.model.SchoolTeacher" />
-   <mapping class="com.school.model.TeacherStaffInfo" />
-   <mapping class="com.school.model.UserRegistrationInfo" />
-   <mapping class="com.school.model.StudentPrevSchoolDetail" />
-   <mapping class="com.school.model.StudentPersonalInfo" />
-   <mapping class="com.school.model.StudentProfile" />
-   <mapping class="com.school.model.TeacherHomework" />
-   <mapping class="com.school.model.TimeTable" />
-   <mapping class="com.school.model.ClassSection" />
-   <mapping class="com.school.model.StandardType" />
-   <mapping class="com.school.model.TeacherHomeworkRemarks" />
-   <mapping class="com.school.model.StudentPrevSchoolDetail" />
-   <mapping class="com.school.model.StudentSchoolInfo" />
-   <mapping class="com.school.model.TeacherAttendance" />
-   <mapping class="com.school.model.TeacherSubject" />
-   <mapping class="com.school.model.TeacherClass" />
-   <mapping class="com.school.model.TeacherClassSkill" />
-   <mapping class="com.school.model.TeacherEducationInfo" />
-   <mapping class="com.school.model.TeacherEducationInfo" />
-   <mapping class="com.school.model.TeacherExperience" />
-   <mapping class="com.school.model.TeacherTimeTable" />
-   <mapping class="com.school.model.ParentInfo" />
-   <mapping class="com.school.model.Task" />
-   <mapping class="com.school.model.UserRole" />
-               
-        
+        <property name="hibernate.search.default.directory_provider" >filesystem</property>
+		<property name="hibernate.search.default.indexBase">/test/lucene/indexes</property>    
+          
+        <mapping class="com.school.model.SchoolCategoryType" />
+        <mapping class="com.school.model.SchoolEducationAchievement" />
+        <mapping class="com.school.model.StudentClass" />
+        <mapping class="com.school.model.TeachingApproachType" />
+        <mapping class="com.school.model.SecondaryRole" />
+        <mapping class="com.school.model.SchoolClassificationType" />
+        <mapping class="com.school.model.TeacherStaffInfo" />
+        <mapping class="com.school.model.ExamType" />
+        <mapping class="com.school.model.ClassSection" />
+        <mapping class="com.school.model.City" />
+        <mapping class="com.school.model.BusInfo" />
+        <mapping class="com.school.model.TeacherHomework" />
+        <mapping class="com.school.model.Accessories" />
+        <mapping class="com.school.model.TeacherSubject" />
+        <mapping class="com.school.model.UserNotificationSettings" />
+        <mapping class="com.school.model.SchoolPaymentMode" />
+        <mapping class="com.school.model.OccupationType" />
+        <mapping class="com.school.model.ClassAccessories" />
+        <mapping class="com.school.model.UserRole" />
+        <mapping class="com.school.model.UserLeave" />
+        <mapping class="com.school.model.BusDelayDetails" />
+        <mapping class="com.school.model.ParentSchoolReviewDesc" />
+        <mapping class="com.school.model.Message" />
+        <mapping class="com.school.model.BusDriver" />
+        <mapping class="com.school.model.EducationType" />
+        <mapping class="com.school.model.ReviewRatingCategory" />
+        <mapping class="com.school.model.ContactInfoExternal" />
+        <mapping class="com.school.model.SchoolInfo" />
+        <mapping class="com.school.model.StudentMarksReport" />
+        <mapping class="com.school.model.Notification" />
+        <mapping class="com.school.model.UserLeaveBalance" />
+        <mapping class="com.school.model.SalesInfo" />
+        <mapping class="com.school.model.SchoolExamSubject" />
+        <mapping class="com.school.model.UserRating" />
+        <mapping class="com.school.model.StudentPrevSchoolDetail" />
+        <mapping class="com.school.model.FeeType" />
+        <mapping class="com.school.model.CertificateType" />
+        <mapping class="com.school.model.Role" />
+        <mapping class="com.school.model.StudentAttendance" />
+        <mapping class="com.school.model.UserRegistrationInfo" />
+        <mapping class="com.school.model.Adminuser" />
+        <mapping class="com.school.model.NotificationType" />
+        <mapping class="com.school.model.Event" />
+        <mapping class="com.school.model.TeacherTimeTable" />
+        <mapping class="com.school.model.ClassSubjects" />
+        <mapping class="com.school.model.SchoolEmergencyContact" />
+        <mapping class="com.school.model.BusRouteStop" />
+        <mapping class="com.school.model.SchoolRating" />
+        <mapping class="com.school.model.RatingCategoryType" />
+        <mapping class="com.school.model.BillingCycleType" />
+        <mapping class="com.school.model.Task" />
+        <mapping class="com.school.model.Country" />
+        <mapping class="com.school.model.TeacherSubjectSkill" />
+        <mapping class="com.school.model.TeacherHomeworkRemarks" />
+        <mapping class="com.school.model.SalesExecutive" />
+        <mapping class="com.school.model.SchoolFeeDetail" />
+        <mapping class="com.school.model.UserMessageSettings" />
+        <mapping class="com.school.model.RoleLeaveTracking" />
+        <mapping class="com.school.model.SchoolTeacher" />
+        <mapping class="com.school.model.Subject" />
+        <mapping class="com.school.model.AreaUnit" />
+        <mapping class="com.school.model.ParentSchoolReviewRating" />
+        <mapping class="com.school.model.Locality" />
+        <mapping class="com.school.model.Route" />
+        <mapping class="com.school.model.DataCollector" />
+        <mapping class="com.school.model.StudentProfile" />
+        <mapping class="com.school.model.TeacherExperience" />
+        <mapping class="com.school.model.SchoolBoard" />
+        <mapping class="com.school.model.SchoolTimelineMilestone" />
+        <mapping class="com.school.model.MediumType" />
+        <mapping class="com.school.model.School" />
+        <mapping class="com.school.model.SchoolTimeline" />
+        <mapping class="com.school.model.TeacherClassSkill" />
+        <mapping class="com.school.model.FacultyType" />
+        <mapping class="com.school.model.BusStop" />
+        <mapping class="com.school.model.PaymentMode" />
+        <mapping class="com.school.model.TeacherClass" />
+        <mapping class="com.school.model.BusRoute" />
+        <mapping class="com.school.model.UserBus" />
+        <mapping class="com.school.model.SchoolType" />
+        <mapping class="com.school.model.State" />
+        <mapping class="com.school.model.TeacherEducationInfo" />
+        <mapping class="com.school.model.StudentParent" />
+        <mapping class="com.school.model.SchoolMedium" />
+        <mapping class="com.school.model.ContactInfoInternal" />
+        <mapping class="com.school.model.StudentPersonalInfo" />
+        <mapping class="com.school.model.SchoolCategoryOptionFeature" />
+        <mapping class="com.school.model.ParentInfo" />
+        <mapping class="com.school.model.SchoolBus" />
+        <mapping class="com.school.model.CampusInfo" />
+        <mapping class="com.school.model.ClassInfo" />
+        <mapping class="com.school.model.SchoolExam" />
+        <mapping class="com.school.model.BoardType" />
+        <mapping class="com.school.model.StandardType" />
+        <mapping class="com.school.model.StudentSchoolInfo" />
+        <mapping class="com.school.model.StudentSchoolFeeInfo" />
+        <mapping class="com.school.model.SchoolBankAccountDetails" />
+        <mapping class="com.school.model.LeaveType" />
+        <mapping class="com.school.model.TeacherAttendance" />
+        <mapping class="com.school.model.Tehsil" />
+        <mapping class="com.school.model.AttendanceInfo" />
+        <mapping class="com.school.model.District" />
+        <mapping class="com.school.model.TimeTable" />
     </session-factory>
-    
 </hibernate-configuration>

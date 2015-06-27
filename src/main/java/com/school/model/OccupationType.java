@@ -1,6 +1,6 @@
 package com.school.model;
 
-// Generated Jun 9, 2015 5:02:23 PM by Hibernate Tools 4.0.0
+// Generated Jun 26, 2015 2:39:37 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -28,13 +28,13 @@ public class OccupationType implements java.io.Serializable {
 	private String description;
 	private Date lastUpdatedOn;
 	private Integer lastUpdatedBy;
-	private Set parentInfos = new HashSet(0);
+	private Set<ParentInfo> parentInfos = new HashSet<ParentInfo>(0);
 
 	public OccupationType() {
 	}
 
 	public OccupationType(String title, String description, Date lastUpdatedOn,
-			Integer lastUpdatedBy, Set parentInfos) {
+			Integer lastUpdatedBy, Set<ParentInfo> parentInfos) {
 		this.title = title;
 		this.description = description;
 		this.lastUpdatedOn = lastUpdatedOn;
@@ -91,11 +91,11 @@ public class OccupationType implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "occupationType")
-	public Set getParentInfos() {
+	public Set<ParentInfo> getParentInfos() {
 		return this.parentInfos;
 	}
 
-	public void setParentInfos(Set parentInfos) {
+	public void setParentInfos(Set<ParentInfo> parentInfos) {
 		this.parentInfos = parentInfos;
 	}
 

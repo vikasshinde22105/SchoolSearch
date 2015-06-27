@@ -1,6 +1,6 @@
 package com.school.model;
 
-// Generated Jun 9, 2015 5:02:23 PM by Hibernate Tools 4.0.0
+// Generated Jun 26, 2015 2:39:37 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -28,41 +28,41 @@ public class CampusInfo implements java.io.Serializable {
 	private Short campusSizeUnitId;
 	private Float campusSize;
 	private Integer totalBuildings;
-	private Integer totalPlaygrounds;
 	private Integer totalBoys;
 	private Integer totalGirls;
-	private Integer totalMaleTeachers;
-	private Integer totalFemaleTeachers;
+	private Integer totalMaleTeacher;
+	private Integer totalFemaleTeacher;
 	private Integer totalStudents;
 	private Integer maleSupportingStaff;
 	private Integer femaleSupportingStaff;
 	private Date lastUpdatedOn;
 	private Integer lastUpdatedBy;
+	private Integer totalPlaygrounds;
 
 	public CampusInfo() {
 	}
 
 	public CampusInfo(School school, String name, Short campusSizeUnitId,
-			Float campusSize, Integer totalBuildings, Integer totalPlaygrounds,
-			Integer totalBoys, Integer totalGirls, Integer totalMaleTeachers,
-			Integer totalFemaleTeachers, Integer totalStudents,
+			Float campusSize, Integer totalBuildings, Integer totalBoys,
+			Integer totalGirls, Integer totalMaleTeacher,
+			Integer totalFemaleTeacher, Integer totalStudents,
 			Integer maleSupportingStaff, Integer femaleSupportingStaff,
-			Date lastUpdatedOn, Integer lastUpdatedBy) {
+			Date lastUpdatedOn, Integer lastUpdatedBy, Integer totalPlaygrounds) {
 		this.school = school;
 		this.name = name;
 		this.campusSizeUnitId = campusSizeUnitId;
 		this.campusSize = campusSize;
 		this.totalBuildings = totalBuildings;
-		this.totalPlaygrounds = totalPlaygrounds;
 		this.totalBoys = totalBoys;
 		this.totalGirls = totalGirls;
-		this.totalMaleTeachers = totalMaleTeachers;
-		this.totalFemaleTeachers = totalFemaleTeachers;
+		this.totalMaleTeacher = totalMaleTeacher;
+		this.totalFemaleTeacher = totalFemaleTeacher;
 		this.totalStudents = totalStudents;
 		this.maleSupportingStaff = maleSupportingStaff;
 		this.femaleSupportingStaff = femaleSupportingStaff;
 		this.lastUpdatedOn = lastUpdatedOn;
 		this.lastUpdatedBy = lastUpdatedBy;
+		this.totalPlaygrounds = totalPlaygrounds;
 	}
 
 	@Id
@@ -122,15 +122,6 @@ public class CampusInfo implements java.io.Serializable {
 		this.totalBuildings = totalBuildings;
 	}
 
-	@Column(name = "total_playgrounds")
-	public Integer getTotalPlaygrounds() {
-		return this.totalPlaygrounds;
-	}
-
-	public void setTotalPlaygrounds(Integer totalPlaygrounds) {
-		this.totalPlaygrounds = totalPlaygrounds;
-	}
-
 	@Column(name = "total_boys")
 	public Integer getTotalBoys() {
 		return this.totalBoys;
@@ -149,22 +140,22 @@ public class CampusInfo implements java.io.Serializable {
 		this.totalGirls = totalGirls;
 	}
 
-	@Column(name = "total_male_teachers")
-	public Integer getTotalMaleTeachers() {
-		return this.totalMaleTeachers;
+	@Column(name = "total_male_teacher")
+	public Integer getTotalMaleTeacher() {
+		return this.totalMaleTeacher;
 	}
 
-	public void setTotalMaleTeachers(Integer totalMaleTeachers) {
-		this.totalMaleTeachers = totalMaleTeachers;
+	public void setTotalMaleTeacher(Integer totalMaleTeacher) {
+		this.totalMaleTeacher = totalMaleTeacher;
 	}
 
-	@Column(name = "total_female_teachers")
-	public Integer getTotalFemaleTeachers() {
-		return this.totalFemaleTeachers;
+	@Column(name = "total_female_teacher")
+	public Integer getTotalFemaleTeacher() {
+		return this.totalFemaleTeacher;
 	}
 
-	public void setTotalFemaleTeachers(Integer totalFemaleTeachers) {
-		this.totalFemaleTeachers = totalFemaleTeachers;
+	public void setTotalFemaleTeacher(Integer totalFemaleTeacher) {
+		this.totalFemaleTeacher = totalFemaleTeacher;
 	}
 
 	@Column(name = "total_students")
@@ -211,6 +202,15 @@ public class CampusInfo implements java.io.Serializable {
 
 	public void setLastUpdatedBy(Integer lastUpdatedBy) {
 		this.lastUpdatedBy = lastUpdatedBy;
+	}
+
+	@Column(name = "total_playgrounds")
+	public Integer getTotalPlaygrounds() {
+		return this.totalPlaygrounds;
+	}
+
+	public void setTotalPlaygrounds(Integer totalPlaygrounds) {
+		this.totalPlaygrounds = totalPlaygrounds;
 	}
 
 }

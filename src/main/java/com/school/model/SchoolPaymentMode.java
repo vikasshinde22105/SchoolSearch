@@ -1,6 +1,6 @@
 package com.school.model;
 
-// Generated 2 Jun, 2015 2:50:11 PM by Hibernate Tools 3.4.0.CR1
+// Generated Jun 26, 2015 2:39:37 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -23,8 +23,8 @@ import javax.persistence.TemporalType;
 public class SchoolPaymentMode implements java.io.Serializable {
 
 	private Integer id;
+	private PaymentMode paymentMode;
 	private School school;
-	private Short paymentModeId;
 	private Byte isDeleted;
 	private Date lastUpdatedOn;
 	private Integer lastUpdatedBy;
@@ -32,10 +32,10 @@ public class SchoolPaymentMode implements java.io.Serializable {
 	public SchoolPaymentMode() {
 	}
 
-	public SchoolPaymentMode(School school, Short paymentModeId,
+	public SchoolPaymentMode(PaymentMode paymentMode, School school,
 			Byte isDeleted, Date lastUpdatedOn, Integer lastUpdatedBy) {
+		this.paymentMode = paymentMode;
 		this.school = school;
-		this.paymentModeId = paymentModeId;
 		this.isDeleted = isDeleted;
 		this.lastUpdatedOn = lastUpdatedOn;
 		this.lastUpdatedBy = lastUpdatedBy;
@@ -53,6 +53,16 @@ public class SchoolPaymentMode implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "payment_mode_id")
+	public PaymentMode getPaymentMode() {
+		return this.paymentMode;
+	}
+
+	public void setPaymentMode(PaymentMode paymentMode) {
+		this.paymentMode = paymentMode;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "school_id")
 	public School getSchool() {
 		return this.school;
@@ -60,15 +70,6 @@ public class SchoolPaymentMode implements java.io.Serializable {
 
 	public void setSchool(School school) {
 		this.school = school;
-	}
-
-	@Column(name = "payment_mode_id")
-	public Short getPaymentModeId() {
-		return this.paymentModeId;
-	}
-
-	public void setPaymentModeId(Short paymentModeId) {
-		this.paymentModeId = paymentModeId;
 	}
 
 	@Column(name = "is_deleted")
@@ -80,8 +81,8 @@ public class SchoolPaymentMode implements java.io.Serializable {
 		this.isDeleted = isDeleted;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "last_updated_on", length = 10)
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "last_updated_on", length = 19)
 	public Date getLastUpdatedOn() {
 		return this.lastUpdatedOn;
 	}

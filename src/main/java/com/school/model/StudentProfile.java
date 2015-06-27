@@ -1,6 +1,6 @@
 package com.school.model;
 
-// Generated 2 Jun, 2015 3:00:10 PM by Hibernate Tools 3.4.0.CR1
+// Generated Jun 26, 2015 2:39:37 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -24,6 +24,7 @@ public class StudentProfile implements java.io.Serializable {
 
 	private Integer id;
 	private School school;
+	private String studentName;
 	private String batch;
 	private String achievement;
 	private String image;
@@ -33,8 +34,9 @@ public class StudentProfile implements java.io.Serializable {
 	public StudentProfile() {
 	}
 
-	public StudentProfile( String batch, String achievement,
+	public StudentProfile(String studentName, String batch, String achievement,
 			String image, Date lastUpdatedOn, int lastUpdatedBy) {
+		this.studentName = studentName;
 		this.batch = batch;
 		this.achievement = achievement;
 		this.image = image;
@@ -42,10 +44,11 @@ public class StudentProfile implements java.io.Serializable {
 		this.lastUpdatedBy = lastUpdatedBy;
 	}
 
-	public StudentProfile(School school,String batch,
+	public StudentProfile(School school, String studentName, String batch,
 			String achievement, String image, Date lastUpdatedOn,
 			int lastUpdatedBy) {
 		this.school = school;
+		this.studentName = studentName;
 		this.batch = batch;
 		this.achievement = achievement;
 		this.image = image;
@@ -72,6 +75,15 @@ public class StudentProfile implements java.io.Serializable {
 
 	public void setSchool(School school) {
 		this.school = school;
+	}
+
+	@Column(name = "student_name", nullable = false, length = 50)
+	public String getStudentName() {
+		return this.studentName;
+	}
+
+	public void setStudentName(String studentName) {
+		this.studentName = studentName;
 	}
 
 	@Column(name = "batch", nullable = false, length = 10)

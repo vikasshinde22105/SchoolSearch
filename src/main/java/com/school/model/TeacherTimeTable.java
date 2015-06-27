@@ -1,6 +1,6 @@
 package com.school.model;
 
-// Generated 2 Jun, 2015 3:00:10 PM by Hibernate Tools 3.4.0.CR1
+// Generated Jun 26, 2015 2:39:37 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -91,8 +91,8 @@ public class TeacherTimeTable implements java.io.Serializable {
 		this.lastUpdatedBy = lastUpdatedBy;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "last_updated_on", length = 10)
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "last_updated_on", length = 19)
 	public Date getLastUpdatedOn() {
 		return this.lastUpdatedOn;
 	}

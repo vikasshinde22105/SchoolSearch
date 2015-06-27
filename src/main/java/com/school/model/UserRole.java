@@ -1,6 +1,6 @@
 package com.school.model;
 
-// Generated 2 Jun, 2015 3:00:10 PM by Hibernate Tools 3.4.0.CR1
+// Generated Jun 26, 2015 2:39:37 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -23,18 +23,19 @@ import javax.persistence.TemporalType;
 public class UserRole implements java.io.Serializable {
 
 	private Integer id;
+	private SecondaryRole secondaryRole;
 	private UserRegistrationInfo userRegistrationInfo;
-	private Short secRoleId;
 	private Date lastUpdatedOn;
 	private Integer lastUpdatedBy;
 
 	public UserRole() {
 	}
 
-	public UserRole(UserRegistrationInfo userRegistrationInfo, Short secRoleId,
-			Date lastUpdatedOn, Integer lastUpdatedBy) {
+	public UserRole(SecondaryRole secondaryRole,
+			UserRegistrationInfo userRegistrationInfo, Date lastUpdatedOn,
+			Integer lastUpdatedBy) {
+		this.secondaryRole = secondaryRole;
 		this.userRegistrationInfo = userRegistrationInfo;
-		this.secRoleId = secRoleId;
 		this.lastUpdatedOn = lastUpdatedOn;
 		this.lastUpdatedBy = lastUpdatedBy;
 	}
@@ -51,6 +52,16 @@ public class UserRole implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "sec_role_id")
+	public SecondaryRole getSecondaryRole() {
+		return this.secondaryRole;
+	}
+
+	public void setSecondaryRole(SecondaryRole secondaryRole) {
+		this.secondaryRole = secondaryRole;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
 	public UserRegistrationInfo getUserRegistrationInfo() {
 		return this.userRegistrationInfo;
@@ -61,17 +72,8 @@ public class UserRole implements java.io.Serializable {
 		this.userRegistrationInfo = userRegistrationInfo;
 	}
 
-	@Column(name = "sec_role_id")
-	public Short getSecRoleId() {
-		return this.secRoleId;
-	}
-
-	public void setSecRoleId(Short secRoleId) {
-		this.secRoleId = secRoleId;
-	}
-
-	@Temporal(TemporalType.DATE)
-	@Column(name = "last_updated_on", length = 10)
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "last_updated_on", length = 19)
 	public Date getLastUpdatedOn() {
 		return this.lastUpdatedOn;
 	}

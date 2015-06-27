@@ -1,6 +1,6 @@
 package com.school.model;
 
-// Generated Jun 9, 2015 5:02:23 PM by Hibernate Tools 4.0.0
+// Generated Jun 26, 2015 2:39:37 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -34,8 +34,10 @@ public class AttendanceInfo implements java.io.Serializable {
 	private String description;
 	private Date lastUpdatedOn;
 	private Integer lastUpdatedBy;
-	private Set<StudentAttendance> studentAttendances = new HashSet<StudentAttendance>(0);
-	private Set<TeacherAttendance> teacherAttendances = new HashSet<TeacherAttendance>(0);
+	private Set<StudentAttendance> studentAttendances = new HashSet<StudentAttendance>(
+			0);
+	private Set<TeacherAttendance> teacherAttendances = new HashSet<TeacherAttendance>(
+			0);
 
 	public AttendanceInfo() {
 	}
@@ -147,7 +149,7 @@ public class AttendanceInfo implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "attendanceInfo")
-	public Set getStudentAttendances() {
+	public Set<StudentAttendance> getStudentAttendances() {
 		return this.studentAttendances;
 	}
 
@@ -156,7 +158,7 @@ public class AttendanceInfo implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "attendanceInfo")
-	public Set getTeacherAttendances() {
+	public Set<TeacherAttendance> getTeacherAttendances() {
 		return this.teacherAttendances;
 	}
 
