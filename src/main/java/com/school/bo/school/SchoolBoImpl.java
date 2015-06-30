@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.school.custom.pojo.SchoolListingRequest;
 import com.school.dao.SchoolDaoImpl;
 import com.school.model.School;
+import com.school.model.SchoolSearch;
  
 @Service
 public class SchoolBoImpl implements SchoolBo {
@@ -17,8 +18,8 @@ public class SchoolBoImpl implements SchoolBo {
 	@Autowired
 	SchoolDaoImpl schoolhome;
 
-	public List<School> fetchAllSchool() {
-	        List<School> fetchedSchool = schoolhome.fetchAll();
+	public List<SchoolSearch> fetchAllSchool() {
+	        List<SchoolSearch> fetchedSchool = schoolhome.fetchAll();
 	        return fetchedSchool;
 	}
 

@@ -5,9 +5,10 @@ import java.util.Map;
 
 import com.school.custom.pojo.SchoolListingRequest;
 import com.school.model.School;
+import com.school.model.SchoolSearch;
 
 public interface SchoolBo {
-	public List<School> fetchAllSchool();
+	public List<SchoolSearch> fetchAllSchool();
 	public School fetchSchoolById(int schoolId);
 	public List<School> fetchSchoolByName(String name) throws InterruptedException;
 	public List<School> fetchSchoolBasicInfo(int schoolId);

@@ -15,6 +15,7 @@ import com.school.bo.school.SchoolBoImpl;
 import com.school.custom.pojo.SchoolListingRequest;
 import com.school.errorhandling.WebServiceException;
 import com.school.model.School;
+import com.school.model.SchoolSearch;
 
 @Controller
 @RequestMapping("/school")
@@ -25,9 +26,9 @@ public class SchoolController// extends ExceptionHandlerController
 	
 	@RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
-     public List<School> fetchAll() {
+     public List<SchoolSearch> fetchAll() {
 	        System.out.println("SchoolDao: fetchAll");
-	        List<School> fetchedSchool = schoolhome.fetchAllSchool();
+	        List<SchoolSearch> fetchedSchool = schoolhome.fetchAllSchool();
 	        return fetchedSchool;
 	    }
 	

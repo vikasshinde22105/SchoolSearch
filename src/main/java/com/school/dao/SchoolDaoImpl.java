@@ -22,6 +22,7 @@ import org.springframework.stereotype.Repository;
 
 import com.school.custom.pojo.SchoolListingRequest;
 import com.school.model.School;
+import com.school.model.SchoolSearch;
 import com.school.util.HibernateUtil;
 
 @Transactional
@@ -30,12 +31,17 @@ public class SchoolDaoImpl implements SchoolDao{
 	public SchoolDaoImpl(){
 	    
 	}
-	 public List<School> fetchAll() {
-	     Session session = HibernateUtil.getSessionFactory().openSession();
-	        List<School> fetchedSchool = (List<School>) session.createCriteria(School.class).list();
-	        System.out.println("DEBUG: includeAll ");
-	        return fetchedSchool;
-	    }
+//	public List<School> fetchAll() {
+//		 Session session = HibernateUtil.getSessionFactory().openSession();
+//		 List<School> fetchedSchool = (List<School>) session.createCriteria(School.class).list();
+//		 return fetchedSchool;
+//    }
+	
+	public List<SchoolSearch> fetchAll() {
+		 Session session = HibernateUtil.getSessionFactory().openSession();
+		 List<SchoolSearch> fetchedSchool = (List<SchoolSearch>) session.createCriteria(SchoolSearch.class).list();
+		 return fetchedSchool;
+   }
 
 		public School fetchById(int schoolID) {
 	        Session session = HibernateUtil.getSessionFactory().openSession();
