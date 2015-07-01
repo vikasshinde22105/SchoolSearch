@@ -6,36 +6,32 @@ import javax.ws.rs.core.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.school.bo.school.UserRegistrationInfoBoImpl;
+import com.school.bo.school.SchoolSearchUserBoImpl;
+import com.school.model.SchoolSearchUser;
 import com.school.model.UserRegistrationInfo;
 import com.school.response.ResponseMessage;
 
 @Component
 @Controller
 @RequestMapping("/user")
-public class UserRegistrationInfoController
+public class SchoolSearchUserController
 {
 	@Autowired
-	UserRegistrationInfoBoImpl userRegistration;
+	SchoolSearchUserBoImpl userRegistration;
    
 	@Autowired
 	HttpServletRequest request;
 	
 	@RequestMapping( value="/add", method= RequestMethod.POST, produces=MediaType.APPLICATION_JSON )
 	@ResponseBody
-	public ResponseMessage addUser() {
+	public ResponseMessage addUser( @RequestBody SchoolSearchUser schoolSearchUser ) {
 
-		UserRegistrationInfo userRegistrationInfo = new UserRegistrationInfo();
-		userRegistrationInfo.setFirstName(request.getParameter("firstName"));
-		userRegistrationInfo.setLastName(request.getParameter("lastName"));
-		userRegistrationInfo.setMobile(request.getParameter("mobile"));
-		userRegistrationInfo.setEmail(request.getParameter("email"));
-		userRegistrationInfo.setPassword(request.getParameter("password"));
-		ResponseMessage responseMessage = userRegistration.addUser(userRegistrationInfo);
+		ResponseMessage responseMessage = userRegistration.addUser(schoolSearchUser);
 		return responseMessage;
 	}
 }
