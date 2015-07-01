@@ -10,20 +10,20 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 
-import com.school.model.UserRegistrationInfo;
+import com.school.model.SchoolSearchUser;
 import com.school.response.ResponseMessage;
 import com.school.util.HibernateUtil;
 
 @Repository
-public class UserRegistrationInfoDaoImpl implements UserRegistrationInfoDao {
+public class SchoolSearchUserDaoImpl implements SchoolSearchUserDao {
 
-	public ResponseMessage addUserRegistrationInfo( UserRegistrationInfo userRegistrationInfo) {
+	public ResponseMessage addSchoolSearchUser( SchoolSearchUser schoolSearchUser) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx;
         tx = session.beginTransaction();
         ResponseMessage responseMessage = new ResponseMessage();
         try {
-        	session.save("UserRegistrationInfo",userRegistrationInfo );
+        	session.save("SchoolSearchUser",schoolSearchUser );
         	tx.commit();
         	session.flush();
         	responseMessage.setStatus(true);
