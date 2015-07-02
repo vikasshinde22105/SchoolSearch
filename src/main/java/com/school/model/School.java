@@ -32,7 +32,7 @@ import org.hibernate.search.annotations.Store;
  */
 @Entity
 @Indexed
-@Table(name = "school", catalog = "school_db")
+@Table(name = "school")
 public class School implements java.io.Serializable {
 
 	private Integer id;

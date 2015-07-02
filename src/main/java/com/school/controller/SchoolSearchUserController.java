@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.school.bo.school.SchoolSearchUserBoImpl;
 import com.school.model.SchoolSearchUser;
-import com.school.model.UserRegistrationInfo;
 import com.school.response.ResponseMessage;
 
 @Component
