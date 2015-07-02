@@ -4,18 +4,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.search.FullTextSession;
 import org.hibernate.search.Search;
-import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.query.dsl.QueryBuilder;
 import org.hibernate.transform.Transformers;
 import org.springframework.stereotype.Repository;
@@ -41,50 +37,43 @@ public class SchoolDaoImpl implements SchoolDao{
 		 Session session = HibernateUtil.getSessionFactory().openSession();
 		 List<SchoolSearch> fetchedSchool = (List<SchoolSearch>) session.createCriteria(SchoolSearch.class).list();
 		 return fetchedSchool;
-   }
+	}
 
-		public School fetchById(int schoolID) {
-	        Session session = HibernateUtil.getSessionFactory().openSession();
-	        School fetchedSchool = (School) session.get(School.class, schoolID);
-	        return fetchedSchool;
-		}
+	public School fetchById(int schoolID) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        String hql = "select " +
+            "s.id as id,s.name as name, s.lastUpdatedBy as lastUpdatedBy, "+
+            "s.lastUpdatedOn as lastUpdatedOn ,s.plotNo as plotNo,s.streetName as streetName, " +
+ 	        "s.alias as alias , s.tagLine as tagLine ,s.aboutSchool as aboutSchool, s.logo as logo , s.establishmentType as establishmentType, " +
+            "s.status as status , s.liveDate as liveDate "+"from School s where s.id = "+schoolID;
 
-		@Override
-		public List<School> fetchByName(String name) throws InterruptedException  {
+		Query query =  session.createQuery(hql);
+		query.setResultTransformer(Transformers.aliasToBean(School.class));
+		return (School) query.uniqueResult();
+	}
 
-			Session session = HibernateUtil.getSessionFactory().openSession();
-			FullTextSession fullTextSession = Search.getFullTextSession(session);
-			fullTextSession.createIndexer().startAndWait();
-			
-		         
-		        QueryBuilder queryBuilder = fullTextSession.getSearchFactory().buildQueryBuilder().forEntity(School.class).get();
-		        org.apache.lucene.search.Query luceneQuery = queryBuilder.keyword().onFields("name","landmark").matching(name).createQuery();
-		 
-		        // wrap Lucene query in a javax.persistence.Query
-		        org.hibernate.Query fullTextQuery = fullTextSession.createFullTextQuery(luceneQuery, School.class);
-		        @SuppressWarnings("unchecked")
-				List<School> contactList = fullTextQuery.list();
-		        fullTextSession.close();
-		        return contactList;				
-		}
+ 	@Override
+	public List<School> fetchByName(String name) throws InterruptedException  {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		FullTextSession fullTextSession = Search.getFullTextSession(session);
+		fullTextSession.createIndexer().startAndWait();	         
+	    QueryBuilder queryBuilder = fullTextSession.getSearchFactory().buildQueryBuilder().forEntity(School.class).get();
+        org.apache.lucene.search.Query luceneQuery = queryBuilder.keyword().onFields("name","landmark").matching(name).createQuery();
+        // wrap Lucene query in a javax.persistence.Query
+        org.hibernate.Query fullTextQuery = fullTextSession.createFullTextQuery(luceneQuery, School.class);
+        @SuppressWarnings("unchecked")
+        List<School> contactList = fullTextQuery.list();
+        fullTextSession.close();
+        return contactList;
+	}
 	
-		@SuppressWarnings("unchecked")
-		public List<School> fetchSchoolBasicInfo(int schoolId) {
-			Session session = HibernateUtil.getSessionFactory().openSession();
-//			String hql = "Select S FROM School S WHERE S.id ="+schoolId;
-//			Query query = session.createQuery(hql);
-//			List<School> results = query.list();
-//			return results;
-			Criteria cr = session.createCriteria(School.class)
-				    .add(Restrictions.eq("id", schoolId));
-//				    .setProjection(Projections.projectionList()
-//				      .add(Projections.property("id"), "id")
-//				      .add(Projections.property("name"), "name"))
-//				    .setResultTransformer(Transformers.aliasToBean(SchoolBasic.class));
-
-				  List<School> studentBasicInfo = cr.list();
-				  return studentBasicInfo;
-		}
+	@SuppressWarnings("unchecked")
+	public List<School> fetchSchoolBasicInfo(int schoolId) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Criteria cr = session.createCriteria(School.class).add(Restrictions.eq("id", schoolId));
+		List<School> studentBasicInfo = cr.list();
+		return studentBasicInfo;
+	}
 
 	@Override
 	public Map<String, List> fetchSchoolListByLattitudeByLongitude( SchoolListingRequest schoolListRequest) {
